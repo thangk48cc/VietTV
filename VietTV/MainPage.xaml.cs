@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -9,7 +11,9 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Newtonsoft.Json.Linq;
 using SettingsPageAnimation.Framework;
+using VietTV.Model;
 using VietTV.Resources;
 
 namespace VietTV
@@ -21,6 +25,7 @@ namespace VietTV
         {
             InitializeComponent();
             _feContainer = this.Container as FrameworkElement;
+            GetSuggestVideo();
         }
 
         #region======= set up menu ============
@@ -252,6 +257,31 @@ namespace VietTV
         private void GrdHide_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             CloseSettings();
+        }
+
+        private async void GetSuggestVideo()
+        {
+            try
+            {
+                var res = new Common.RepositoryServices();
+                GetListData dataChanels = await res.GetDataChanelsTask();
+                MessageBox.Show(dataChanels.chanelsCollection.First().groupName);
+            }
+            catch (Exception exception)
+            {
+            }
+        }
+
+        private void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            try
+            {
+                string t = e.Result.ToString();
+                MessageBox.Show(t);
+            }
+            catch (Exception exception)
+            {
+            }
         }
         
     }
