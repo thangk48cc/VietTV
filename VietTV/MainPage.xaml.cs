@@ -248,6 +248,7 @@ namespace VietTV
         }
         #endregion=============================
 
+
         private void GrdHide_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             CloseSettings();
