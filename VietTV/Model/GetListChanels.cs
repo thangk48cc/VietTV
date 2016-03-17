@@ -50,7 +50,25 @@ namespace VietTV.Model
                 if (this._chanels != value)
                 {
                     this._chanels = value;
+                    _numchannel = this._chanels.Count;
                     this.RaisePropertyChanged("chanels");
+                }
+            }
+        }
+
+        private int _numchannel;
+        public int numChannel
+        {
+            get
+            {
+                return _numchannel;
+            }
+            set
+            {
+                if (this._numchannel != value)
+                {
+                    this._numchannel = value;
+                    this.RaisePropertyChanged("numChannel");
                 }
             }
         }

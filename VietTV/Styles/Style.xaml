@@ -4,13 +4,14 @@
     xmlns:converters="clr-namespace:MobiTV_Peru.Converters"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone">
+    xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
+    xmlns:converters1="clr-namespace:VietTV.Converters">
     
     <!--<converters:DisBooleanToVisibilityConverter x:Key="DisBooleanToVisibilityConverter"/>
     <converters:ButtonBackgroundConverter x:Key="ButtonBackgroundConverter"/>
-    <converters:ExpanderViewImageConverter x:Key="ExpanderViewImageConverter"/>
-    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-    <converters:BooleanToImageTickConverter x:Key="BooleanToImageTickConverter" />
+    <converters:ExpanderViewImageConverter x:Key="ExpanderViewImageConverter"/>-->
+    <converters1:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <!--<converters:BooleanToImageTickConverter x:Key="BooleanToImageTickConverter" />
     <converters:StringAs0VisiableConverter x:Key="StringAs0VisiableConverter" />
     <converters:StringAs1VisiableConverter x:Key="StringAs1VisiableConverter" />
     <converters:StringAs2VisiableConverter x:Key="StringAs2VisiableConverter" />-->
@@ -207,7 +208,7 @@
                         </VisualStateManager.VisualStateGroups>
                         <Grid Margin="{TemplateBinding Padding}">
                             <ViewportControl x:Name="ViewportControl" HorizontalContentAlignment="Stretch" VerticalAlignment="Top"/>
-                            <ScrollBar HorizontalAlignment="Right" Background="Teal" x:Name="VerticalScrollBar" Margin="0,0,0,0" Opacity="0" Orientation="Vertical"/>
+                            <ScrollBar HorizontalAlignment="Right" Background="DodgerBlue" x:Name="VerticalScrollBar" Margin="0,0,0,0" Opacity="0" Orientation="Vertical"/>
                         </Grid>
                     </Grid>
                 </ControlTemplate>

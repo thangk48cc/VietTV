@@ -19,7 +19,22 @@ namespace VietTV.Model
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
+        private string _chanelid;
+        public string chanelId
+        {
+            get
+            {
+                return _chanelid;
+            }
+            set
+            {
+                if (this._chanelid != value)
+                {
+                    this._chanelid = value;
+                    this.RaisePropertyChanged("chanelId");
+                }
+            }
+        }
         private string _chanelname;
         public string chanelName
         {
@@ -49,6 +64,11 @@ namespace VietTV.Model
                 if (this._icon != value)
                 {
                     this._icon = value;
+                    if (chanelId == null) chanelId = "333";
+                    if (!chanelId.Equals("#123"))
+                        this.icon = "/Assets/Images/todayTV.png";
+                    else
+                        this.icon = "/Assets/Images/addFavChanel.png";
                     this.RaisePropertyChanged("icon");
                 }
             }
@@ -122,22 +142,7 @@ namespace VietTV.Model
             }
         }
 
-        private string _chanelid;
-        public string chanelId
-        {
-            get
-            {
-                return _chanelid;
-            }
-            set
-            {
-                if (this._chanelid != value)
-                {
-                    this._chanelid = value;
-                    this.RaisePropertyChanged("chanelId");
-                }
-            }
-        }
+        
 
         private string _link;
         public string link

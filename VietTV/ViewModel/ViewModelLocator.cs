@@ -33,7 +33,7 @@ namespace VietTV.ViewModel
             }
 
             SimpleIoc.Default.Register<NavigationHelper>(() => new NavigationHelper(App.RootFrame));
-
+            SimpleIoc.Default.Register<MenuMainVM>();
         }
         /// <summary>
         /// Gets the Main property.

@@ -20,7 +20,7 @@ namespace VietTV.Model
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        private ObservableCollection<GetListChanels> _chanelsCollection;
+        private ObservableCollection<GetListChanels> _chanelsCollection = new ObservableCollection<GetListChanels>();
         public ObservableCollection<GetListChanels> chanelsCollection
         {
             get
