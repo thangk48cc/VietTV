@@ -80,8 +80,9 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Background="Black">
-                <TextBlock Text="KÊNH YÊU THÍCH" FontWeight="SemiBold" Foreground="White"
-                           VerticalAlignment="Center" Margin="60 0 10 0"></TextBlock>
+                <TextBlock  Text="{Binding groupChanelItem.groupName,Converter ={StaticResource CaseConverter}}" 
+                            FontWeight="SemiBold" Foreground="White"
+                           VerticalAlignment="Center" Margin="70 0 10 0"/>
             </Grid>
 
             <Grid Margin="5" Grid.Row="1" Name="grdContentChanel" >
@@ -98,7 +99,7 @@
         
         <!--Menu trai-->
         
-        <Grid Margin="-500 0 0 0" HorizontalAlignment="Left" Background="Black" Name="grdPanelMenu" RenderTransformOrigin="0.5,0.5">
+        <Grid Margin="-500 0 0 0" Width="350" HorizontalAlignment="Left" Background="Black" Name="grdPanelMenu" RenderTransformOrigin="0.5,0.5">
         	<Grid.RenderTransform>
         		<CompositeTransform/>
         	</Grid.RenderTransform>

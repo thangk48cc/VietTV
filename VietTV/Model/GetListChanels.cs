@@ -20,6 +20,22 @@ namespace VietTV.Model
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        private string _groupid;
+        public string groupId
+        {
+            get
+            {
+                return _groupid;
+            }
+            set
+            {
+                if (this._groupid != value)
+                {
+                    this._groupid = value;
+                    this.RaisePropertyChanged("groupId");
+                }
+            }
+        }
 
         private string _groupname;
         public string groupName

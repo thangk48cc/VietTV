@@ -8,8 +8,8 @@
     xmlns:converters1="clr-namespace:VietTV.Converters">
     
     <!--<converters:DisBooleanToVisibilityConverter x:Key="DisBooleanToVisibilityConverter"/>
-    <converters:ButtonBackgroundConverter x:Key="ButtonBackgroundConverter"/>
-    <converters:ExpanderViewImageConverter x:Key="ExpanderViewImageConverter"/>-->
+    <converters:ButtonBackgroundConverter x:Key="ButtonBackgroundConverter"/>-->
+    <converters1:CaseConverter x:Key="CaseConverter"/>
     <converters1:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <!--<converters:BooleanToImageTickConverter x:Key="BooleanToImageTickConverter" />
     <converters:StringAs0VisiableConverter x:Key="StringAs0VisiableConverter" />

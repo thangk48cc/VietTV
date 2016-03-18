@@ -64,7 +64,20 @@ namespace VietTV.View
         {
             var item = (GetListChanels)(sender as Button).DataContext;
             var vm = DataContext as MenuMainVM;
+            vm.groupChanelItem = item;
             vm.chanelsByGroup = item.chanels;
+            if (item.groupId == vm.groupChanelId)
+            {
+                var chanel = new Chanel();
+                chanel.chanelId = "#123";
+                chanel.chanelName = "Thêm kênh yêu thích";
+                chanel.icon = "/Assets/Images/addFavChanel.png";
+                if (vm.chanelsByGroup.Last().chanelId != chanel.chanelId)
+                {
+                    vm.chanelsByGroup.Add(chanel);
+                }
+            }
+            
             MenuSetting();
         }
     }

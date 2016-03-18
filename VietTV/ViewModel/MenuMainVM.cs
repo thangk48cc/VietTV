@@ -44,10 +44,35 @@ namespace VietTV.ViewModel
                 {
                     _propData = value;
                     _chanelsByGroup = _propData.chanelsCollection[2].chanels;
+
+                    var item = new GetListChanels();
+                    item.groupId = groupChanelId;
+                    item.groupName = "Kênh yêu thích";
+                    item.chanels = this._propData.chanelsCollection.Last().chanels;
+                    if (this._propData.chanelsCollection.First().groupId!=item.groupId)
+                    this._propData.chanelsCollection.Insert(0, item);
                     RaisePropertyChanged("propData");
                 }
             }
         }
+        private GetListChanels _groupchanelitem=new GetListChanels();
+        public GetListChanels groupChanelItem
+        {
+            get
+            {
+                return _groupchanelitem;
+            }
+            set
+            {
+                if (this._groupchanelitem != value)
+                {
+                    this._groupchanelitem = value;
+                    this.RaisePropertyChanged("groupChanelItem");
+                }
+            }
+        }
+
+        public string groupChanelId = "channelFav";
         private ObservableCollection<Chanel> _chanelsByGroup;
         public ObservableCollection<Chanel> chanelsByGroup
         {
@@ -60,11 +85,15 @@ namespace VietTV.ViewModel
                 if (this._chanelsByGroup != value)
                 {
                     this._chanelsByGroup = value;
-                    var chanel = new Chanel();
-                    chanel.chanelId = "#123";
-                    chanel.chanelName = "Thêm kênh yêu thích";
-                    chanel.icon = "/Assets/Images/addFavChanel.png";
-                    this.chanelsByGroup.Add(chanel);
+                    
+                    //var chanel = new Chanel();
+                    //chanel.chanelId = "#123";
+                    //chanel.chanelName = "Thêm kênh yêu thích";
+                    //chanel.icon = "/Assets/Images/addFavChanel.png";
+                    //if (this.chanelsByGroup.Last().chanelId!=chanel.chanelId)
+                    //{
+                    //    this.chanelsByGroup.Add(chanel);
+                    //}
 
                     this.RaisePropertyChanged("chanelsByGroup");
                 }

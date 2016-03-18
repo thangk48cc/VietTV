@@ -99,6 +99,7 @@
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\CaseConverter.cs" />
     <Compile Include="Framework\Extensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
