@@ -54,6 +54,7 @@ namespace VietTV.Model
             }
         }
 
+        Random rand = new Random();
         private ObservableCollection<Chanel> _chanels;
         public ObservableCollection<Chanel> chanels
         {

@@ -1,0 +1,305 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="VietTV.View.PlayerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Landscape" Orientation="Landscape"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False"
+    DataContext="{Binding MenuMain,Source={StaticResource Locator}}"
+    >
+
+    <phone:PhoneApplicationPage.Resources>
+        <Style x:Key="SliderStyle1" TargetType="Slider">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Maximum" Value="10"/>
+            <Setter Property="Minimum" Value="0"/>
+            <Setter Property="Value" Value="0"/>
+            <Setter Property="Background" Value="{StaticResource PhoneChromeBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="0.1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalTrack"/>
+                                            <DoubleAnimation Duration="0" To="0.1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalTrack"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="HorizontalFill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="VerticalFill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid x:Name="HorizontalTemplate" Margin="{StaticResource PhoneHorizontalMargin}">
+                                <Rectangle RadiusX="5" RadiusY="5" x:Name="HorizontalTrack" Fill="{TemplateBinding Background}" Height="7" IsHitTestVisible="False" Margin="0"/>
+                                <Rectangle RadiusX="5" RadiusY="5" x:Name="HorizontalFill" Fill="{TemplateBinding Foreground}" Height="8" IsHitTestVisible="False" Margin="0">
+                                    <Rectangle.Clip>
+                                        <RectangleGeometry Rect="0, 0, 6, 12"/>
+                                    </Rectangle.Clip>
+                                </Rectangle>
+                                <Rectangle x:Name="HorizontalCenterElement" HorizontalAlignment="Left" Height="24" Margin="0 0 0 0" Width="24">
+                                    <Rectangle.Fill>
+                                        <ImageBrush Stretch="Fill" ImageSource="/Assets/Images/scrollbutton.png"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                            </Grid>
+                            <Grid x:Name="VerticalTemplate" Margin="{StaticResource PhoneVerticalMargin}">
+                                <Rectangle x:Name="VerticalTrack" Fill="{TemplateBinding Background}" IsHitTestVisible="False" Margin="18,0,18,0" Width="12"/>
+                                <Rectangle x:Name="VerticalFill" Fill="{TemplateBinding Foreground}" IsHitTestVisible="False" Margin="18,0,18,0" Width="12">
+                                    <Rectangle.Clip>
+                                        <RectangleGeometry Rect="0, 0, 12, 6"/>
+                                    </Rectangle.Clip>
+                                </Rectangle>
+                                <Rectangle x:Name="VerticalCenterElement" Fill="{StaticResource PhoneForegroundBrush}" Height="12" Margin="12,0,12,0" VerticalAlignment="Top" Width="24">
+                                    <Rectangle.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderStyle2" TargetType="Slider" BasedOn="{StaticResource SliderStyle1}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="0.1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalTrack"/>
+                                            <DoubleAnimation Duration="0" To="0.1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalTrack"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="HorizontalFill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="VerticalFill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid x:Name="HorizontalTemplate" Margin="{StaticResource PhoneHorizontalMargin}">
+                                <Rectangle RadiusX="3" RadiusY="3" x:Name="HorizontalTrack" Fill="{TemplateBinding Background}" Height="7" IsHitTestVisible="False" Margin="0"/>
+                                <Rectangle RadiusX="3" RadiusY="3" x:Name="HorizontalFill" Fill="{TemplateBinding Foreground}" Height="8" IsHitTestVisible="False" Margin="0">
+                                    <Rectangle.Clip>
+                                        <RectangleGeometry Rect="0, 0, 6, 12"/>
+                                    </Rectangle.Clip>
+                                </Rectangle>
+                                <Rectangle x:Name="HorizontalCenterElement" HorizontalAlignment="Left" Height="24" Margin="0 0 0 0" Width="24">
+                                    <Rectangle.Fill>
+                                        <ImageBrush Stretch="Fill" ImageSource="/Assets/Images/volum.png"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                            </Grid>
+                            <Grid x:Name="VerticalTemplate" Margin="{StaticResource PhoneVerticalMargin}">
+                                <Rectangle x:Name="VerticalTrack" Fill="{TemplateBinding Background}" IsHitTestVisible="False" Margin="18,0,18,0" Width="12"/>
+                                <Rectangle x:Name="VerticalFill" Fill="{TemplateBinding Foreground}" IsHitTestVisible="False" Margin="18,0,18,0" Width="12">
+                                    <Rectangle.Clip>
+                                        <RectangleGeometry Rect="0, 0, 12, 6"/>
+                                    </Rectangle.Clip>
+                                </Rectangle>
+                                <Rectangle x:Name="VerticalCenterElement" Fill="{StaticResource PhoneForegroundBrush}" Height="12" Margin="12,0,12,0" VerticalAlignment="Top" Width="24">
+                                    <Rectangle.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Name="stbCloseControls">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ControlBoardPanel">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ControlBoardPanel">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="75"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="Grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-75"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="stbOpenControls">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="Grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-75"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ControlBoardPanel">
+                <EasingDoubleKeyFrame KeyTime="0" Value="75"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </phone:PhoneApplicationPage.Resources>
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <MediaElement 
+            x:Name="TiviMediaElement"
+            Tap="MdaMain_OnTap"
+            AutoPlay="True"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            MediaFailed="TiviMediaElement_MediaFailed"
+            MediaEnded="TiviMediaElement_MediaEnded"
+            MediaOpened="TiviMediaElement_OnMediaOpened"
+            CurrentStateChanged="TiviMediaElement_CurrentStateChanged" 
+            BufferingProgressChanged="TiviMediaElement_BufferingProgressChanged" />
+
+        <ProgressBar Name="ProsesProgressBar" IsIndeterminate="True" />
+        <Image 
+            Visibility="Collapsed" 
+            Name="PlayAgainButton" 
+            Width="50" 
+            Height="50"
+            Source="/Assets/Images/trailer.png" />
+
+        <Grid  
+            ManipulationStarted="grid1_ManipulationStarted" 
+            ManipulationCompleted="grid1_ManipulationCompleted" 
+            x:Name="Grid1" 
+            VerticalAlignment="Top" 
+            Height="60" 
+            Background="Transparent" 
+            RenderTransformOrigin="0.5,0.5" >
+            <Grid.RenderTransform>
+                <CompositeTransform/>
+            </Grid.RenderTransform>
+            <Grid Background="Black" Opacity="0.5" ColumnSpan="2" 
+                  />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Button Click="BtnLike_OnClick" Style="{StaticResource ButtonNormal}" Name="btnLike"  Width="100">
+                        <Grid>
+                            <Image  Name="imgUnLike" Margin="15" Visibility="Visible"  Source="/Assets/Icon/video_like_unchecked.png"/>
+                            <Image Visibility="{Binding isLiked,Converter={StaticResource BooleanToVisibilityConverter}}" Name="imgLike" Margin="15" Source="/Assets/Icon/video_like_checked.png"/>
+
+                        </Grid>
+                    </Button>
+                    <Line VerticalAlignment="Center" Fill="#444849" StrokeThickness="2" Y1="70" Stroke="#444849" />
+                    <Button 
+                        Click="BtnShare_OnClick"
+                        Style="{StaticResource ButtonNormal}" Name="ShareButton" Width="100">
+                        <Image Margin="15" Source="/Assets/Icon/video_share.png"/>
+                    </Button>
+                    <Line Fill="#444849" VerticalAlignment="Center" StrokeThickness="2" Y1="70" Stroke="#444849" />
+                    <Button Visibility="Collapsed" Click="BtnInfo_OnClick" Style="{StaticResource ButtonNormal}" Name="InfoButton"  Width="100">
+                        <Image Margin="35 15" Source="/Assets/Icon/video_info.png"/>
+                    </Button>
+                    <Line Visibility="Collapsed" Fill="#444849" VerticalAlignment="Center" StrokeThickness="2" Y1="70" Stroke="#444849" />
+
+                </StackPanel>
+                <Grid Grid.Column="1">
+                    <Button 
+                        Style="{StaticResource ButtonNormal}" 
+                        Name="MuteButton" 
+                        Click="BtnMute_OnClick"
+                        HorizontalAlignment="Left"
+                        Width="100">
+                        <Image Name="imgMute" Margin="20 15" Source="/Assets/Icon/video_volum.png"/>
+                    </Button>
+                    <TextBlock Visibility="Collapsed" Name="TbBlock" Text="9"></TextBlock>
+
+                    <Slider 
+                        ManipulationStarted="grid1_ManipulationStarted" 
+                        ManipulationCompleted="grid1_ManipulationCompleted" 
+                        x:Name="VolumeSlider"
+                        ValueChanged="VolumeSlider_OnValueChanged" 
+                        Style="{StaticResource SliderStyle2}" 
+                        Value="0.5" 
+                        Maximum="1" 
+                        Foreground="Cyan" 
+                        Background="#848587"
+                        Width="350" Margin="0 10 10 10" 
+                        VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid 
+            x:Name="ControlBoardPanel" 
+            VerticalAlignment="Bottom" 
+            Height="60" 
+            Background="Transparent" 
+            RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <CompositeTransform/>
+            </Grid.RenderTransform>
+            <Grid Background="Black" Opacity="0.5" />
+            <Button 
+                Name="PlayPauseButton" 
+                Click="PlayPauseButton_OnClick"
+                Margin="20 5" Width="50" 
+                HorizontalAlignment="Left" 
+                Style="{StaticResource ButtonNull}">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="/Assets/Icon/basecircle.png"/>
+                </Button.Background>
+                <Image Name="imgPause" Source="/Assets/Icon/transport.pause.png" />
+            </Button>
+            <TextBlock 
+                Foreground="White" 
+                Name="TimeElapsedTextBlock" 
+                Text="00:00:00" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Left" 
+                Margin="86 0 0 0" />
+            <Slider 
+                Name="TimelineSlider" 
+                Style="{StaticResource SliderStyle1}"  
+                VerticalAlignment="Center" 
+                Margin="160 0 100 0"  
+                BorderBrush="#FFB6DA12" 
+                Background="#FF8D8D8D" 
+                ValueChanged="TimelineSlider_OnValueChanged"/>
+                <!--MouseMove="sldRunVideo_MouseMove" 
+                MouseLeftButtonUp="sldRunVideo_MouseLeftButtonUp" 
+                MouseLeftButtonDown="sldRunVideo_MouseLeftButtonDown" 
+                ManipulationStarted="sldRunVideo_ManipulationStarted" 
+                ManipulationCompleted="sldRunVideo_ManipulationCompleted" />-->
+            <TextBlock 
+                Foreground="White" 
+                Name="TotalDurationTextBlock" 
+                Text="00:00:00" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Right"
+                Margin="0 0 20 0"/>
+        </Grid>
+
+    </Grid>
+
+</phone:PhoneApplicationPage>

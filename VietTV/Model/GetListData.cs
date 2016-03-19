@@ -32,7 +32,25 @@ namespace VietTV.Model
                 if (this._chanelsCollection != value)
                 {
                     this._chanelsCollection = value;
+                    
                     this.RaisePropertyChanged("chanelsCollection");
+                }
+            }
+        }
+
+        private ObservableCollection<Chanel> _chanelsCollectionInOne = new ObservableCollection<Chanel>();
+        public ObservableCollection<Chanel> chanelsCollectionInOne
+        {
+            get
+            {
+                return _chanelsCollectionInOne;
+            }
+            set
+            {
+                if (this._chanelsCollectionInOne != value)
+                {
+                    this._chanelsCollectionInOne = value;
+                    this.RaisePropertyChanged("chanelsCollectionInOne");
                 }
             }
         }

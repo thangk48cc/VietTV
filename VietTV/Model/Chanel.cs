@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VietTV.Common;
 
 namespace VietTV.Model
 {
@@ -19,6 +20,40 @@ namespace VietTV.Model
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        private int _groupid;
+        public int groupId
+        {
+            get
+            {
+                return _groupid;
+            }
+            set
+            {
+                if (this._groupid != value)
+                {
+                    this._groupid = value;
+                    this.RaisePropertyChanged("groupId");
+                }
+            }
+        }
+
+        private string _groupname;
+        public string groupName
+        {
+            get
+            {
+                return _groupname;
+            }
+            set
+            {
+                if (this._groupname != value)
+                {
+                    this._groupname = value;
+                    this.RaisePropertyChanged("groupName");
+                }
+            }
+        }
+
         private string _chanelid;
         public string chanelId
         {
@@ -65,7 +100,7 @@ namespace VietTV.Model
                 {
                     this._icon = value;
                     if (chanelId == null) chanelId = "333";
-                    if (!chanelId.Equals("#123"))
+                    if (!chanelId.Equals(CodePublic.chanelIdAdd))
                         this.icon = "/Assets/Images/todayTV.png";
                     else
                         this.icon = "/Assets/Images/addFavChanel.png";
@@ -157,6 +192,22 @@ namespace VietTV.Model
                 {
                     this._link = value;
                     this.RaisePropertyChanged("link");
+                }
+            }
+        }
+        private bool _isliked=false;
+        public bool isLiked
+        {
+            get
+            {
+                return _isliked;
+            }
+            set
+            {
+                if (this._isliked != value)
+                {
+                    this._isliked = value;
+                    this.RaisePropertyChanged("isLiked");
                 }
             }
         }

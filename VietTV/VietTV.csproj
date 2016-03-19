@@ -94,12 +94,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\CodePublic.cs" />
+    <Compile Include="Common\KeyedList.cs" />
+    <Compile Include="Common\MediaElementManager.cs" />
     <Compile Include="Common\RepositoryServices.cs" />
     <Compile Include="Controls\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BooleanToCheckedConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\CaseConverter.cs" />
+    <Compile Include="DBFavoriteChanelContext.cs" />
     <Compile Include="Framework\Extensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -121,8 +126,17 @@
     <Compile Include="Services\NavigationHelper.cs" />
     <Compile Include="ViewModel\MenuMainVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\PageAddFavorite.xaml.cs">
+      <DependentUpon>PageAddFavorite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PageChanelDeail.xaml.cs">
+      <DependentUpon>PageChanelDeail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PageMainPanel.xaml.cs">
       <DependentUpon>PageMainPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PlayerPage.xaml.cs">
+      <DependentUpon>PlayerPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -142,9 +156,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\PageAddFavorite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PageChanelDeail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PageMainPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PlayerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +183,34 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Assets\Icon\basecircle.png" />
+    <Content Include="Assets\Icon\bg_login.jpg" />
+    <Content Include="Assets\Icon\download_cancel.png" />
+    <Content Include="Assets\Icon\download_pause.png" />
+    <Content Include="Assets\Icon\download_play.png" />
+    <Content Include="Assets\Icon\download_refresh.png" />
+    <Content Include="Assets\Icon\login_get_pass.png" />
+    <Content Include="Assets\Icon\login_refresh_captcha.png" />
+    <Content Include="Assets\Icon\transport.pause.png" />
+    <Content Include="Assets\Icon\transport.play.png" />
+    <Content Include="Assets\Icon\video_info.png" />
+    <Content Include="Assets\Icon\video_like_checked.png" />
+    <Content Include="Assets\Icon\video_like_unchecked.png" />
+    <Content Include="Assets\Icon\video_pause.png" />
+    <Content Include="Assets\Icon\video_play.png" />
+    <Content Include="Assets\Icon\video_share.png" />
+    <Content Include="Assets\Icon\video_unvolum.png" />
+    <Content Include="Assets\Icon\video_volum.png" />
+    <Content Include="Assets\Images\icon3cham.png" />
+    <Content Include="Assets\Images\iconV.png" />
+    <Content Include="Assets\Images\iconX.png" />
+    <Content Include="Assets\Images\icon_liked.png" />
+    <Content Include="Assets\Images\icon_select.png" />
+    <Content Include="Assets\Images\icon_unliked.png" />
+    <Content Include="Assets\Images\icon_zoomPlayer.png" />
+    <Content Include="Assets\Images\scrollbutton.png" />
+    <Content Include="Assets\Images\trailer.png" />
+    <Content Include="Assets\Images\volum.png" />
     <Content Include="Services\channels.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +282,9 @@
     <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL" />
     <Reference Include="GalaSoft.MvvmLight.Extras.WP8, Version=4.2.30.23483, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="GalaSoft.MvvmLight.WP8, Version=4.2.30.23483, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="HtmlAgilityPack-PCL">
+      <HintPath>C:\Users\luanvd\Downloads\HtmlAgilityPack-PCL-master\HtmlAgilityPack-PCL-master\HtmlAgilityPack-PCL\bin\Debug\HtmlAgilityPack-PCL.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=8.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.PlayerFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />

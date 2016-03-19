@@ -6,8 +6,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using HtmlAgilityPack;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using VietTV.Common;
 using VietTV.Model;
 using VietTV.ViewModel;
 
@@ -24,18 +26,19 @@ namespace VietTV.View
             stbOpenMenu.Completed += stbOpenMenu_Completed;
         }
 
-        void stbOpenMenu_Completed(object sender, EventArgs e)
+        private void stbOpenMenu_Completed(object sender, EventArgs e)
         {
             isOpen = true;
         }
 
         private bool isOpen = false;
-        void stbCloseMenu_Completed(object sender, EventArgs e)
+
+        private void stbCloseMenu_Completed(object sender, EventArgs e)
         {
             isOpen = false;
         }
 
-        void MenuSetting()
+        private void MenuSetting()
         {
             if (isOpen)
             {
@@ -45,9 +48,10 @@ namespace VietTV.View
             else
             {
                 stbOpenMenu.Begin();
-                btnMenuMain.Background = new SolidColorBrush(Color.FromArgb(255,79,184,229));
+                btnMenuMain.Background = new SolidColorBrush(Color.FromArgb(255, 79, 184, 229));
             }
         }
+
         private void BtnMenuMain_OnClick(object sender, RoutedEventArgs e)
         {
             MenuSetting();
@@ -62,7 +66,7 @@ namespace VietTV.View
 
         private void BtnItemGroupChanel_OnClick(object sender, RoutedEventArgs e)
         {
-            var item = (GetListChanels)(sender as Button).DataContext;
+            var item = (GetListChanels) (sender as Button).DataContext;
             var vm = DataContext as MenuMainVM;
             vm.groupChanelItem = item;
             vm.chanelsByGroup = item.chanels;
@@ -77,8 +81,63 @@ namespace VietTV.View
                     vm.chanelsByGroup.Add(chanel);
                 }
             }
-            
+
             MenuSetting();
+        }
+
+        private void BtnItemChanel_OnClick(object sender, RoutedEventArgs e)
+        {
+            var item = (Chanel) (sender as Button).DataContext;
+            if (item != null)
+            {
+                if (item.chanelId == CodePublic.chanelIdAdd)
+                {
+                    NavigationService.Navigate(new Uri("/View/PageAddFavorite.xaml", UriKind.RelativeOrAbsolute));
+                }
+                else
+                {
+                    (App.Current as App).chanelDetail = item;
+                    NavigationService.Navigate(
+                        new Uri(
+                            "/View/PageChanelDeail.xaml?chanelId=" + item.chanelId + "&chanelName = " + item.chanelName,
+                            UriKind.RelativeOrAbsolute));
+                }
+            }
+
+        }
+
+        private void PageMainPanel_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            WebClient codeSampleReq = new WebClient();
+            codeSampleReq.DownloadStringCompleted += codeSampleReq_DownloadStringCompleted;
+            codeSampleReq.DownloadStringAsync(new Uri("http://htvonline.com.vn/xem-phim/phim-mat-na-thien-than-Tap-1-hd-3536313623373634316E61.html"));
+        }
+
+        private void codeSampleReq_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            try
+            {
+                HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
+                htmlDoc.OptionFixNestedTags = true;
+                htmlDoc.LoadHtml(e.Result);
+                HtmlNode divContainer = htmlDoc.GetElementbyId("directoryItems");
+                if (divContainer != null)
+                {
+                    //HtmlNodeCollection nodes = divContainer.SelectNodes("//table/tr");
+                    //foreach (HtmlNode trNode in nodes)
+                    //{
+                    //    HtmlNode titleNode = trNode.SelectSingleNode("td[@class='itemBody']/div[@class='itemTitle']/a");
+                    //    if (titleNode != null)
+                    //    {
+                    //        newSample.Title = titleNode.InnerHtml.Trim();
+                    //    }
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to download" + ex.Message);
+            }
         }
     }
 }
