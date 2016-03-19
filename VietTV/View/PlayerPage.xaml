@@ -169,6 +169,7 @@
             x:Name="TiviMediaElement"
             Tap="MdaMain_OnTap"
             AutoPlay="True"
+            Stretch="Fill"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             MediaFailed="TiviMediaElement_MediaFailed"
@@ -206,8 +207,9 @@
                 <StackPanel Orientation="Horizontal">
                     <Button Click="BtnLike_OnClick" Style="{StaticResource ButtonNormal}" Name="btnLike"  Width="100">
                         <Grid>
-                            <Image  Name="imgUnLike" Margin="15" Visibility="Visible"  Source="/Assets/Icon/video_like_unchecked.png"/>
-                            <Image Visibility="{Binding isLiked,Converter={StaticResource BooleanToVisibilityConverter}}" Name="imgLike" Margin="15" Source="/Assets/Icon/video_like_checked.png"/>
+                            <Image Margin="15" Source="{Binding isLiked,Converter={StaticResource BooleanToCheckedConverter}}"/>
+                            <!--<Image  Name="imgUnLike" Margin="15" Visibility="Visible"  Source="/Assets/Icon/video_like_unchecked.png"/>-->
+                            <!--<Image Visibility="{Binding isLiked,Converter={StaticResource BooleanToVisibilityConverter}}" Name="imgLike" Margin="15" Source="/Assets/Icon/video_like_checked.png"/>-->
 
                         </Grid>
                     </Button>

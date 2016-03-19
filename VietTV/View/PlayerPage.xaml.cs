@@ -27,6 +27,7 @@ namespace VietTV.View
         public PlayerPage()
         {
             InitializeComponent();
+            this.DataContext = (App.Current as App).chanelDetail;
             timer.Interval = TimeSpan.FromSeconds(5);
             timer.Tick += timer_Tick;
             timer.Start();
@@ -98,8 +99,8 @@ namespace VietTV.View
                     //    _streamLink = PublicCode.tvShow.linkTVShow;
                     //if (type == "CHANNEL")
                     //    _streamLink = PublicCode.channel.linkChannel;
-                    _streamLink = "http://htvvod.1c656bad.cdnviet.com/c22eef2eb8ed7b7ccaac1a06bf3eefbb1458424543/xhjldcecaj/Mat.Na.Thien.Than.01.mp4/playlist.m3u8";
-                    _streamLink = NavigationContext.QueryString["linkVideo"];
+                    _streamLink ="http://live.kenhitv.vn:1935/liveweb/itv_web_500k.stream/playlist.m3u8";//"http://vp.xemtvhd.com/chn/vtc1/v.m3u8";
+                    //_streamLink = NavigationContext.QueryString["linkVideo"];
                     InitMediaPlayer();
                 }
                 else
