@@ -42,28 +42,54 @@ namespace VietTV.View
             timerAutoOut.Interval = TimeSpan.FromSeconds(10);
             timerAutoOut.Tick += timerAutoOut_Tick;
             timerAutoOut.Start();
+            grdBackgroundPlayer.Visibility = Visibility.Collapsed;
+            btnZoomPlayer.Visibility = Visibility.Collapsed;
         }
 
+        private bool isLandscape = false;
         void MainPage_OrientationChanged(object sender, OrientationChangedEventArgs e)
         {
             TiviMediaElement.Stretch = Stretch.Fill;
             if (e.Orientation == PageOrientation.LandscapeLeft || e.Orientation == PageOrientation.LandscapeRight)
             {
-
-                //TiviMediaElement.Height = 480;//  Double.NaN;
-                //TiviMediaElement.Width = Double.NaN;
-                panelPlayTivi.Height = 480;
-                panelPlayTivi.Margin = new Thickness(0, 0, 0, 0);
-                TiviMediaElement.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-                TiviMediaElement.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-
-                SystemTray.IsVisible = false;
-
+                isLandscape = true;
+                btnUnZoomPlayer.Visibility = Visibility.Collapsed;
+                    panelPlayTivi.Height = Application.Current.Host.Content.ActualWidth;
+                    panelPlayTivi.Width = Application.Current.Host.Content.ActualHeight;
+                    panelPlayTivi.Margin = new Thickness(0, 0, 0, 0);
+                    TiviMediaElement.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                    TiviMediaElement.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                    SystemTray.IsVisible = false;  
             }
             else
             {
-                panelPlayTivi.Height = 270;
-                panelPlayTivi.Margin = new Thickness(0,50,0,0);
+                btnUnZoomPlayer.Visibility = Visibility.Visible;
+                isLandscape = false;
+                if (isZoom)
+                {
+                    panelPlayTivi.Height = 270;
+                    panelPlayTivi.Width = Application.Current.Host.Content.ActualWidth;
+                    panelPlayTivi.Margin = new Thickness(0, 0, 0, 0);
+                    panelPlayTivi.VerticalAlignment = VerticalAlignment.Center;
+                    TiviMediaElement.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                    TiviMediaElement.Stretch = Stretch.Fill;
+                    TiviMediaElement.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+
+                    SystemTray.IsVisible = false;
+                    grdBackgroundPlayer.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    panelPlayTivi.VerticalAlignment = VerticalAlignment.Top;
+                    panelPlayTivi.Height = 270;
+                    panelPlayTivi.Margin = new Thickness(0, 50, 0, 0);
+                    //TiviMediaElement.Width = Double.NaN;
+                    panelPlayTivi.Width = Application.Current.Host.Content.ActualWidth;
+                    TiviMediaElement.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                    TiviMediaElement.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                    SystemTray.IsVisible = true;
+                }
+                
             }
         }
         async void loadPageHTML()
@@ -136,16 +162,45 @@ namespace VietTV.View
             MenuSetting();
             NavigationService.GoBack();
         }
+
+        private bool isZoom = false;
         private void BtnZoomPlayer_OnClick(object sender, RoutedEventArgs e)
         {
-            panelPlayTivi.Height = Application.Current.Host.Content.ActualHeight;
-            panelPlayTivi.Margin = new Thickness(0, 0, 0, 0);
+            if (isZoom)
+            {
+                if (isLandscape)
+                {
+                    return;
+                }
+                panelPlayTivi.VerticalAlignment = VerticalAlignment.Top;
+                TiviMediaElement.Stretch = Stretch.Fill;
+                panelPlayTivi.Height = 270;
+                panelPlayTivi.Width = Application.Current.Host.Content.ActualWidth;
+                panelPlayTivi.Margin = new Thickness(0, 50, 0, 0);
+                TiviMediaElement.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                TiviMediaElement.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                grdBackgroundPlayer.Visibility = Visibility.Collapsed;
+                isZoom = false;
+                SystemTray.IsVisible = true;
+            }
+            else
+            {
+                if (isLandscape)
+                {
+                    return;
+                }
+                panelPlayTivi.Height = 270;
+                panelPlayTivi.Margin = new Thickness(0, 0, 0, 0);
+                panelPlayTivi.VerticalAlignment = VerticalAlignment.Center;
+                TiviMediaElement.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                TiviMediaElement.Stretch = Stretch.Fill;
+                TiviMediaElement.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
 
-            TiviMediaElement.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-            TiviMediaElement.Stretch= Stretch.Uniform;
-            TiviMediaElement.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-
-            SystemTray.IsVisible = false;
+                SystemTray.IsVisible = false;
+                grdBackgroundPlayer.Visibility = Visibility.Visible;
+                isZoom = true;
+            }
+            
 
             //stbFullScreen.Begin();
            // NavigationService.Navigate(new Uri("/View/PlayerPage.xaml?linkVideo="+linkVideo, UriKind.RelativeOrAbsolute));

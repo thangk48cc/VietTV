@@ -84,7 +84,7 @@ namespace VietTV.View
 
             MenuSetting();
         }
-
+        
         private void BtnItemChanel_OnClick(object sender, RoutedEventArgs e)
         {
             var item = (Chanel) (sender as Button).DataContext;
