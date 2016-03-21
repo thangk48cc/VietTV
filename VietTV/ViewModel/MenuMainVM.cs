@@ -137,6 +137,24 @@ namespace VietTV.ViewModel
                 }
             }
         }
+
+        private Chanel _chaneldetail;
+        public Chanel chanelDetail
+        {
+            get
+            {
+                return _chaneldetail;
+            }
+            set
+            {
+                if (this._chaneldetail != value)
+                {
+                    this._chaneldetail = value;
+                    this.RaisePropertyChanged("chanelDetail");
+                }
+            }
+        }
+
         public RelayCommand<object> getDataFromServiceCommand { get; set; }
         public MenuMainVM(NavigationHelper _navigation)
         {

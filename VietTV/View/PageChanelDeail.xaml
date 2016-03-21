@@ -8,11 +8,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}" Orientation="Portrait"
+    Foreground="{StaticResource PhoneForegroundBrush}" 
+    Orientation="Portrait" SupportedOrientations="PortraitOrLandscape"
     mc:Ignorable="d"
     xmlns:controls="clr-namespace:VietTV.Controls"
      xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-  
+  OrientationChanged="MainPage_OrientationChanged"
     DataContext="{Binding MenuMain,Source={StaticResource Locator}}"
     shell:SystemTray.IsVisible="True">
 
@@ -294,6 +295,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
                 <RowDefinition Height="270" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Background="Black">
@@ -304,185 +306,36 @@
                     <Image Margin="10" Width="50" Source="/Assets/Images/icon_zoomPlayer.png" />
                 </Button>
             </Grid>
-            <Grid Grid.Row="1" Name="panelPlayTivi">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="40" />
-                </Grid.RowDefinitions>
-                <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">
-                	<Grid.RenderTransform>
-                		<CompositeTransform/>
-                	</Grid.RenderTransform>
-                    <Grid x:Name="LayoutRoot" Background="Transparent">
-                        <MediaElement 
-                            x:Name="TiviMediaElement"
-                            Tap="MdaMain_OnTap"
-                            AutoPlay="True"
-                            Stretch="Fill"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            MediaFailed="TiviMediaElement_MediaFailed"
-                            MediaEnded="TiviMediaElement_MediaEnded"
-                            MediaOpened="TiviMediaElement_OnMediaOpened"
-                            CurrentStateChanged="TiviMediaElement_CurrentStateChanged" 
-                            BufferingProgressChanged="TiviMediaElement_BufferingProgressChanged" />
+            <Grid Grid.Row="2" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource ButtonHightLight}">
+                    <TextBlock Text="Server 1" Foreground="White"/>
+                </Button>
 
-                        <ProgressBar Name="ProsesProgressBar" IsIndeterminate="True" />
-                        <Image 
-            Visibility="Collapsed" 
-            Name="PlayAgainButton" 
-            Width="50" 
-            Height="50"
-            Source="/Assets/Images/trailer.png" />
+                <Button Grid.Column="1" Style="{StaticResource ButtonHightLight}">
+                    <TextBlock Text="Server 2"  Foreground="DarkGray"/>
+                </Button>
 
-                        <Grid  
-            ManipulationStarted="grid1_ManipulationStarted" 
-            ManipulationCompleted="grid1_ManipulationCompleted" 
-            x:Name="Grid1" 
-            VerticalAlignment="Top" 
-            Height="60" 
-            Background="Transparent" 
-            RenderTransformOrigin="0.5,0.5" >
-                            <Grid.RenderTransform>
-                                <CompositeTransform/>
-                            </Grid.RenderTransform>
-                            <Grid Background="Black" Opacity="0.5" ColumnSpan="2" 
-                  />
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Click="BtnLike_OnClick" Style="{StaticResource ButtonNormal}" Name="btnLike"  Width="60">
-                                        <Grid>
-                                            <!--<Image  Name="imgUnLike" Margin="15" Visibility="Visible"  Source="/Assets/Images/icon_unliked.png"/>
-                                            <Image Visibility="{Binding isLiked,Converter={StaticResource BooleanToVisibilityConverter}}" Name="imgLike" Margin="15" Source="/Assets/Images/icon_liked.png"/>-->
-                                            <Image Margin="15" Source="{Binding isLiked,Converter={StaticResource BooleanToCheckedConverter}}"/>
-                                        </Grid>
-                                    </Button>
-                                    <Line VerticalAlignment="Center" Fill="#444849" StrokeThickness="2" Y1="70" Stroke="#444849" />
-                                    <Button 
-                        Click="BtnShare_OnClick"
-                        Style="{StaticResource ButtonNormal}" Name="ShareButton" Width="60">
-                                        <Image Margin="15" Source="/Assets/Icon/video_share.png"/>
-                                    </Button>
-                                    <Line Fill="#444849" VerticalAlignment="Center" StrokeThickness="2" Y1="70" Stroke="#444849" />
-                                    <Button Visibility="Collapsed" Click="BtnInfo_OnClick" Style="{StaticResource ButtonNormal}" Name="InfoButton"  Width="100">
-                                        <Image Margin="35 15" Source="/Assets/Icon/video_info.png"/>
-                                    </Button>
-                                    <Line Visibility="Collapsed" Fill="#444849" VerticalAlignment="Center" StrokeThickness="2" Y1="70" Stroke="#444849" />
+                <Button Grid.Column="2"  Style="{StaticResource ButtonHightLight}">
+                    <TextBlock Text="Server 3" Foreground="DarkGray"/>
+                </Button>
 
-                                </StackPanel>
-                                <Grid Grid.Column="1">
-                                    <Button 
-                        Style="{StaticResource ButtonNormal}" 
-                        Name="MuteButton" 
-                        Click="BtnMute_OnClick"
-                        HorizontalAlignment="Left"
-                        Width="60">
-                                        <Image Name="imgMute" Margin="20 15" Source="/Assets/Icon/video_volum.png"/>
-                                    </Button>
-                                    <TextBlock Visibility="Collapsed" Name="TbBlock" Text="9"></TextBlock>
+                <Button Grid.Column="3"  Style="{StaticResource ButtonHightLight}">
+                    <TextBlock Text="Server 4"  Foreground="DarkGray"/>
+                </Button>
 
-                                    <Slider 
-                        ManipulationStarted="grid1_ManipulationStarted" 
-                        ManipulationCompleted="grid1_ManipulationCompleted" 
-                        x:Name="VolumeSlider"
-                        ValueChanged="VolumeSlider_OnValueChanged" 
-                        Style="{StaticResource SliderStyle2}" 
-                        Value="0.7" 
-                        Maximum="1" 
-                        Foreground="Cyan" HorizontalAlignment="Right"
-                        Background="#848587"
-                        Width="300" Margin="0 10 10 10" 
-                        VerticalAlignment="Center"/>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid 
-            x:Name="ControlBoardPanel" 
-            VerticalAlignment="Bottom" 
-            Height="60" 
-            Background="Transparent" 
-            RenderTransformOrigin="0.5,0.5">
-                            <Grid.RenderTransform>
-                                <CompositeTransform/>
-                            </Grid.RenderTransform>
-                            <Grid Background="Black" Opacity="0.5" />
-                            <Button 
-                Name="PlayPauseButton" 
-                Click="PlayPauseButton_OnClick"
-                Margin="20 5" Width="50" 
-                HorizontalAlignment="Left" 
-                Style="{StaticResource ButtonNull}">
-                                <Button.Background>
-                                    <ImageBrush Stretch="Fill" ImageSource="/Assets/Icon/basecircle.png"/>
-                                </Button.Background>
-                                <Image Name="imgPause" Source="/Assets/Icon/transport.pause.png" />
-                            </Button>
-                            <TextBlock 
-                Foreground="White" 
-                Name="TimeElapsedTextBlock" 
-                Text="00:00:00" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Left" 
-                Margin="86 0 0 0" />
-                            <Slider 
-                Name="TimelineSlider" 
-                Style="{StaticResource SliderStyle1}"  
-                VerticalAlignment="Center" 
-                Margin="160 0 100 0"  
-                BorderBrush="#FFB6DA12" 
-                Background="#FF8D8D8D" 
-                ValueChanged="TimelineSlider_OnValueChanged"/>
-                            <!--MouseMove="sldRunVideo_MouseMove" 
-                MouseLeftButtonUp="sldRunVideo_MouseLeftButtonUp" 
-                MouseLeftButtonDown="sldRunVideo_MouseLeftButtonDown" 
-                ManipulationStarted="sldRunVideo_ManipulationStarted" 
-                ManipulationCompleted="sldRunVideo_ManipulationCompleted" />-->
-                            <TextBlock 
-                Foreground="White" 
-                Name="TotalDurationTextBlock" 
-                Text="00:00:00" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Right"
-                Margin="0 0 20 0"/>
-                        </Grid>
-
-                    </Grid>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource ButtonHightLight}">
-                        <TextBlock Text="Server 1" Foreground="White"/>
-                    </Button>
-
-                    <Button Grid.Column="1" Style="{StaticResource ButtonHightLight}">
-                        <TextBlock Text="Server 2"  Foreground="DarkGray"/>
-                    </Button>
-
-                    <Button Grid.Column="2"  Style="{StaticResource ButtonHightLight}">
-                        <TextBlock Text="Server 3" Foreground="DarkGray"/>
-                    </Button>
-
-                    <Button Grid.Column="3"  Style="{StaticResource ButtonHightLight}">
-                        <TextBlock Text="Server 4"  Foreground="DarkGray"/>
-                    </Button>
-                    
-                </Grid>
             </Grid>
-            <Grid Grid.Row="2" Name="panelListCalender">
+            <Grid Grid.Row="3" Name="panelListCalender">
                 
             </Grid>
         </Grid>
 
-
+       
         <!--Menu trai-->
 
         <Grid Margin="-500 0 0 0" Width="350" HorizontalAlignment="Left" Background="Black" Name="grdPanelMenu" RenderTransformOrigin="0.5,0.5">
@@ -577,8 +430,163 @@
             <Image Margin="10 5"  Source="/Assets/Images/icon_menu.png" />
         </Button>
 
-        <!--<controls:LoadingControl Visibility="{Binding isLoading,Converter={StaticResource BooleanToVisibilityConverter}}" />-->
+        
+        <!--pannel player-->
+        <Grid  Name="panelPlayTivi" Height="270" 
+               VerticalAlignment="Top" Margin="0 50 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <CompositeTransform/>
+                </Grid.RenderTransform>
+                <Grid x:Name="LayoutRoot" Background="Transparent">
+                    <MediaElement 
+                            x:Name="TiviMediaElement"
+                            Tap="MdaMain_OnTap"
+                            AutoPlay="True"
+                            Stretch="Fill"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            MediaFailed="TiviMediaElement_MediaFailed"
+                            MediaEnded="TiviMediaElement_MediaEnded"
+                            MediaOpened="TiviMediaElement_OnMediaOpened"
+                            CurrentStateChanged="TiviMediaElement_CurrentStateChanged" 
+                            BufferingProgressChanged="TiviMediaElement_BufferingProgressChanged" />
 
+                    <ProgressBar Name="ProsesProgressBar" IsIndeterminate="True" />
+                    <Image 
+            Visibility="Collapsed" 
+            Name="PlayAgainButton" 
+            Width="50" 
+            Height="50"
+            Source="/Assets/Images/trailer.png" />
+
+                    <Grid  
+            ManipulationStarted="grid1_ManipulationStarted" 
+            ManipulationCompleted="grid1_ManipulationCompleted" 
+            x:Name="Grid1" 
+            VerticalAlignment="Top" 
+            Height="60" 
+            Background="Transparent" 
+            RenderTransformOrigin="0.5,0.5" >
+                        <Grid.RenderTransform>
+                            <CompositeTransform/>
+                        </Grid.RenderTransform>
+                        <Grid Background="Black" Opacity="0.5" ColumnSpan="2" 
+                  />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Click="BtnLike_OnClick" Style="{StaticResource ButtonNormal}" Name="btnLike"  Width="60">
+                                    <Grid>
+                                        <!--<Image  Name="imgUnLike" Margin="15" Visibility="Visible"  Source="/Assets/Images/icon_unliked.png"/>
+                                            <Image Visibility="{Binding isLiked,Converter={StaticResource BooleanToVisibilityConverter}}" Name="imgLike" Margin="15" Source="/Assets/Images/icon_liked.png"/>-->
+                                        <Image Margin="15" Source="{Binding chanelDetail.isLiked,Converter={StaticResource BooleanToCheckedConverter}}"/>
+                                    </Grid>
+                                </Button>
+                                <Line VerticalAlignment="Center" Fill="#444849" StrokeThickness="2" Y1="70" Stroke="#444849" />
+                                <Button 
+                        Click="BtnShare_OnClick"
+                        Style="{StaticResource ButtonNormal}" Name="ShareButton" Width="60">
+                                    <Image Margin="15" Source="/Assets/Icon/video_share.png"/>
+                                </Button>
+                                <Line Fill="#444849" VerticalAlignment="Center" StrokeThickness="2" Y1="70" Stroke="#444849" />
+                                <Button Visibility="Collapsed" Click="BtnInfo_OnClick" Style="{StaticResource ButtonNormal}" Name="InfoButton"  Width="100">
+                                    <Image Margin="35 15" Source="/Assets/Icon/video_info.png"/>
+                                </Button>
+                                <Line Visibility="Collapsed" Fill="#444849" VerticalAlignment="Center" StrokeThickness="2" Y1="70" Stroke="#444849" />
+
+                            </StackPanel>
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0"
+                        Style="{StaticResource ButtonNormal}" 
+                        Name="MuteButton" 
+                        Click="BtnMute_OnClick"
+                        HorizontalAlignment="Left"
+                        Width="60">
+                                    <Image Name="imgMute" Margin="20 15" Source="/Assets/Icon/video_volum.png"/>
+                                </Button>
+                                <TextBlock Visibility="Collapsed" Name="TbBlock" Text="9"></TextBlock>
+
+                                <Slider  Grid.Column="1"
+                        ManipulationStarted="grid1_ManipulationStarted" 
+                        ManipulationCompleted="grid1_ManipulationCompleted" 
+                        x:Name="VolumeSlider"
+                        ValueChanged="VolumeSlider_OnValueChanged" 
+                        Style="{StaticResource SliderStyle2}" 
+                        Value="0.7" 
+                        Maximum="1" Width="280"
+                        Foreground="Cyan" HorizontalAlignment="Left"
+                        Background="#848587" Margin="0 10 10 10" 
+                        VerticalAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid 
+            x:Name="ControlBoardPanel" 
+            VerticalAlignment="Bottom" 
+            Height="60" 
+            Background="Transparent" 
+            RenderTransformOrigin="0.5,0.5">
+                        <Grid.RenderTransform>
+                            <CompositeTransform/>
+                        </Grid.RenderTransform>
+                        <Grid Background="Black" Opacity="0.5" />
+                        <Button 
+                Name="PlayPauseButton" 
+                Click="PlayPauseButton_OnClick"
+                Margin="20 5" Width="50" 
+                HorizontalAlignment="Left" 
+                Style="{StaticResource ButtonNull}">
+                            <Button.Background>
+                                <ImageBrush Stretch="Fill" ImageSource="/Assets/Icon/basecircle.png"/>
+                            </Button.Background>
+                            <Image Name="imgPause" Source="/Assets/Icon/transport.pause.png" />
+                        </Button>
+                        <TextBlock 
+                Foreground="White" 
+                Name="TimeElapsedTextBlock" 
+                Text="00:00:00" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Left" 
+                Margin="86 0 0 0" />
+                        <Slider 
+                Name="TimelineSlider" 
+                Style="{StaticResource SliderStyle1}"  
+                VerticalAlignment="Center" 
+                Margin="160 0 100 0"  
+                BorderBrush="#FFB6DA12" 
+                Background="#FF8D8D8D" 
+                ValueChanged="TimelineSlider_OnValueChanged"/>
+                        <!--MouseMove="sldRunVideo_MouseMove" 
+                MouseLeftButtonUp="sldRunVideo_MouseLeftButtonUp" 
+                MouseLeftButtonDown="sldRunVideo_MouseLeftButtonDown" 
+                ManipulationStarted="sldRunVideo_ManipulationStarted" 
+                ManipulationCompleted="sldRunVideo_ManipulationCompleted" />-->
+                        <TextBlock 
+                Foreground="White" 
+                Name="TotalDurationTextBlock" 
+                Text="00:00:00" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Right"
+                Margin="0 0 20 0"/>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+
+        </Grid>
+        <!--<controls:LoadingControl Visibility="{Binding isLoading,Converter={StaticResource BooleanToVisibilityConverter}}" />-->
+       
     </Grid>
 
 </phone:PhoneApplicationPage>

@@ -31,7 +31,7 @@ namespace VietTV.View
         public PageChanelDeail()
         {
             InitializeComponent();
-            this.DataContext = (App.Current as App).chanelDetail;
+            //this.DataContext = (App.Current as App).chanelDetail;
             stbCloseMenu.Completed += stbCloseMenu_Completed;
             stbOpenMenu.Completed += stbOpenMenu_Completed;
             loadPageHTML();
@@ -43,29 +43,58 @@ namespace VietTV.View
             timerAutoOut.Tick += timerAutoOut_Tick;
             timerAutoOut.Start();
         }
-       
 
+        void MainPage_OrientationChanged(object sender, OrientationChangedEventArgs e)
+        {
+            TiviMediaElement.Stretch = Stretch.Fill;
+            if (e.Orientation == PageOrientation.LandscapeLeft || e.Orientation == PageOrientation.LandscapeRight)
+            {
+
+                //TiviMediaElement.Height = 480;//  Double.NaN;
+                //TiviMediaElement.Width = Double.NaN;
+                panelPlayTivi.Height = 480;
+                panelPlayTivi.Margin = new Thickness(0, 0, 0, 0);
+                TiviMediaElement.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                TiviMediaElement.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+
+                SystemTray.IsVisible = false;
+
+            }
+            else
+            {
+                panelPlayTivi.Height = 270;
+                panelPlayTivi.Margin = new Thickness(0,50,0,0);
+            }
+        }
         async void loadPageHTML()
         {
             string link = "http://htvonline.com.vn/xem-phim/phim-mat-na-thien-than-Tap-1-hd-3536313623373634316E61.html";
 
-            HttpClient client = new HttpClient();
-            var html = await client.GetStringAsync(link);
+            //HttpClient client = new HttpClient();
+            //var html = await client.GetStringAsync(link);
 
-            var doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(html);
+            //var doc = new HtmlAgilityPack.HtmlDocument();
+            //doc.LoadHtml(html);
 
-            var root = doc.DocumentNode;
-            var commonPosts = root.Descendants().Where(n => n.GetAttributeValue("id", "").Equals("play_video"));
-            var inputs = from input in doc.DocumentNode.Descendants("div")
-                         where (input.Attributes["id"] != null && input.Attributes["id"].Value == "play_video")
-                         select input;
-            foreach (var input in inputs)
-            {
-                linkVideo = input.Attributes["data-source"].Value;
-                //MessageBox.Show(input.Attributes["data-source"].Value);
-                // John
-            }
+            //var root = doc.DocumentNode;
+            //var commonPosts = root.Descendants().Where(n => n.GetAttributeValue("id", "").Equals("play_video"));
+            //var inputs = from input in doc.DocumentNode.Descendants("div")
+            //             where (input.Attributes["id"] != null && input.Attributes["id"].Value == "play_video")
+            //             select input;
+            //foreach (var input in inputs)
+            //{
+            //    linkVideo = input.Attributes["data-source"].Value;
+            //    //MessageBox.Show(input.Attributes["data-source"].Value);
+            //    // John
+            //}
+            //var inputs1 = from input in doc.DocumentNode.Descendants("ul")
+            //              where (input.Attributes["class"] != null && input.Attributes["class"].Value == "bxslider list_schedule-ul")
+            //             select input;
+            //HtmlAgilityPack.HtmlDocument innerDoc = new HtmlAgilityPack.HtmlDocument();
+            //innerDoc.LoadHtml(link.InnerHtml);
+
+            //// Select what I need
+            //MessageBox.Show(innerDoc.DocumentNode.SelectSingleNode("//span[@class=\"pp-place-title\"]").InnerText);
         }
 
         private String linkVideo = "";
@@ -109,8 +138,17 @@ namespace VietTV.View
         }
         private void BtnZoomPlayer_OnClick(object sender, RoutedEventArgs e)
         {
+            panelPlayTivi.Height = Application.Current.Host.Content.ActualHeight;
+            panelPlayTivi.Margin = new Thickness(0, 0, 0, 0);
+
+            TiviMediaElement.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+            TiviMediaElement.Stretch= Stretch.Uniform;
+            TiviMediaElement.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+
+            SystemTray.IsVisible = false;
+
             //stbFullScreen.Begin();
-            NavigationService.Navigate(new Uri("/View/PlayerPage.xaml?linkVideo="+linkVideo, UriKind.RelativeOrAbsolute));
+           // NavigationService.Navigate(new Uri("/View/PlayerPage.xaml?linkVideo="+linkVideo, UriKind.RelativeOrAbsolute));
         }
 
         private string chanelId = "";
@@ -133,6 +171,7 @@ namespace VietTV.View
             }
             else
             {
+                _streamLink = "http://live.kenhitv.vn:1935/liveweb/itv_web_500k.stream/playlist.m3u8";
                 InitMediaPlayer();
             }
             base.OnNavigatedTo(e);
@@ -151,8 +190,8 @@ namespace VietTV.View
                 //ToastManage.Show("Có lỗi xảy ra trong quá trình xử lý, vui lòng thử lại sau!");
                 timerAutoOut.Stop();
                 timerAutoOut = null;
-                if (NavigationService.CanGoBack)
-                    NavigationService.GoBack();
+                //if (NavigationService.CanGoBack)
+                //    NavigationService.GoBack();
             }
             else
             {
@@ -441,8 +480,8 @@ namespace VietTV.View
             //{
             //    PopupManager.popup.IsOpen = false;
             //}
-            if (NavigationService.CanGoBack)
-                NavigationService.GoBack();
+            ////if (NavigationService.CanGoBack)
+            ////    NavigationService.GoBack();
             Debug.WriteLine("TiviMediaElement_MediaFailed: ");
         }
 

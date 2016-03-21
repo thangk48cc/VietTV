@@ -96,6 +96,8 @@ namespace VietTV.View
                 }
                 else
                 {
+                    var vm = DataContext as MenuMainVM;
+                    vm.chanelDetail = item;
                     (App.Current as App).chanelDetail = item;
                     NavigationService.Navigate(
                         new Uri(

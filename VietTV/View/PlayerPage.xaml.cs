@@ -99,8 +99,8 @@ namespace VietTV.View
                     //    _streamLink = PublicCode.tvShow.linkTVShow;
                     //if (type == "CHANNEL")
                     //    _streamLink = PublicCode.channel.linkChannel;
-                    _streamLink ="http://live.kenhitv.vn:1935/liveweb/itv_web_500k.stream/playlist.m3u8";//"http://vp.xemtvhd.com/chn/vtc1/v.m3u8";
-                    //_streamLink = NavigationContext.QueryString["linkVideo"];
+                    //_streamLink ="http://live.kenhitv.vn:1935/liveweb/itv_web_500k.stream/playlist.m3u8";//"http://vp.xemtvhd.com/chn/vtc1/v.m3u8";
+                    _streamLink = NavigationContext.QueryString["linkVideo"];
                     InitMediaPlayer();
                 }
                 else
