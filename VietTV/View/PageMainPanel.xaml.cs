@@ -72,6 +72,7 @@ namespace VietTV.View
             vm.chanelsByGroup = item.chanels;
             if (item.groupId == vm.groupChanelId)
             {
+                vm.chanelsByGroup = CodePublic.ReadDataFromIsolatedStorage();
                 var chanel = new Chanel();
                 chanel.chanelId = "#123";
                 chanel.chanelName = "Thêm kênh yêu thích";

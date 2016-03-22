@@ -129,9 +129,9 @@
                 <Border Height="40" VerticalAlignment="Bottom" Margin="15 5">
                     <Grid>
                         <Grid  Background="Gainsboro" Opacity="0.6" />
-                        <toolkit:PhoneTextBox Style="{StaticResource PhoneTextBoxStyleNormal}" Background="Transparent"
-                                      BorderBrush="Transparent" Name="txtSearch"
-                                  PlaceholderText="Tìm kiếm..." FontSize="20" Foreground="White" />
+                        <toolkit:PhoneTextBox Name="txtSearch" TextChanged="TxtSearch_OnTextChanged" Style="{StaticResource PhoneTextBoxStyleNormal}" Background="Transparent"
+                                      BorderBrush="Transparent" ActionIcon="/Assets/Images/iconX.png" ActionIconTapped="TxtSearch_OnActionIconTapped"
+                                  PlaceholderText="Tìm kiếm..." FontSize="20" Foreground="White" HorizontalAlignment="Left" Width="450" />
                     </Grid>
                 </Border>
             </Grid>

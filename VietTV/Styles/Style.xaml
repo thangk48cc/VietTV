@@ -264,9 +264,9 @@
                                             Padding="{TemplateBinding Padding}"  VerticalContentAlignment="Center" />
                         </Border>
                         <toolkitPrimitives:TiltUserControl HorizontalAlignment="Right" Grid.Row="1"
-                                                           VerticalAlignment="Bottom">
-                            <Border x:Name="ActionIconBorder" Background="{TemplateBinding Background}" Height="72" Width="96">
-                                <Image x:Name="ActionIcon" HorizontalAlignment="Right" Height="26"
+                                                           VerticalAlignment="Center" Margin="0 0 10 0">
+                            <Border x:Name="ActionIconBorder" Background="{TemplateBinding Background}" Height="Auto" Width="70">
+                                <Image x:Name="ActionIcon" HorizontalAlignment="Right" VerticalAlignment="Center" Height="24"
                                        Source="{TemplateBinding ActionIcon}" />
                             </Border>
                         </toolkitPrimitives:TiltUserControl>

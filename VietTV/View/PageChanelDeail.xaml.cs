@@ -52,6 +52,7 @@ namespace VietTV.View
             TiviMediaElement.Stretch = Stretch.Fill;
             if (e.Orientation == PageOrientation.LandscapeLeft || e.Orientation == PageOrientation.LandscapeRight)
             {
+                grdMenuLeft.Visibility = Visibility.Collapsed;
                 isLandscape = true;
                 btnUnZoomPlayer.Visibility = Visibility.Collapsed;
                     panelPlayTivi.Height = Application.Current.Host.Content.ActualWidth;
@@ -67,6 +68,7 @@ namespace VietTV.View
                 isLandscape = false;
                 if (isZoom)
                 {
+                    grdMenuLeft.Visibility = Visibility.Collapsed;
                     panelPlayTivi.Height = 270;
                     panelPlayTivi.Width = Application.Current.Host.Content.ActualWidth;
                     panelPlayTivi.Margin = new Thickness(0, 0, 0, 0);
@@ -80,6 +82,7 @@ namespace VietTV.View
                 }
                 else
                 {
+                    grdMenuLeft.Visibility = Visibility.Visible;
                     panelPlayTivi.VerticalAlignment = VerticalAlignment.Top;
                     panelPlayTivi.Height = 270;
                     panelPlayTivi.Margin = new Thickness(0, 50, 0, 0);
@@ -168,6 +171,7 @@ namespace VietTV.View
         {
             if (isZoom)
             {
+                grdMenuLeft.Visibility = Visibility.Visible;
                 if (isLandscape)
                 {
                     return;
@@ -185,6 +189,7 @@ namespace VietTV.View
             }
             else
             {
+                grdMenuLeft.Visibility = Visibility.Collapsed;
                 if (isLandscape)
                 {
                     return;

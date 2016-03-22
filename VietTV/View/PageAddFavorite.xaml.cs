@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -21,8 +22,34 @@ namespace VietTV.View
             InitializeComponent();
             stbCloseMenu.Completed += stbCloseMenu_Completed;
             stbOpenMenu.Completed += stbOpenMenu_Completed;
+            lstChanelsLiked = CodePublic.ReadDataFromIsolatedStorage();
+            if (lstChanelsLiked == null)
+            {
+                return;
+            }
+            var vm = DataContext as MenuMainVM;
+            if (vm!=null)
+            {
+                
+                foreach (var chanelLiked in lstChanelsLiked)
+                {
+                    foreach (var itemChanel in vm.propData.chanelsCollection)
+                    {
+                        if (chanelLiked.groupName!=null && chanelLiked.groupName.Equals(itemChanel.groupName))
+                        {
+                            foreach (var chanel in itemChanel.chanels)
+                            {
+                                if (chanelLiked.chanelId.Equals(chanel.chanelId))
+                                {
+                                    chanel.isLiked = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-
+        ObservableCollection<Chanel> lstChanelsLiked=new ObservableCollection<Chanel>(); 
         void stbOpenMenu_Completed(object sender, EventArgs e)
         {
             isOpen = true;
@@ -67,8 +94,44 @@ namespace VietTV.View
             var item = (Chanel) (sender as Button).DataContext;
             if (item!=null)
             {
+                if (lstChanelsLiked==null)
+                {
+                    lstChanelsLiked = new ObservableCollection<Chanel>();
+                }
                 item.isLiked = !item.isLiked;
+                if (item.isLiked)
+                {
+                    lstChanelsLiked.Add(item);
+                    CodePublic.SaveDataToIsolatedStorage(lstChanelsLiked);
+                }
+                else
+                {
+                    if (lstChanelsLiked.Contains(item))
+                    {
+                        lstChanelsLiked.Remove(item);
+                        CodePublic.SaveDataToIsolatedStorage(lstChanelsLiked);
+                    }
+                }
             }
+
+            //var chanel = CodePublic.ReadDataFromIsolatedStorage();
+           // MessageBox.Show(chanel[0].chanelName);
+        }
+
+        private void TxtSearch_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var vm = DataContext as MenuMainVM;
+            var query = from mContact in vm.propData.chanelsCollectionInOne
+                        where
+                           mContact.chanelName.ToLower().Contains(txtSearch.Text.ToLower())
+                        select mContact;
+            var listQuery = new ObservableCollection<Chanel>(query);
+            vm.listShowing = CodePublic.getListToBiding(listQuery);
+        }
+
+        private void TxtSearch_OnActionIconTapped(object sender, EventArgs e)
+        {
+            txtSearch.Text = "";
         }
     }
 }
