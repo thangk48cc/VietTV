@@ -162,7 +162,7 @@ namespace VietTV.ViewModel
             navigationHelper = _navigation;
             getDataFromServiceCommand = new RelayCommand<object>(getDataFromService);
         }
-
+        public Chanel chanelFav = new Chanel();
         private async void getDataFromService(object obj)
         {
             isLoading = true;
@@ -187,6 +187,7 @@ namespace VietTV.ViewModel
                 chanel1.chanelId = "#123";
                 chanel1.chanelName = "Thêm kênh yêu thích";
                 chanel1.icon = "/Assets/Images/addFavChanel.png";
+                chanelFav = chanel1;
                 if (chanelsByGroup==null)
                 {
                      chanelsByGroup=new ObservableCollection<Chanel>();

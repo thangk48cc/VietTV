@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -84,9 +85,31 @@ namespace VietTV.View
             var item = (GetListChanels)(sender as Button).DataContext;
             var vm = DataContext as MenuMainVM;
             vm.groupChanelItem = item;
-            vm.chanelsByGroup = item.chanels;
+            if (item.groupId == CodePublic.groupChanelId)
+            {
+                vm.chanelsByGroup = CodePublic.ReadDataFromIsolatedStorage();
+            }
+            else
+                vm.chanelsByGroup = item.chanels;
+            while(vm.chanelsByGroup.Contains(vm.chanelFav))
+            {
+                vm.chanelsByGroup.Remove(vm.chanelFav);
+            }
+            vm.chanelsByGroup.Add(vm.chanelFav);
             MenuSetting();
             NavigationService.GoBack();
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            var vm = DataContext as MenuMainVM;
+            vm.chanelsByGroup = CodePublic.ReadDataFromIsolatedStorage();
+            while (vm.chanelsByGroup.Contains(vm.chanelFav))
+            {
+                vm.chanelsByGroup.Remove(vm.chanelFav);
+            }
+            vm.chanelsByGroup.Add(vm.chanelFav);
+            base.OnBackKeyPress(e);
         }
 
         private void BtnChanelItem_OnClick(object sender, RoutedEventArgs e)
