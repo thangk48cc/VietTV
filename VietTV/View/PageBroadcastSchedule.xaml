@@ -142,7 +142,7 @@
 
                                 <toolkit:ContextMenu Width="400" IsZoomEnabled="False" x:Name="ContextMenu" 
                                                      IsFadeEnabled="True" 
-                                                     VerticalOffset="2" Margin="0" HorizontalAlignment="Center">
+                                                     VerticalOffset="0.5" Margin="0" HorizontalAlignment="Center">
                                     <Grid MaxHeight="500">
                                         <phone:LongListSelector LayoutMode="List" 
                                             ItemTemplate="{StaticResource ItemChanelPopupTemplate}"
@@ -153,8 +153,10 @@
                                 </toolkit:ContextMenu>
 
                             </toolkit:ContextMenuService.ContextMenu>
-                            <Grid  Background="Gainsboro" Opacity="0.6" />
-                            <TextBlock Name="tbChanelSelected" Text="VTV 3" VerticalAlignment="Center" Margin="20 0" Foreground="Black" />
+                            <Grid  Background="Black" Opacity="0.5" />
+                            <TextBlock Name="tbChanelSelected" Text="VTV 3" 
+                                       VerticalAlignment="Center" 
+                                       Margin="20 0" Foreground="White" />
                             
                             <Button Click="btnOpenChanelSelect_Click" Style="{StaticResource ButtonHightLight}"  HorizontalAlignment="Right" >
                                 <Image Margin="10" Source="/Assets/Images/combobox.png"/>
@@ -173,7 +175,7 @@
                     <Grid Name="grdSelectDate" Tap="GrdSelectDate_OnTap">
                         <Border Height="40" VerticalAlignment="Center" Margin="15 5">
                         <Grid>
-                            <Grid  Background="Gainsboro" Opacity="0.6" />
+                            <Grid  Background="Black" Opacity="0.5" />
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1.5*" />
@@ -182,9 +184,9 @@
                                 </Grid.ColumnDefinitions>
                                 <Grid Grid.Column="1" HorizontalAlignment="Left" Width="1" Background="Gainsboro" />
                                 <Grid Grid.Column="1" HorizontalAlignment="Right" Width="1" Background="Gainsboro" />
-                                <TextBlock Name="tbMonth" Grid.Column="0" Text="Marth" VerticalAlignment="Center" Margin="20 0" TextAlignment="Left" Foreground="Black" />
-                                <TextBlock Name="tbDay" Grid.Column="1" Text="26" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
-                                <TextBlock Name="tbYear" Grid.Column="2"  Text="2016" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                    <TextBlock Name="tbMonth" Grid.Column="0" Text="Marth" VerticalAlignment="Center" Margin="20 0" TextAlignment="Left" Foreground="White" />
+                                    <TextBlock Name="tbDay" Grid.Column="1" Text="26" VerticalAlignment="Center" TextAlignment="Center" Foreground="White" />
+                                <TextBlock Name="tbYear" Grid.Column="2"  Text="2016" VerticalAlignment="Center" TextAlignment="Center" Foreground="White" />
                             </Grid>
                            
                             
