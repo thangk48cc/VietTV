@@ -133,7 +133,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid>
-                        <Button Style="{StaticResource ButtonNormalLeft}"
+                        <Button Click="BtnBroadcastSchedule_OnClick" Style="{StaticResource ButtonNormalLeft}"
                                 Name="btnCalendar">
                             <Grid Width="480">
                                 <Grid.ColumnDefinitions>

@@ -129,6 +129,9 @@
     <Compile Include="View\PageAddFavorite.xaml.cs">
       <DependentUpon>PageAddFavorite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PageBroadcastSchedule.xaml.cs">
+      <DependentUpon>PageBroadcastSchedule.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PageChanelDeail.xaml.cs">
       <DependentUpon>PageChanelDeail.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PageBroadcastSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PageChanelDeail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,6 +186,11 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
@@ -202,6 +214,7 @@
     <Content Include="Assets\Icon\video_share.png" />
     <Content Include="Assets\Icon\video_unvolum.png" />
     <Content Include="Assets\Icon\video_volum.png" />
+    <Content Include="Assets\Images\combobox.png" />
     <Content Include="Assets\Images\icon3cham.png" />
     <Content Include="Assets\Images\iconV.png" />
     <Content Include="Assets\Images\iconX.png" />
@@ -212,6 +225,10 @@
     <Content Include="Assets\Images\scrollbutton.png" />
     <Content Include="Assets\Images\trailer.png" />
     <Content Include="Assets\Images\volum.png" />
+    <Content Include="Library\HtmlAgilityPack-PCL.dll" />
+    <Content Include="Library\HtmlAgilityPack.dll" />
+    <Content Include="Library\Sen.HTMLParser.dll" />
+    <Content Include="Library\System.Xml.XPath.dll" />
     <Content Include="Services\channels.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -283,8 +300,8 @@
     <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL" />
     <Reference Include="GalaSoft.MvvmLight.Extras.WP8, Version=4.2.30.23483, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="GalaSoft.MvvmLight.WP8, Version=4.2.30.23483, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="HtmlAgilityPack-PCL">
-      <HintPath>C:\Users\luanvd\Downloads\HtmlAgilityPack-PCL-master\HtmlAgilityPack-PCL-master\HtmlAgilityPack-PCL\bin\Debug\HtmlAgilityPack-PCL.dll</HintPath>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>C:\Users\luanvd\Downloads\HTML Parser - Code MSDN Samples\C#\Sen.HTMLParser\Bin\Debug\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=8.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
@@ -298,6 +315,9 @@
     <Reference Include="MyToolkit, Version=2.3.15.0, Culture=neutral, PublicKeyToken=3e349a1360994d26, processorArchitecture=MSIL" />
     <Reference Include="MyToolkit.Extended, Version=2.3.15.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="Sen.HTMLParser">
+      <HintPath>C:\Users\luanvd\Downloads\HTML Parser - Code MSDN Samples\C#\Sen.HTMLParser\Bin\Debug\Sen.HTMLParser.dll</HintPath>
+    </Reference>
     <Reference Include="SM.Media, Version=1.2.2.0, Culture=neutral, PublicKeyToken=a8a96d0f02112ebc, processorArchitecture=MSIL" />
     <Reference Include="SM.Media.Builder, Version=1.2.2.0, Culture=neutral, PublicKeyToken=a8a96d0f02112ebc, processorArchitecture=MSIL" />
     <Reference Include="SM.Media.MediaPlayer.WP8, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL" />
@@ -307,6 +327,9 @@
     <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Net.Http.Primitives, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.XPath">
+      <HintPath>C:\Users\luanvd\Downloads\HTML Parser - Code MSDN Samples\C#\Sen.HTMLParser\Bin\Debug\System.Xml.XPath.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

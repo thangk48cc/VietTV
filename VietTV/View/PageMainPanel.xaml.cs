@@ -130,6 +130,15 @@ namespace VietTV.View
             MenuSetting();
         }
 
-        
+
+
+        private void BtnBroadcastSchedule_OnClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(
+                        new Uri(
+                            "/View/PageBroadcastSchedule.xaml",
+                            UriKind.RelativeOrAbsolute));
+            MenuSetting();
+        }
     }
 }

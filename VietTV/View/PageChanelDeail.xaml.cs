@@ -17,6 +17,7 @@ using HtmlAgilityPack;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
+using Sen.HTMLParser;
 using SM.Media;
 using SM.Media.Utility;
 using SM.Media.Web;
@@ -35,7 +36,7 @@ namespace VietTV.View
             //this.DataContext = (App.Current as App).chanelDetail;
             stbCloseMenu.Completed += stbCloseMenu_Completed;
             stbOpenMenu.Completed += stbOpenMenu_Completed;
-            loadPageHTML();
+            //loadPageHTML();
             timer.Interval = TimeSpan.FromSeconds(5);
             timer.Tick += timer_Tick;
             timer.Start();
@@ -45,6 +46,105 @@ namespace VietTV.View
             timerAutoOut.Start();
             grdBackgroundPlayer.Visibility = Visibility.Collapsed;
             btnZoomPlayer.Visibility = Visibility.Collapsed;
+
+            //this.Loaded += MainPage_Loaded;
+        }
+
+        void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            string link = "http://vtv.vn/truyen-hinh-truc-tuyen/vtv1/phim-truyen-0.htm";
+            WebClient codeSampleReq = new WebClient();
+            codeSampleReq.DownloadStringCompleted += codeSampleReq_DownloadStringCompleted;
+            codeSampleReq.DownloadStringAsync(new Uri(link));
+            //CodeSamples.ItemsSource = codes;
+        }
+
+        private void codeSampleReq_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            string link = "http://code.msdn.microsoft.com/";
+            try
+            {
+                HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
+                htmlDoc.OptionFixNestedTags = true;
+                htmlDoc.LoadHtml(e.Result);
+                HtmlNode divContainer = htmlDoc.GetElementbyId("ScrollDivLich");
+                if (divContainer != null)
+                {
+                    HtmlNodeCollection nodes = divContainer.SelectNodes("//ul");
+                    foreach (HtmlNode trNode in nodes)
+                    {
+                        CodeSample newSample = new CodeSample();
+                        HtmlNode titleNode = trNode.SelectSingleNode("li[@class='zoneurl']/span[@class='thoigian']");
+                        if (titleNode != null)
+                        {
+                            newSample.Title = titleNode.InnerHtml.Trim();
+                        }
+
+                        HtmlNode summaryNode = trNode.SelectSingleNode("td[@class='itemBody']/div/div[@class='customcontribution']/a");
+                        if (summaryNode != null)
+                        {
+                            newSample.Summary = summaryNode.InnerHtml.Trim();
+                        }
+                        else
+                        {
+                            summaryNode = trNode.SelectSingleNode("td[@class='itemBody']/div/a[@class='profile-usercard-hover']");
+
+                        }
+                        if (summaryNode != null)
+                        {
+                            newSample.Summary = summaryNode.InnerHtml.Trim();
+                        }
+                        HtmlNode descNode = trNode.SelectSingleNode("td[@class='itemBody']/div[@class='summaryBox']");
+                        if (descNode != null)
+                        {
+                            newSample.Description = descNode.InnerHtml.Trim();
+                        }
+
+                        HtmlNode divTech = trNode.SelectSingleNode("td[@class='itemBody']/div/div/div[@id='Technologies']");
+                        if (divTech != null)
+                        {
+                            StringBuilder techNames = new StringBuilder();
+                            foreach (HtmlNode techAnchor in divTech.ChildNodes)
+                            {
+                                if (techAnchor.Name.StartsWith("a"))
+                                {
+                                    techNames.Append(techAnchor.InnerHtml.Trim() + " ; ");
+                                }
+                            }
+                            newSample.Technologies = techNames.ToString();
+                        }
+                        if (newSample.Technologies != null)
+                        {
+                            if (newSample.Technologies.ToString().ToLower().Contains("windows phone"))
+                            {
+                                newSample.ImageUrl = "/images/wp.jpg";
+                            }
+                            else if (newSample.Technologies.ToString().ToLower().Contains("windows store"))
+                            {
+                                newSample.ImageUrl = "/images/w8.png";
+                            }
+                            else if (newSample.Technologies.ToString().ToLower().Contains("visual studio"))
+                            {
+                                newSample.ImageUrl = "/images/vs.png";
+                            }
+                            else if (newSample.Technologies.ToString().ToLower().Contains("asp.net"))
+                            {
+                                newSample.ImageUrl = "/images/aspnet.png";
+                            }
+                            else
+                            {
+                                newSample.ImageUrl = "/images/net.jpg";
+                            }
+                        }
+                        codes.Add(newSample);
+                    }
+                }
+                var list = codes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to download" + ex.Message);
+            }
         }
 
         private bool isLandscape = false;
@@ -96,38 +196,93 @@ namespace VietTV.View
                 
             }
         }
+        ObservableCollection<CodeSample> codes = new ObservableCollection<CodeSample>();
         async void loadPageHTML()
         {
-            string link = "http://htvonline.com.vn/xem-phim/phim-mat-na-thien-than-Tap-1-hd-3536313623373634316E61.html";
+            string link = "http://code.msdn.microsoft.com/";
+            try
+            {
+                HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
+                htmlDoc.OptionFixNestedTags = true;
+                htmlDoc.LoadHtml(link);
+                HtmlNode divContainer = htmlDoc.GetElementbyId("directoryItems");
+                if (divContainer != null)
+                {
+                    HtmlNodeCollection nodes = divContainer.SelectNodes("//table/tr");
+                    foreach (HtmlNode trNode in nodes)
+                    {
+                        CodeSample newSample = new CodeSample();
+                        HtmlNode titleNode = trNode.SelectSingleNode("td[@class='itemBody']/div[@class='itemTitle']/a");
+                        if (titleNode != null)
+                        {
+                            newSample.Title = titleNode.InnerHtml.Trim();
+                        }
 
-            //HttpClient client = new HttpClient();
-            //var html = await client.GetStringAsync(link);
+                        HtmlNode summaryNode = trNode.SelectSingleNode("td[@class='itemBody']/div/div[@class='customcontribution']/a");
+                        if (summaryNode != null)
+                        {
+                            newSample.Summary = summaryNode.InnerHtml.Trim();
+                        }
+                        else
+                        {
+                            summaryNode = trNode.SelectSingleNode("td[@class='itemBody']/div/a[@class='profile-usercard-hover']");
 
-            //var doc = new HtmlAgilityPack.HtmlDocument();
-            //doc.LoadHtml(html);
+                        }
+                        if (summaryNode != null)
+                        {
+                            newSample.Summary = summaryNode.InnerHtml.Trim();
+                        }
+                        HtmlNode descNode = trNode.SelectSingleNode("td[@class='itemBody']/div[@class='summaryBox']");
+                        if (descNode != null)
+                        {
+                            newSample.Description = descNode.InnerHtml.Trim();
+                        }
 
-            //var root = doc.DocumentNode;
-            //var commonPosts = root.Descendants().Where(n => n.GetAttributeValue("id", "").Equals("play_video"));
-            //var inputs = from input in doc.DocumentNode.Descendants("div")
-            //             where (input.Attributes["id"] != null && input.Attributes["id"].Value == "play_video")
-            //             select input;
-            //foreach (var input in inputs)
-            //{
-            //    linkVideo = input.Attributes["data-source"].Value;
-            //    //MessageBox.Show(input.Attributes["data-source"].Value);
-            //    // John
-            //}
-            //var inputs1 = from input in doc.DocumentNode.Descendants("ul")
-            //              where (input.Attributes["class"] != null && input.Attributes["class"].Value == "bxslider list_schedule-ul")
-            //             select input;
-            //HtmlAgilityPack.HtmlDocument innerDoc = new HtmlAgilityPack.HtmlDocument();
-            //innerDoc.LoadHtml(link.InnerHtml);
-            HtmlAgilityPack.HtmlDocument document = new HtmlAgilityPack.HtmlDocument();
-            document.LoadHtml(link);
-            HtmlNode divNode = document.DocumentNode.SelectSingleNode("//div[@class='pronounce']");
-
-            //// Select what I need
-            //MessageBox.Show(innerDoc.DocumentNode.SelectSingleNode("//span[@class=\"pp-place-title\"]").InnerText);
+                        HtmlNode divTech = trNode.SelectSingleNode("td[@class='itemBody']/div/div/div[@id='Technologies']");
+                        if (divTech != null)
+                        {
+                            StringBuilder techNames = new StringBuilder();
+                            foreach (HtmlNode techAnchor in divTech.ChildNodes)
+                            {
+                                if (techAnchor.Name.StartsWith("a"))
+                                {
+                                    techNames.Append(techAnchor.InnerHtml.Trim() + " ; ");
+                                }
+                            }
+                            newSample.Technologies = techNames.ToString();
+                        }
+                        if (newSample.Technologies != null)
+                        {
+                            if (newSample.Technologies.ToString().ToLower().Contains("windows phone"))
+                            {
+                                newSample.ImageUrl = "/images/wp.jpg";
+                            }
+                            else if (newSample.Technologies.ToString().ToLower().Contains("windows store"))
+                            {
+                                newSample.ImageUrl = "/images/w8.png";
+                            }
+                            else if (newSample.Technologies.ToString().ToLower().Contains("visual studio"))
+                            {
+                                newSample.ImageUrl = "/images/vs.png";
+                            }
+                            else if (newSample.Technologies.ToString().ToLower().Contains("asp.net"))
+                            {
+                                newSample.ImageUrl = "/images/aspnet.png";
+                            }
+                            else
+                            {
+                                newSample.ImageUrl = "/images/net.jpg";
+                            }
+                        }
+                        codes.Add(newSample);
+                    }
+                }
+                var list = codes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to download" + ex.Message);
+            }
         }
 
         private String linkVideo = "";
