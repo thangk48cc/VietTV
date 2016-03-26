@@ -105,16 +105,11 @@ namespace VietTV.ViewModel
                 if (this._chanelsByGroup != value)
                 {
                     this._chanelsByGroup = value;
-                    
-                    //var chanel = new Chanel();
-                    //chanel.chanelId = "#123";
-                    //chanel.chanelName = "Thêm kênh yêu thích";
-                    //chanel.icon = "/Assets/Images/addFavChanel.png";
-                    //if (this.chanelsByGroup.Last().chanelId!=chanel.chanelId)
+                    //if (this.chanelsByGroup.Last().chanelId != CodePublic.chanelIdAdd)
                     //{
-                    //    this.chanelsByGroup.Add(chanel);
+                    //    propData.chanelsCollection[0].numChannel = chanelsByGroup.Count - 1;
                     //}
-
+                    
                     this.RaisePropertyChanged("chanelsByGroup");
                 }
             }
@@ -182,21 +177,18 @@ namespace VietTV.ViewModel
                 groupChanels = propData.chanelsCollection;
                 var item1 = propData.chanelsCollection.First();
                 groupChanelItem = item1;
-                chanelsByGroup = CodePublic.ReadDataFromIsolatedStorage();
+                
                 var chanel1 = new Chanel();
                 chanel1.chanelId = "#123";
                 chanel1.chanelName = "Thêm kênh yêu thích";
                 chanel1.icon = "/Assets/Images/addFavChanel.png";
                 chanelFav = chanel1;
+                chanelsByGroup = CodePublic.ReadDataFromIsolatedStorage();
+                propData.chanelsCollection[0].numChannel = chanelsByGroup.Count-1;
                 if (chanelsByGroup==null)
                 {
                      chanelsByGroup=new ObservableCollection<Chanel>();
                      chanelsByGroup.Add(chanel1);
-                }
-                else
-                if (chanelsByGroup.Last().chanelId != chanel1.chanelId)
-                {
-                    chanelsByGroup.Add(chanel1);
                 }
 
                 int indexId = 0;

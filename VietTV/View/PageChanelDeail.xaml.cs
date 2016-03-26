@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -121,6 +122,9 @@ namespace VietTV.View
             //             select input;
             //HtmlAgilityPack.HtmlDocument innerDoc = new HtmlAgilityPack.HtmlDocument();
             //innerDoc.LoadHtml(link.InnerHtml);
+            HtmlAgilityPack.HtmlDocument document = new HtmlAgilityPack.HtmlDocument();
+            document.LoadHtml(link);
+            HtmlNode divNode = document.DocumentNode.SelectSingleNode("//div[@class='pronounce']");
 
             //// Select what I need
             //MessageBox.Show(innerDoc.DocumentNode.SelectSingleNode("//span[@class=\"pp-place-title\"]").InnerText);
@@ -144,12 +148,18 @@ namespace VietTV.View
             {
                 stbCloseMenu.Begin();
                 btnMenuMain.Background = new SolidColorBrush(Color.FromArgb(255, 0, 154, 216));
+                grdChePanel.Visibility = Visibility.Collapsed;
             }
             else
             {
                 stbOpenMenu.Begin();
                 btnMenuMain.Background = new SolidColorBrush(Color.FromArgb(255, 79, 184, 229));
+                grdChePanel.Visibility = Visibility.Visible;
             }
+        }
+        private void GrdChePanel_OnTap(object sender, GestureEventArgs e)
+        {
+            MenuSetting();
         }
         private void BtnMenuMain_OnClick(object sender, RoutedEventArgs e)
         {
@@ -158,10 +168,37 @@ namespace VietTV.View
 
         private void BtnItemGroupChanel_OnClick(object sender, RoutedEventArgs e)
         {
+            //var item = (GetListChanels)(sender as Button).DataContext;
+            //var vm = DataContext as MenuMainVM;
+            //vm.groupChanelItem = item;
+            //vm.chanelsByGroup = item.chanels;
+            //MenuSetting();
+            //NavigationService.GoBack();
+
             var item = (GetListChanels)(sender as Button).DataContext;
             var vm = DataContext as MenuMainVM;
             vm.groupChanelItem = item;
-            vm.chanelsByGroup = item.chanels;
+            if (item.groupId == CodePublic.groupChanelId)
+            {
+                vm.chanelsByGroup = CodePublic.ReadDataFromIsolatedStorage();
+                //while (vm.chanelsByGroup.Contains(vm.chanelFav))
+                //{
+                //    vm.chanelsByGroup.Remove(vm.chanelFav);
+                //}
+                //vm.chanelsByGroup.Add(vm.chanelFav);
+
+                for (int i = 0; i < vm.chanelsByGroup.Count; i++)
+                {
+                    if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)
+                    {
+                        vm.chanelsByGroup.Remove(vm.chanelsByGroup[i]);
+                    }
+                }
+                vm.chanelsByGroup.Add(vm.chanelFav);
+            }
+            else
+                vm.chanelsByGroup = item.chanels;
+
             MenuSetting();
             NavigationService.GoBack();
         }
@@ -225,13 +262,13 @@ namespace VietTV.View
             
             if (e.NavigationMode == NavigationMode.New)
             {
-                 _streamLink ="http://live.kenhitv.vn:1935/liveweb/itv_web_500k.stream/playlist.m3u8";//"http://vp.xemtvhd.com/chn/vtc1/v.m3u8";
+                _streamLink = (App.Current as App).chanelDetail.link;  //"http://live.kenhitv.vn:1935/liveweb/itv_web_500k.stream/playlist.m3u8";//"http://vp.xemtvhd.com/chn/vtc1/v.m3u8";
                 //_streamLink = NavigationContext.QueryString["linkVideo"];
                 InitMediaPlayer();
             }
             else
             {
-                _streamLink = "http://live.kenhitv.vn:1935/liveweb/itv_web_500k.stream/playlist.m3u8";
+                //_streamLink = "http://live.kenhitv.vn:1935/liveweb/itv_web_500k.stream/playlist.m3u8";
                 InitMediaPlayer();
             }
             base.OnNavigatedTo(e);
@@ -367,7 +404,14 @@ namespace VietTV.View
             InitializeMediaStream();
             if (!string.IsNullOrEmpty(_streamLink))
             {
-                _mediaStreamFascade.Source = new Uri(_streamLink);
+                try
+                {
+                    _mediaStreamFascade.Source = new Uri(_streamLink);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Sai định dạng link tivi!");
+                }
             }
         }
 
@@ -630,9 +674,33 @@ namespace VietTV.View
         private void BtnLike_OnClick(object sender, RoutedEventArgs e)
         {
             var item = (App.Current as App).chanelDetail;
+            var lstChanelsLiked = CodePublic.ReadDataFromIsolatedStorage();
             if (item != null)
             {
+                if (lstChanelsLiked == null)
+                {
+                    lstChanelsLiked = new ObservableCollection<Chanel>();
+                }
                 item.isLiked = !item.isLiked;
+                if (item.isLiked)
+                {
+                    lstChanelsLiked.Add(item);
+                    CodePublic.SaveDataToIsolatedStorage(lstChanelsLiked);
+                }
+                else
+                {
+                    foreach (var chanel in lstChanelsLiked)
+                    {
+                        if (chanel.chanelId == item.chanelId)
+                        {
+                            lstChanelsLiked.Remove(chanel);
+                            CodePublic.SaveDataToIsolatedStorage(lstChanelsLiked);
+                            break;
+                        }
+                    }
+                }
+                var vm = DataContext as MenuMainVM;
+                if (vm != null) vm.propData.chanelsCollection[0].numChannel = lstChanelsLiked.Count - 1;
             }
         }
 
@@ -673,5 +741,55 @@ namespace VietTV.View
             }
         }
         #endregion
+
+        private void BtnServer_OnClick(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            SelectedServerLiveTv(button.Tag.ToString(),(App.Current as App).chanelDetail);
+            var tbSelected = button.GetFirstLogicalChildByType<TextBlock>(true);
+            buttonServerSelected(tbSelected);
+        }
+
+        void buttonServerSelected(TextBlock tbSelected)
+        {
+            tbServer1.Foreground =
+                tbServer2.Foreground =
+                    tbServer3.Foreground = tbServer4.Foreground = new SolidColorBrush(Colors.DarkGray);
+            tbSelected.Foreground = new SolidColorBrush(Colors.White);
+        }
+        private void SelectedServerLiveTv(string nServer, Chanel chanel)
+        {
+            switch (nServer)
+            {
+                case "1":
+                    _streamLink = chanel.link;
+                    //TiviMediaElement.Source = new Uri(chanel.link,UriKind.RelativeOrAbsolute);
+                    //TiviMediaElement.Play();
+                    break;
+                case "2":
+                    _streamLink = chanel.link2;
+                    //TiviMediaElement.Source = new Uri(chanel.link2, UriKind.RelativeOrAbsolute);
+                    //TiviMediaElement.Play();
+                    break;
+                case "3":
+                    _streamLink = chanel.link3;
+                    //TiviMediaElement.Source = new Uri(chanel.link3, UriKind.RelativeOrAbsolute);
+                    //TiviMediaElement.Play();
+                    break;
+                case "4":
+                    _streamLink = chanel.link4;
+                    //TiviMediaElement.Source = new Uri(chanel.link4, UriKind.RelativeOrAbsolute);
+                    //TiviMediaElement.Play();
+                    break;
+                default:
+                    _streamLink = chanel.link;
+                    //TiviMediaElement.Source = new Uri(chanel.link, UriKind.RelativeOrAbsolute);
+                    //TiviMediaElement.Play();
+                    break;
+
+            }
+            InitMediaPlayer();
+        }
+
     }
 }

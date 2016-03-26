@@ -213,7 +213,6 @@
     <Content Include="Assets\Images\trailer.png" />
     <Content Include="Assets\Images\volum.png" />
     <Content Include="Services\channels.txt" />
-    <None Include="Services\channels" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />

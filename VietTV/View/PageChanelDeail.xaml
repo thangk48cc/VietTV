@@ -314,20 +314,20 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource ButtonHightLight}">
-                    <TextBlock Text="Server 1" Foreground="White"/>
+                <Button Name="btnServer1" Tag="1" Click="BtnServer_OnClick" Style="{StaticResource ButtonHightLight}">
+                    <TextBlock Name="tbServer1" Text="Server 1" Foreground="White"/>
                 </Button>
 
-                <Button Grid.Column="1" Style="{StaticResource ButtonHightLight}">
-                    <TextBlock Text="Server 2"  Foreground="DarkGray"/>
+                <Button Name="btnServer2"  Tag="2" Click="BtnServer_OnClick" Grid.Column="1" Style="{StaticResource ButtonHightLight}">
+                    <TextBlock Name="tbServer2" Text="Server 2"  Foreground="DarkGray"/>
                 </Button>
 
-                <Button Grid.Column="2"  Style="{StaticResource ButtonHightLight}">
-                    <TextBlock Text="Server 3" Foreground="DarkGray"/>
+                <Button Name="btnServer3" Tag="3" Click="BtnServer_OnClick" Grid.Column="2"  Style="{StaticResource ButtonHightLight}">
+                    <TextBlock Name="tbServer3" Text="Server 3" Foreground="DarkGray"/>
                 </Button>
 
-                <Button Grid.Column="3"  Style="{StaticResource ButtonHightLight}">
-                    <TextBlock Text="Server 4"  Foreground="DarkGray"/>
+                <Button Name="btnServer4" Tag="4" Click="BtnServer_OnClick" Grid.Column="3"  Style="{StaticResource ButtonHightLight}">
+                    <TextBlock Name="tbServer4" Text="Server 4"  Foreground="DarkGray"/>
                 </Button>
 
             </Grid>
@@ -475,7 +475,7 @@
                 Name="TimelineSlider" 
                 Style="{StaticResource SliderStyle1}"  
                 VerticalAlignment="Center" 
-                Margin="160 0 100 0"  
+                Margin="160 0 80 0"  
                 BorderBrush="#FFB6DA12" 
                 Background="#FF8D8D8D" 
                 ValueChanged="TimelineSlider_OnValueChanged"/>
@@ -487,7 +487,7 @@
                         <TextBlock 
                 Foreground="White" 
                 Name="TotalDurationTextBlock" 
-                Text="00:00:00" 
+                Text="LiveTV" 
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Right"
                 Margin="0 0 20 0"/>
@@ -499,6 +499,7 @@
         </Grid>
         <Grid Name="grdMenuLeft">
             <!--Menu trai-->
+            <Grid Name="grdChePanel" Tap="GrdChePanel_OnTap" Visibility="Collapsed" Background="Black" Opacity="0.2"/>
             <Grid Margin="-500 0 0 0" Width="350" HorizontalAlignment="Left" Background="Black" Name="grdPanelMenu" RenderTransformOrigin="0.5,0.5">
                 <Grid.RenderTransform>
                     <CompositeTransform/>

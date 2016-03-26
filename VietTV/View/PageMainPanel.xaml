@@ -98,7 +98,7 @@
         
         
         <!--Menu trai-->
-        
+        <Grid Name="grdChePanel" Tap="GrdChePanel_OnTap" Visibility="Collapsed" Background="Black" Opacity="0.2"/>
         <Grid Margin="-500 0 0 0" Width="350" HorizontalAlignment="Left" Background="Black" Name="grdPanelMenu" RenderTransformOrigin="0.5,0.5">
         	<Grid.RenderTransform>
         		<CompositeTransform/>
@@ -191,7 +191,7 @@
             <Image Margin="10 5"  Source="/Assets/Images/icon_menu.png" />
         </Button>
 
-        <!--<controls:LoadingControl Visibility="{Binding isLoading,Converter={StaticResource BooleanToVisibilityConverter}}" />-->
+        <controls:LoadingControl Opacity="0.7" Visibility="{Binding isLoading,Converter={StaticResource BooleanToVisibilityConverter}}" />
 
     </Grid>
 

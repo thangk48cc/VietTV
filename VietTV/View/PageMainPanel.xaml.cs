@@ -26,6 +26,11 @@ namespace VietTV.View
             stbOpenMenu.Completed += stbOpenMenu_Completed;
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+        }
+
         private void stbOpenMenu_Completed(object sender, EventArgs e)
         {
             isOpen = true;
@@ -38,19 +43,22 @@ namespace VietTV.View
             isOpen = false;
         }
 
-        private void MenuSetting()
+        void MenuSetting()
         {
             if (isOpen)
             {
                 stbCloseMenu.Begin();
                 btnMenuMain.Background = new SolidColorBrush(Color.FromArgb(255, 0, 154, 216));
+                grdChePanel.Visibility = Visibility.Collapsed;
             }
             else
             {
                 stbOpenMenu.Begin();
                 btnMenuMain.Background = new SolidColorBrush(Color.FromArgb(255, 79, 184, 229));
+                grdChePanel.Visibility = Visibility.Visible;
             }
         }
+        
 
         private void BtnMenuMain_OnClick(object sender, RoutedEventArgs e)
         {
@@ -70,19 +78,27 @@ namespace VietTV.View
             var vm = DataContext as MenuMainVM;
             vm.groupChanelItem = item;
             vm.chanelsByGroup = item.chanels;
-            if (item.groupId == vm.groupChanelId)
-            {
-                vm.chanelsByGroup = CodePublic.ReadDataFromIsolatedStorage();
-                var chanel = new Chanel();
-                chanel.chanelId = "#123";
-                chanel.chanelName = "Thêm kênh yêu thích";
-                chanel.icon = "/Assets/Images/addFavChanel.png";
-                if (vm.chanelsByGroup.Last().chanelId != chanel.chanelId)
+                if (vm!=null && vm.chanelsByGroup!=null )
                 {
-                    vm.chanelsByGroup.Add(chanel);
-                }
-            }
+                    if (item.groupId == CodePublic.groupChanelId)
+                    {
+                        vm.chanelsByGroup = CodePublic.ReadDataFromIsolatedStorage();
+                        //while (vm.chanelsByGroup.Contains(vm.chanelFav))
+                        //{
+                        //    vm.chanelsByGroup.Remove(vm.chanelFav);
+                        //}
+                        //vm.chanelsByGroup.Add(vm.chanelFav);
 
+                        for (int i = 0; i < vm.chanelsByGroup.Count; i++)
+                        {
+                            if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)
+                            {
+                                vm.chanelsByGroup.Remove(vm.chanelsByGroup[i]);
+                            }
+                        }
+                        vm.chanelsByGroup.Add(vm.chanelFav);
+                    }
+                }
             MenuSetting();
         }
         
@@ -107,6 +123,11 @@ namespace VietTV.View
                 }
             }
 
+        }
+
+        private void GrdChePanel_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            MenuSetting();
         }
 
         
