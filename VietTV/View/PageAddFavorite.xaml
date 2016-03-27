@@ -117,7 +117,7 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="70" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid Background="Black">
                 <TextBlock  Text="CHỌN KÊNH YÊU THÍCH" 
@@ -151,7 +151,7 @@
                
             </Grid>
 
-            <Grid Grid.Row="3" Background="#1e1f1e">
+            <Grid Visibility="Collapsed" Grid.Row="3" Background="#1e1f1e">
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <Button Width="80" Height="50" Style="{StaticResource ButtonHightLight}">
                         <Image Width="22" VerticalAlignment="Center" Source="/Assets/Images/iconX.png" />
@@ -205,7 +205,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid>
-                        <Button Style="{StaticResource ButtonNormalLeft}"
+                        <Button Click="BtnBroadcastSchedule_OnClick" Style="{StaticResource ButtonNormalLeft}"
                                 Name="btnCalendar">
                             <Grid Width="480">
                                 <Grid.ColumnDefinitions>

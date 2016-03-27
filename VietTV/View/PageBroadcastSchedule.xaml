@@ -143,7 +143,7 @@
                                 <toolkit:ContextMenu Width="400" IsZoomEnabled="False" x:Name="ContextMenu" 
                                                      IsFadeEnabled="True" 
                                                      VerticalOffset="0.5" Margin="0" HorizontalAlignment="Center">
-                                    <Grid MaxHeight="500">
+                                    <Grid MaxHeight="400">
                                         <phone:LongListSelector LayoutMode="List" 
                                             ItemTemplate="{StaticResource ItemChanelPopupTemplate}"
                                             ItemsSource="{Binding chanelsCollectionInOne}"/>
@@ -243,7 +243,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid>
-                        <Button Style="{StaticResource ButtonNormalLeft}"
+                        <Button Click="BtnLPS_OnClick" Style="{StaticResource ButtonNormalLeft}"
                                 Name="btnCalendar">
                             <Grid Width="480">
                                 <Grid.ColumnDefinitions>

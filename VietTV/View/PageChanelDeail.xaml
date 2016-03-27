@@ -337,7 +337,9 @@
         </Grid>
 
         <!--pannel player-->
-        <Grid Background="Black" Visibility="Collapsed" Name="grdBackgroundPlayer" />
+        <Grid Tap="GrdBackgroundPlayer_OnTap" Background="Black" Visibility="Collapsed" Name="grdBackgroundPlayer" >
+            <TextBlock Text="{Binding chanelDetail.chanelName}" Name="tbChanel" HorizontalAlignment="Center" Margin="0 50" Foreground="White"/>
+        </Grid>
         <Grid  Name="panelPlayTivi" Height="270" 
                VerticalAlignment="Top" Margin="0 50 0 0">
             <Grid >
@@ -415,6 +417,7 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Button Grid.Column="0"
                         Style="{StaticResource ButtonNormal}" 
@@ -437,7 +440,9 @@
                         Foreground="Cyan" HorizontalAlignment="Left"
                         Background="#848587" Margin="-5 10 10 10" 
                         VerticalAlignment="Center"/>
-                                <Button Name="btnUnZoomPlayer" Grid.Column="2" Click="BtnZoomPlayer_OnClick" Style="{StaticResource ButtonHightLight}" HorizontalAlignment="Right" Width="50">
+
+                                <TextBlock Name="tbNameChanel" Visibility="Collapsed" Margin="10 0" Text="{Binding chanelDetail.chanelName}" Grid.Column="2" VerticalAlignment="Center"/>
+                                <Button Name="btnUnZoomPlayer" Grid.Column="3" Click="BtnZoomPlayer_OnClick" Style="{StaticResource ButtonHightLight}" HorizontalAlignment="Right" Width="50">
                                     <Image Margin="10"  Source="/Assets/Images/icon_zoomPlayer.png" />
                                 </Button>
                             </Grid>

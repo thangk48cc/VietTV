@@ -153,7 +153,8 @@ namespace VietTV.View
             TiviMediaElement.Stretch = Stretch.Fill;
             if (e.Orientation == PageOrientation.LandscapeLeft || e.Orientation == PageOrientation.LandscapeRight)
             {
-                grdMenuLeft.Visibility = Visibility.Collapsed;
+                grdMenuLeft.Visibility =  Visibility.Collapsed;
+                tbNameChanel.Visibility = Visibility.Visible;
                 isLandscape = true;
                 btnUnZoomPlayer.Visibility = Visibility.Collapsed;
                     panelPlayTivi.Height = Application.Current.Host.Content.ActualWidth;
@@ -165,6 +166,7 @@ namespace VietTV.View
             }
             else
             {
+                tbNameChanel.Visibility = Visibility.Collapsed;
                 btnUnZoomPlayer.Visibility = Visibility.Visible;
                 isLandscape = false;
                 if (isZoom)
@@ -342,14 +344,22 @@ namespace VietTV.View
                 //}
                 //vm.chanelsByGroup.Add(vm.chanelFav);
 
-                for (int i = 0; i < vm.chanelsByGroup.Count; i++)
+                if (vm.chanelsByGroup != null)
                 {
-                    if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)
+                    for (int i = 0; i < vm.chanelsByGroup.Count; i++)
                     {
-                        vm.chanelsByGroup.Remove(vm.chanelsByGroup[i]);
+                        if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)
+                        {
+                            vm.chanelsByGroup.Remove(vm.chanelsByGroup[i]);
+                        }
                     }
+                    vm.chanelsByGroup.Add(vm.chanelFav);
                 }
-                vm.chanelsByGroup.Add(vm.chanelFav);
+                else
+                {
+                    vm.chanelsByGroup = new ObservableCollection<Chanel>();
+                    vm.chanelsByGroup.Add(vm.chanelFav);
+                }
             }
             else
                 vm.chanelsByGroup = item.chanels;
@@ -364,6 +374,7 @@ namespace VietTV.View
             if (isZoom)
             {
                 grdMenuLeft.Visibility = Visibility.Visible;
+                tbChanel.Visibility = Visibility.Collapsed;
                 if (isLandscape)
                 {
                     return;
@@ -381,6 +392,7 @@ namespace VietTV.View
             }
             else
             {
+                tbChanel.Visibility = Visibility.Visible;
                 grdMenuLeft.Visibility = Visibility.Collapsed;
                 if (isLandscape)
                 {
@@ -946,5 +958,9 @@ namespace VietTV.View
             InitMediaPlayer();
         }
 
+        private void GrdBackgroundPlayer_OnTap(object sender, GestureEventArgs e)
+        {
+            ShowOrCloseControl();
+        }
     }
 }

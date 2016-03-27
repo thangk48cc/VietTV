@@ -184,13 +184,26 @@ namespace VietTV.ViewModel
                 chanel1.icon = "/Assets/Images/addFavChanel.png";
                 chanelFav = chanel1;
                 chanelsByGroup = CodePublic.ReadDataFromIsolatedStorage();
-                propData.chanelsCollection[0].numChannel = chanelsByGroup.Count-1;
+                if (chanelsByGroup == null)
+                    propData.chanelsCollection[0].numChannel = 0;
+                else
+                    propData.chanelsCollection[0].numChannel = chanelsByGroup.Count-1;
                 if (chanelsByGroup==null)
                 {
                      chanelsByGroup=new ObservableCollection<Chanel>();
                      chanelsByGroup.Add(chanel1);
                 }
-
+                else
+                {
+                        for (int i = 0; i < chanelsByGroup.Count; i++)
+                        {
+                            if (chanelsByGroup[i].chanelId == chanelFav.chanelId)
+                            {
+                                chanelsByGroup.Remove(chanelsByGroup[i]);
+                            }
+                        }
+                        chanelsByGroup.Add(chanelFav);
+                }
                 int indexId = 0;
                 foreach (var item in propData.chanelsCollection)
                 {

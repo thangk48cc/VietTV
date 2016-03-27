@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -89,14 +90,22 @@ namespace VietTV.View
                         //}
                         //vm.chanelsByGroup.Add(vm.chanelFav);
 
-                        for (int i = 0; i < vm.chanelsByGroup.Count; i++)
+                        if (vm.chanelsByGroup != null)
                         {
-                            if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)
+                            for (int i = 0; i < vm.chanelsByGroup.Count; i++)
                             {
-                                vm.chanelsByGroup.Remove(vm.chanelsByGroup[i]);
+                                if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)
+                                {
+                                    vm.chanelsByGroup.Remove(vm.chanelsByGroup[i]);
+                                }
                             }
+                            vm.chanelsByGroup.Add(vm.chanelFav);
                         }
-                        vm.chanelsByGroup.Add(vm.chanelFav);
+                        else
+                        {
+                            vm.chanelsByGroup = new ObservableCollection<Chanel>();
+                            vm.chanelsByGroup.Add(vm.chanelFav);
+                        }
                     }
                 }
             MenuSetting();

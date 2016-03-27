@@ -76,38 +76,54 @@ namespace VietTV.View
                 //}
                 //vm.chanelsByGroup.Add(vm.chanelFav);
 
-                for (int i = 0; i < vm.chanelsByGroup.Count; i++)
+                if (vm.chanelsByGroup != null)
                 {
-                    if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)
+                    for (int i = 0; i < vm.chanelsByGroup.Count; i++)
                     {
-                        vm.chanelsByGroup.Remove(vm.chanelsByGroup[i]);
+                        if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)
+                        {
+                            vm.chanelsByGroup.Remove(vm.chanelsByGroup[i]);
+                        }
                     }
+                    vm.chanelsByGroup.Add(vm.chanelFav);
                 }
-                vm.chanelsByGroup.Add(vm.chanelFav);
+                else
+                {
+                    vm.chanelsByGroup = new ObservableCollection<Chanel>();
+                    vm.chanelsByGroup.Add(vm.chanelFav);
+                }
             }
             else
                 vm.chanelsByGroup = item.chanels;
 
             MenuSetting();
-            NavigationService.GoBack();
+
+            NavigationService.Navigate(
+                        new Uri(
+                            "/View/PageMainPanel.xaml", UriKind.RelativeOrAbsolute));
+            while (this.NavigationService.BackStack.Any())
+            {
+                this.NavigationService.RemoveBackEntry();
+            }
+            //NavigationService.GoBack();
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            var vm = DataContext as MenuMainVM;
-            vm.chanelsByGroup = CodePublic.ReadDataFromIsolatedStorage();
-            //while (vm.chanelsByGroup.Contains(vm.chanelFav))
+            //var vm = DataContext as MenuMainVM;
+            //vm.chanelsByGroup = CodePublic.ReadDataFromIsolatedStorage();
+            ////while (vm.chanelsByGroup.Contains(vm.chanelFav))
+            ////{
+            ////    vm.chanelsByGroup.Remove(vm.chanelFav);
+            ////}
+            //for (int i = 0; i < vm.chanelsByGroup.Count; i++)
             //{
-            //    vm.chanelsByGroup.Remove(vm.chanelFav);
+            //    if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)
+            //    {
+            //        vm.chanelsByGroup.Remove(vm.chanelsByGroup[i]);
+            //    }
             //}
-            for (int i = 0; i < vm.chanelsByGroup.Count; i++)
-            {
-                if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)
-                {
-                    vm.chanelsByGroup.Remove(vm.chanelsByGroup[i]);
-                }
-            }
-            vm.chanelsByGroup.Add(vm.chanelFav);
+            //vm.chanelsByGroup.Add(vm.chanelFav);
             base.OnBackKeyPress(e);
         }
 
@@ -151,6 +167,11 @@ namespace VietTV.View
             var item = (Chanel) (sender as Button).DataContext;
             tbChanelSelected.Text = item.chanelName;
             ContextMenu.IsOpen = false;
+        }
+
+        private void BtnLPS_OnClick(object sender, RoutedEventArgs e)
+        {
+            MenuSetting();
         }
     }
 }

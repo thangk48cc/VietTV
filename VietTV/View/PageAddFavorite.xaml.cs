@@ -95,15 +95,22 @@ namespace VietTV.View
                 //    vm.chanelsByGroup.Remove(vm.chanelFav);
                 //}
                 //vm.chanelsByGroup.Add(vm.chanelFav);
-
-                for (int i = 0; i < vm.chanelsByGroup.Count; i++)
+                if (vm.chanelsByGroup != null)
                 {
-                    if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)
+                    for (int i = 0; i < vm.chanelsByGroup.Count; i++)
                     {
-                        vm.chanelsByGroup.Remove(vm.chanelsByGroup[i]);
+                        if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)
+                        {
+                            vm.chanelsByGroup.Remove(vm.chanelsByGroup[i]);
+                        }
                     }
+                    vm.chanelsByGroup.Add(vm.chanelFav);
                 }
-                vm.chanelsByGroup.Add(vm.chanelFav);
+                else
+                {
+                    vm.chanelsByGroup=new ObservableCollection<Chanel>();
+                    vm.chanelsByGroup.Add(vm.chanelFav);
+                }
             }
             else
                 vm.chanelsByGroup = item.chanels;
@@ -185,6 +192,15 @@ namespace VietTV.View
 
         private void GrdChePanel_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            MenuSetting();
+        }
+
+        private void BtnBroadcastSchedule_OnClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(
+                        new Uri(
+                            "/View/PageBroadcastSchedule.xaml",
+                            UriKind.RelativeOrAbsolute));
             MenuSetting();
         }
     }
