@@ -191,7 +191,7 @@
             <Image Margin="10 5"  Source="/Assets/Images/icon_menu.png" />
         </Button>
 
-        <!--<controls:LoadingControl Opacity="0.7" Visibility="{Binding isLoading,Converter={StaticResource BooleanToVisibilityConverter}}" />-->
+        <controls:LoadingControl Opacity="0.7" Visibility="{Binding isLoading,Converter={StaticResource BooleanToVisibilityConverter}}" />
 
     </Grid>
 

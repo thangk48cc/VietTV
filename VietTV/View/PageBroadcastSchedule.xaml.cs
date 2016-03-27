@@ -173,5 +173,10 @@ namespace VietTV.View
         {
             MenuSetting();
         }
+
+        private void grdChanelCombo_Tap(object sender, GestureEventArgs e)
+        {
+            ContextMenu.IsOpen = true;
+        }
     }
 }

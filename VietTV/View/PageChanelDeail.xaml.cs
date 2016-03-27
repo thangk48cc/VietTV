@@ -47,12 +47,12 @@ namespace VietTV.View
             grdBackgroundPlayer.Visibility = Visibility.Collapsed;
             btnZoomPlayer.Visibility = Visibility.Collapsed;
 
-            //this.Loaded += MainPage_Loaded;
+           // this.Loaded += MainPage_Loaded;
         }
 
         void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            string link = "http://vtv.vn/truyen-hinh-truc-tuyen/vtv1/phim-truyen-0.htm";
+            string link = "http://htvonline.com.vn/livetv/htv7-34336E61.html";
             WebClient codeSampleReq = new WebClient();
             codeSampleReq.DownloadStringCompleted += codeSampleReq_DownloadStringCompleted;
             codeSampleReq.DownloadStringAsync(new Uri(link));
@@ -67,14 +67,17 @@ namespace VietTV.View
                 HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
                 htmlDoc.OptionFixNestedTags = true;
                 htmlDoc.LoadHtml(e.Result);
-                HtmlNode divContainer = htmlDoc.GetElementbyId("ScrollDivLich");
+                HtmlNode divContainer = htmlDoc.GetElementbyId("div_schedule");
                 if (divContainer != null)
                 {
-                    HtmlNodeCollection nodes = divContainer.SelectNodes("//ul");
+                    HtmlNodeCollection nodes = divContainer.SelectNodes("//div/div/ul/li");
                     foreach (HtmlNode trNode in nodes)
                     {
+                        BroadcastSchedule newSchedule = new BroadcastSchedule();
+                        HtmlNode time = trNode.SelectSingleNode("p/b");
+                        Console.WriteLine(time);
                         CodeSample newSample = new CodeSample();
-                        HtmlNode titleNode = trNode.SelectSingleNode("li[@class='zoneurl']/span[@class='thoigian']");
+                        HtmlNode titleNode = trNode.SelectSingleNode("p/span");
                         if (titleNode != null)
                         {
                             newSample.Title = titleNode.InnerHtml.Trim();
@@ -961,6 +964,21 @@ namespace VietTV.View
         private void GrdBackgroundPlayer_OnTap(object sender, GestureEventArgs e)
         {
             ShowOrCloseControl();
+        }
+
+        private void BtnCalendar_OnClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(
+                        new Uri(
+                            "/View/PageBroadcastSchedule.xaml",
+                            UriKind.RelativeOrAbsolute));
+            MenuSetting();
+        }
+
+        private void PanelPlayTivi_OnDoubleTap(object sender, GestureEventArgs e)
+        {
+            if(!isLandscape)
+            BtnZoomPlayer_OnClick(null,null);
         }
     }
 }

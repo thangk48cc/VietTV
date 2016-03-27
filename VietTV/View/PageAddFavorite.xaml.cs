@@ -50,6 +50,13 @@ namespace VietTV.View
                 }
             }
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            searchChanel(txtSearch.Text);
+            base.OnNavigatedTo(e);
+        }
+
         ObservableCollection<Chanel> lstChanelsLiked=new ObservableCollection<Chanel>(); 
         void stbOpenMenu_Completed(object sender, EventArgs e)
         {
@@ -176,15 +183,19 @@ namespace VietTV.View
 
         private void TxtSearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
+            searchChanel(txtSearch.Text);
+        }
+
+        private void searchChanel(string text)
+        {
             var vm = DataContext as MenuMainVM;
             var query = from mContact in vm.propData.chanelsCollectionInOne
                         where
-                           mContact.chanelName.ToLower().Contains(txtSearch.Text.ToLower())
+                           mContact.chanelName.ToLower().Contains(text.ToLower())
                         select mContact;
             var listQuery = new ObservableCollection<Chanel>(query);
             vm.listShowing = CodePublic.getListToBiding(listQuery);
         }
-
         private void TxtSearch_OnActionIconTapped(object sender, EventArgs e)
         {
             txtSearch.Text = "";

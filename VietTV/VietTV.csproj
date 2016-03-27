@@ -110,6 +110,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\BroadcastSchedule.cs" />
     <Compile Include="Model\Chanel.cs" />
     <Compile Include="Model\GetListChanels.cs" />
     <Compile Include="Model\GetListData.cs" />

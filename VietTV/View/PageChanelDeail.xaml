@@ -340,7 +340,7 @@
         <Grid Tap="GrdBackgroundPlayer_OnTap" Background="Black" Visibility="Collapsed" Name="grdBackgroundPlayer" >
             <TextBlock Text="{Binding chanelDetail.chanelName}" Name="tbChanel" HorizontalAlignment="Center" Margin="0 50" Foreground="White"/>
         </Grid>
-        <Grid  Name="panelPlayTivi" Height="270" 
+        <Grid  Name="panelPlayTivi" Height="270" DoubleTap="PanelPlayTivi_OnDoubleTap"
                VerticalAlignment="Top" Margin="0 50 0 0">
             <Grid >
                 <Grid.Background>
@@ -539,7 +539,7 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid>
-                            <Button Style="{StaticResource ButtonNormalLeft}"
+                            <Button Click="BtnCalendar_OnClick" Style="{StaticResource ButtonNormalLeft}"
                                     Name="btnCalendar">
                                 <Grid Width="480">
                                     <Grid.ColumnDefinitions>

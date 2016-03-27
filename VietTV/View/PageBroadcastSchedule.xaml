@@ -137,7 +137,7 @@
                                Margin="15 30 15 40" Foreground="Gainsboro"/>
                     <TextBlock Text="Kênh" Margin="15 0 20 5"></TextBlock>
                     <Border Height="40" VerticalAlignment="Bottom" Margin="15 5">
-                        <Grid DataContext="{Binding propData}">
+                        <Grid Tap="grdChanelCombo_Tap" DataContext="{Binding propData}">
                             <toolkit:ContextMenuService.ContextMenu >
 
                                 <toolkit:ContextMenu Width="400" IsZoomEnabled="False" x:Name="ContextMenu" 
