@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,6 +18,8 @@ using HtmlAgilityPack;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Sen.HTMLParser;
 using SM.Media;
 using SM.Media.Utility;
@@ -71,6 +74,8 @@ namespace VietTV.View
                 if (divContainer != null)
                 {
                     HtmlNodeCollection nodes = divContainer.SelectNodes("//div/div/ul/li");
+                    var data =
+                        htmlDoc.DocumentNode.SelectSingleNode("//script[contains(text(), 'Blablabla')]").InnerHtml;
                     foreach (HtmlNode trNode in nodes)
                     {
                         BroadcastSchedule newSchedule = new BroadcastSchedule();
@@ -432,7 +437,8 @@ namespace VietTV.View
             
             if (e.NavigationMode == NavigationMode.New)
             {
-                _streamLink = (App.Current as App).chanelDetail.link;  //"http://live.kenhitv.vn:1935/liveweb/itv_web_500k.stream/playlist.m3u8";//"http://vp.xemtvhd.com/chn/vtc1/v.m3u8";
+                GetDirectLink((App.Current as App).chanelDetail.link);
+                //_streamLink = (App.Current as App).chanelDetail.link;  //"http://live.kenhitv.vn:1935/liveweb/itv_web_500k.stream/playlist.m3u8";//"http://vp.xemtvhd.com/chn/vtc1/v.m3u8";
                 //_streamLink = NavigationContext.QueryString["linkVideo"];
                 InitMediaPlayer();
             }
@@ -576,7 +582,7 @@ namespace VietTV.View
             {
                 try
                 {
-                    _mediaStreamFascade.Source = new Uri(_streamLink);
+                    _mediaStreamFascade.Source = new Uri(_streamLink,0);
                 }
                 catch (Exception)
                 {
@@ -958,6 +964,7 @@ namespace VietTV.View
                     break;
 
             }
+            GetDirectLink(_streamLink);
             InitMediaPlayer();
         }
 
@@ -980,5 +987,199 @@ namespace VietTV.View
             if(!isLandscape)
             BtnZoomPlayer_OnClick(null,null);
         }
+
+        #region==========get link==============
+        private int _countLink = 0;
+        private async void GetDirectLink(string link)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.IfModifiedSince = new DateTimeOffset?(DateTimeOffset.Now);
+            if ((App.Current as App).chanelDetail.typeChannel.EndsWith("TrucTiep"))
+            {
+                if (this._countLink > 0 && !link.Contains("m3u8"))
+                {
+                    string stringAsync = await httpClient.GetStringAsync(string.Concat("http://winphonevn.com/server/getlinkbongda.php?url=", link));
+                    link = stringAsync;
+                }
+                this._countLink = this._countLink + 1;
+            }
+           // this.Player.Source = null;
+            string[] strArray = null;
+            string str = "";
+           // this.Load.set_Visibility(0);
+            if (link.Contains("!"))
+            {
+                strArray = link.Split(new char[] { '!' });
+            }
+            try
+            {
+                if (strArray != null)
+                {
+                    str = await httpClient.GetStringAsync(strArray[0]);
+                }
+                if (link.Contains("fptlive"))
+                {
+                    string str1 = link;
+                    char[] chrArray = new char[] { '/' };
+                    string str2 = str1.Split(chrArray)[1];
+                    httpClient = new HttpClient();
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    dictionary.Add("id", str2);
+                    dictionary.Add("quality", "3");
+                    dictionary.Add("mobile", "web");
+                    dictionary.Add("type", "newchannel");
+                    FormUrlEncodedContent formUrlEncodedContent = new FormUrlEncodedContent(dictionary);
+                    HttpRequestMessage httpRequestMessage = new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Post,
+                        RequestUri = new Uri("http://fptplay.net/show/getlinklivetv", UriKind.RelativeOrAbsolute),
+                        Content = formUrlEncodedContent
+                    };
+                    HttpRequestMessage uri = httpRequestMessage;
+                    uri.Headers.Referrer = new Uri("http://fptplay.net/");
+                    uri.Headers.Add("X-Requested-With", "XMLHttpRequest");
+                    HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(uri, HttpCompletionOption.ResponseContentRead);
+                    string str3 = await httpResponseMessage.Content.ReadAsStringAsync();
+                    if (str3 != null && str3.Trim() != "")
+                    {
+                        string item = (string)JObject.Parse(str3)["stream"];
+                        if (item.Trim() != "")
+                        {
+                            this._str = item;
+                        }
+                    }
+                }
+                else if (strArray != null)
+                {
+                    Match match = (new Regex(strArray[1], RegexOptions.Compiled)).Match(str);  
+                    if (match.Success && match.Groups[1].Value.StartsWith("http"))
+                    {
+                        this._str = HttpUtility.UrlDecode(match.Groups[1].Value);
+                    }
+                }
+                else if (link.Contains("app.101vn"))
+                {
+                    Dictionary<string, string> dictionary1 = new Dictionary<string, string>();
+                    dictionary1.Add("talachua", "101vn");
+                    dictionary1.Add("package", "duahau3");
+                    dictionary1.Add("version", "10");
+                    FormUrlEncodedContent formUrlEncodedContent1 = new FormUrlEncodedContent(dictionary1);
+                    HttpResponseMessage httpResponseMessage1 = await httpClient.PostAsync(link, formUrlEncodedContent1);
+                    PageChanelDeail playVideo = this;
+                    string str4 = playVideo._str;
+                    playVideo._str = await httpResponseMessage1.Content.ReadAsStringAsync();
+                    playVideo = null;
+                }
+                else if (link.Contains("notfreeplus"))
+                {
+                    string str5 = await (new WebClient()).DownloadStringTaskAsync(new Uri("https://api.vtvplus.vn/pro/index.php/api/v1/channel/stream/88/?ip_address=0&username=84972291119@vtvplus.vn&type_device=android&type_network=wifi&app_name=VTVPlus"));
+                    str = str5;
+                    GetListNotFreePlus objectPlu = JsonConvert.DeserializeObject<GetListNotFreePlus>(str);
+                    this._str = objectPlu.data[0].url;
+                    //string[] arrStrings = _str.Split('?');
+                    //this._str = arrStrings[0];
+                }
+                else if (!link.Contains("notfreemtv"))
+                {
+                    this._str = link;
+                }
+                else
+                {
+                    string[] strArray1 = link.Split(new char[] { '=' });
+                    Random random = new Random();
+                    Dictionary<string, string> dictionary2 = new Dictionary<string, string>();
+                    str = await httpClient.GetStringAsync("http://api.mytvnet.vn//getToken");
+                    JObject jObjects = JObject.Parse(str);
+                    if (jObjects == null || jObjects["tid"] == null)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        //long num = Convert.ToInt64((new Fc()).DeCodeTid(jObjects["tid"].ToString()));
+                        //DateTime now = DateTime.Now;
+                        //Fc fc = new Fc();
+                        //dictionary2.Add("tid", fc.GetTid(num, now));
+                        dictionary2.Add("tid", jObjects["tid"].ToString());
+                        Dictionary<string, string> dictionary3 = dictionary2;
+                        int num1 = random.Next(1, 10);
+                        dictionary3.Add("device_type", num1.ToString());
+                        Dictionary<string, string> dictionary4 = dictionary2;
+                        num1 = random.Next(1, 99);
+                        dictionary4.Add("app_v", num1.ToString());
+                        dictionary2.Add("lang", "vn");
+                        dictionary2.Add("channel_id", strArray1[1]);
+                        dictionary2.Add("mf_code", strArray1[2]);
+                        Dictionary<string, string> dictionary5 = dictionary2;
+                        num1 = random.Next(1, 10);
+                        dictionary5.Add("profile", num1.ToString());
+                        Dictionary<string, string> dictionary6 = dictionary2;
+                        num1 = random.Next(1, 100000);
+                        dictionary6.Add("member_id", num1.ToString());
+                        Dictionary<string, string> dictionary7 = dictionary2;
+                        num1 = random.Next(1, 1000000);
+                        dictionary7.Add("manufacturer_id", num1.ToString());
+                        Dictionary<string, string> dictionary8 = dictionary2;
+                        num1 = random.Next(0, 100000);
+                        dictionary8.Add("device_id", num1.ToString());
+                        FormUrlEncodedContent formUrlEncodedContent2 = new FormUrlEncodedContent(dictionary2);
+                        HttpResponseMessage httpResponseMessage2 = await httpClient.PostAsync("http://ott.mytvnet.vn/v5/channel/mobile/url", formUrlEncodedContent2);
+                        string str6 = await httpResponseMessage2.Content.ReadAsStringAsync();
+                        jObjects = JObject.Parse(str6);
+                        if (jObjects["result"].ToString() == "-1")
+                        {
+                            Dictionary<string, string> dictionary9 = new Dictionary<string, string>();
+                            //dictionary9.Add("tid", fc.GetTid(num, now));
+                            num1 = random.Next(1, 10);
+                            dictionary9.Add("device_type", num1.ToString());
+                            num1 = random.Next(1, 99);
+                            dictionary9.Add("app_v", num1.ToString());
+                            dictionary9.Add("lang", "vn");
+                            dictionary9.Add("channel_id", strArray1[1]);
+                            dictionary9.Add("mf_code", strArray1[2]);
+                            num1 = random.Next(1, 10);
+                            dictionary9.Add("profile", num1.ToString());
+                            num1 = random.Next(1, 100000);
+                            dictionary9.Add("member_id", num1.ToString());
+                            num1 = random.Next(1, 1000000);
+                            dictionary9.Add("manufacturer_id", num1.ToString());
+                            num1 = random.Next(1, 100000);
+                            dictionary9.Add("device_id", num1.ToString());
+                            dictionary2 = dictionary9;
+                            formUrlEncodedContent2 = new FormUrlEncodedContent(dictionary2);
+                            HttpResponseMessage httpResponseMessage3 = await httpClient.PostAsync("http://api.mytvnet.vn/v5/channel/mobile/url", formUrlEncodedContent2);
+                            string str7 = await httpResponseMessage3.Content.ReadAsStringAsync();
+                            jObjects = JObject.Parse(str7);
+                            this._str = jObjects["data"]["url"].ToString();
+                        }
+                        else
+                        {
+                            this._str = jObjects["data"]["url"].ToString();
+                        }
+                        strArray1 = null;
+                        random = null;
+                        dictionary2 = null;
+                       // fc = null;
+                    }
+                }
+
+                _streamLink = this._str;
+                //  return _str;
+                //this.Player.Source = new Uri(this._str.Trim(), 0);
+                //this.Player.Play();
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                //EasyTracker.GetTracker().SendException(string.Concat(this._str, " :", exception.get_Message()), false);
+                //this.Player.Source = new Uri(this._str, 0);
+                //this.Player.Play();
+                //this.Load.set_Visibility(1);
+                _streamLink = (App.Current as App).chanelDetail.link;
+            }
+            //this.Load.set_Visibility(1);
+        }
+        private string _str = "";
+        #endregion
     }
 }
