@@ -114,7 +114,7 @@
 	},
 	{
 		"chanelName": "VTC4",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/15042014/vtc4_35721397550869.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "http://113.160.49.34/lives/origin01/vtc4sd.isml/vtc4sd.m3u8",
@@ -185,7 +185,7 @@
 	},
 	{
 		"chanelName": "VTC10",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/15042014/vtc10_35531397551057.png",
 		"typeChannel": "",
  	 	"link4":"http://hlscache.fptplay.net.vn/livez/vtc10_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
 		"link3": "http://118.107.85.21:1337/get-stream.json?p=smil:vtc10.smil&t=l&ott=mobile!url\": \"(.+?)\"",
@@ -260,7 +260,7 @@
 	"groupName": "Kênh VTV",
 	"chanels": [{
 		"chanelName": "VTV3 HD",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/16062014/vtv3_20711402902808.png",
 		"typeChannel": "",
  	 	"link4":"fptlive/vtv3",
 		"link3": "http://winphonevn.com/GetLinkTv.php?id=39!(http.+)",
@@ -272,7 +272,7 @@
 	},
 	{
 		"chanelName": "VTV1",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/21082013/vtv1_51961377055325.png",
 		"typeChannel": "",
  	 	"link4":"http://118.107.85.21:1337/get-stream.json?p=smil:vtv1.smil&t=l&ott=mobile!url\": \"(.+?)\"",
 		"link3": "http://www.htvonline.com.vn/livetv/vtv1-32316E61.html!data-source=\"(.+?)\"",
@@ -284,7 +284,7 @@
 	},
 	{
 		"chanelName": "VTV1 HD",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/21082013/vtv1_51961377055325.png",
 		"typeChannel": "",
  	 	"link4":"http://vtv.live.cdn.fptplay.net/vtvlive/smil:vtv1sd_hls.smil/chunklist_b500000.m3u8",
 		"link3": "fptlive/vtv1-hd",
@@ -296,7 +296,7 @@
 	},
 	{
 		"chanelName": "VTV2",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/15042014/vtv2_56311397551336.png",
 		"typeChannel": "",
  	 	"link4":"http://hlscache.fptplay.net.vn/livez/vtv2_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
 		"link3": "http://118.107.85.21:1337/get-stream.json?p=smil:vtv2.smil&t=l&ott=mobile!url\": \"(.+?)\"",
@@ -308,7 +308,7 @@
 	},
 	{
 		"chanelName": "VTV3",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/21082013/vtv3_17021377055352.png",
 		"typeChannel": "",
  	 	"link4":"http://118.107.85.21:1337/get-stream.json?p=smil:vtv3.smil&t=l&ott=mobile!url\": \"(.+?)\"",
 		"link3": "http://vtv.live.cdn.fptplay.net/vtvlive/smil:vtv3sd_hls.smil/chunklist_b500000.m3u8",
@@ -344,7 +344,7 @@
 	},
 	{
 		"chanelName": "VTV6 HD",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/16062014/vtv6_43081402902871.png",
 		"typeChannel": "",
  	 	"link4":"fptlive/vtv6-hd",
 		"link3": "http://winphonevn.com/GetLinkTv.php?id=187!(http.+)",
@@ -356,7 +356,7 @@
 	},
 	{
 		"chanelName": "VTV9",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/16042014/vtv9_97381397636733.png",
 		"typeChannel": "",
  	 	"link4":"http://vtv.live.cdn.fptplay.net/vtvlive/smil:vtv1sd_hls.smil/chunklist_b500000.m3u8",
 		"link3": "fptlive/vtv9",
@@ -927,7 +927,7 @@
 	"groupName": "Kênh HTV",
 	"chanels": [{
 		"chanelName": "HTV2 HD",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/26042014/htv2_52321398488170.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "fptlive/htv2",
@@ -939,7 +939,7 @@
 	},
 	{
 		"chanelName": "HTV7 HD",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27122013/htv7_27951388138557.png",
 		"typeChannel": "",
  	 	"link4":"fptlive/htv7",
 		"link3": "http://hlscache.fptplay.net.vn/live/htv7_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
@@ -951,7 +951,7 @@
 	},
 	{
 		"chanelName": "HTV9 HD",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27122013/htv_9_96011388139602.png",
 		"typeChannel": "",
  	 	"link4":"http://118.107.85.21:1337/get-stream.json?p=smil:htv9.smil&t=l&ott=mobile!url\": \"(.+?)\"",
 		"link3": "http://www.htvonline.com.vn/livetv/htv9-37356E61.html!data-source=\"(.+?)\"",
@@ -963,7 +963,7 @@
 	},
 	{
 		"chanelName": "HTV1",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27122013/htv1_13781388139486.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "http://www.htvonline.com.vn/livetv/htv1-32326E61.html!data-source=\"(.+?)\"",
@@ -975,7 +975,7 @@
 	},
 	{
 		"chanelName": "HVT2",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/26042014/htv2_52321398488170.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "fptlive/htv2",
@@ -987,7 +987,7 @@
 	},
 	{
 		"chanelName": "HTV3",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/26032014/htv3_red_65681395806087.png",
 		"typeChannel": "",
  	 	"link4":"http://app.101vn.com/ok/blog/code/stream_n.php?app=apps&code=dG9rZW49KCopVEV6TGpFNSgqKXtPNHlOVEItdSgqKWpVdyZzdD0oKilURXYoKilqVXYoKilqW2d4TlNbZ3hOOX1vMSgqKXc=&id=1008",
 		"link3": "http://www.htvonline.com.vn/livetv/htv3-34396E61.html!data-source=\"(.+?)\"",
@@ -999,7 +999,7 @@
 	},
 	{
 		"chanelName": "HTV4",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27122013/htv4_70521388139563.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "http://hlscache.fptplay.net.vn/live/htv4_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
@@ -1011,7 +1011,7 @@
 	},
 	{
 		"chanelName": "HTV Thể Thao",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/23112015/htvthethaohd_49551448253116.png",
 		"typeChannel": "",
  	 	"link4":"http://hlscache.fptplay.net.vn/live/htvcthethao_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
 		"link3": "fptlive/htvc-the-thao",
@@ -1026,7 +1026,7 @@
 	"groupName": "Kênh HTVC",
 	"chanels": [{
 		"chanelName": "HTVC Phim HD",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27012014/htvc_movie_50151388139835_80281390814952.png",
 		"typeChannel": "",
  	 	"link4":"http://www.htvonline.com.vn/livetv/htvc-phim-3131306E61.html!data-source=\"(.+?)\"",
 		"link3": "http://www.htvonline.com.vn/livetv/htvc-phim-hd-35326E61.html!data-source=\"(.+?)\"",
@@ -1038,7 +1038,7 @@
 	},
 	{
 		"chanelName": "Thuần Việt HD",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27012014/thuan_viet_67731382411308_87811390814814.png",
 		"typeChannel": "",
  	 	"link4":"fptlive/htvc-thuan-viet-hd",
 		"link3": "http://www.htvonline.com.vn/livetv/thua%CC%80n-vie%CC%A3t-hd-39326E61.html!data-source=\"(.+?)\"",
@@ -1050,7 +1050,7 @@
 	},
 	{
 		"chanelName": "HTVC+",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/24112015/htvcplus_94891448334249.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
@@ -1062,7 +1062,7 @@
 	},
 	{
 		"chanelName": "HTVC Gia đình",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27122013/htvgiadinh_60171388139882.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "http://hlscache.fptplay.net.vn/live/htvcgiadinh_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
@@ -1074,7 +1074,7 @@
 	},
 	{
 		"chanelName": "HTVC Phụ Nữ",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27122013/pn_66361388139915.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "http://hlscache.fptplay.net.vn/live/htvcphunu_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
@@ -1086,7 +1086,7 @@
 	},
 	{
 		"chanelName": "HVTC Du lịch",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27122013/dulichvacuocsong_32651388139741.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "http://hlscache.fptplay.net.vn/live/htvcdulich_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
@@ -1098,7 +1098,7 @@
 	},
 	{
 		"chanelName": "HTVC Ca nhạc",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27122013/htvmusic_77851388140058.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
@@ -1110,7 +1110,7 @@
 	},
 	{
 		"chanelName": "FBNC",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/15082014/fbnc_16271408086163.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "fptlive/fbnc",
@@ -1122,7 +1122,7 @@
 	},
 	{
 		"chanelName": "HTVC Shopping",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/28122013/htvcshopping_57871388200808.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "http://hlscache.fptplay.net.vn/live/htvcshopping_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
@@ -1224,7 +1224,7 @@
 	},
 	{
 		"chanelName": "HTV Thể Thao",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27122013/htv_the-thao_74801388139968.png",
 		"typeChannel": "",
  	 	"link4":"http://hlscache.fptplay.net.vn/live/htvcthethao_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
 		"link3": "fptlive/htvc-the-thao",
@@ -1260,7 +1260,7 @@
 	},
 	{
 		"chanelName": "VTC3 HD",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/03072014/vtc3_hd_64101404390449.png",
 		"typeChannel": "",
  	 	"link4":"http://hlscache.fptplay.net.vn/livez/vtc3hd_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
 		"link3": "notfreemtv=21=vstv096",
@@ -1777,12 +1777,12 @@
 	},
 	{
 		"chanelName": "Bà Rịa",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/09052014/brt-1_27131399631308.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "http://hlscache.fptplay.net.vn/live/bariavungtau_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
 		"link2": "http://www.htvonline.com.vn/livetv/ba-ria-3133306E61.html!data-source=\"(.+?)\"",
-		"chanelId": "",
+		"chanelId": "130",
 		"link": "notfreemtv=96=vstv216",
 		
 	},
@@ -1854,12 +1854,12 @@
 	},
 	{
 		"chanelName": "Hà Tĩnh",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/21052015/logo-ha-tinh_92671432174373.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "notfreemtv=94=vstv355",
 		"link2": "http://www.htvonline.com.vn/livetv/ha-tinh-3134396E61.html!data-source=\"(.+?)\"",
-		"chanelId": "",
+		"chanelId": "149",
 		"link": "http://hatinhtv.vn/liveevent.m3u8",
 		
 	},
@@ -1887,12 +1887,12 @@
 	},
 	{
 		"chanelName": "Tây Ninh",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/25072014/ttv_11__76601406270531.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=53=vstv229",
-		"chanelId": "",
+		"chanelId": "141",
 		"link": "http://www.htvonline.com.vn/livetv/tayninh-3134316E61.html!data-source=\"(.+?)\"",
 		
 	},
@@ -1920,29 +1920,29 @@
 	},
 	{
 		"chanelName": "Khánh Hòa",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/21012014/khanhhoa_96941390299027.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=114=vstv203",
-		"chanelId": "",
+		"chanelId": "104",
 		"link": "http://www.htvonline.com.vn/livetv/khanh-hoa-ktv-3130346E61.html!data-source=\"(.+?)\"",
 		
 	},
 	{
 		"chanelName": "Lạng Sơn",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/06012014/lstv_41791389003996.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=114=vstv237",
-		"chanelId": "",
+		"chanelId": "89",
 		"link": "http://www.htvonline.com.vn/livetv/lang-son--lstv-38396E61.html!data-source=\"(.+?)\"",
 		
 	},
 	{
 		"chanelName": "Bình Định",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/21082013/btv_53201377055201.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "notfreemtv=27=vstv352",
@@ -1964,7 +1964,7 @@
 	},
 	{
 		"chanelName": "Bình Dương 1",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/05122014/chanel_btv1--edited_79511417772836.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "notfreemtv=37=vstv222",
@@ -1975,7 +1975,7 @@
 	},
 	{
 		"chanelName": "Bình Dương 2",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/07102015/btv2_50151444185195_68161444187184.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
@@ -2019,29 +2019,29 @@
 	},
 	{
 		"chanelName": "Cà Mau",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/06012014/ctv_57031389004403.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=116=vstv200",
-		"chanelId": "",
+		"chanelId": "67",
 		"link": "http://www.htvonline.com.vn/livetv/ca-mau--ctv-36376E61.html!data-source=\"(.+?)\"",
 		
 	},
 	{
 		"chanelName": "Lào Cai",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/06012014/thlc_30421389003882.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=116=vstv212",
-		"chanelId": "",
+		"chanelId": "70",
 		"link": "http://www.htvonline.com.vn/livetv/lao-cai--thlc-37306E61.html!data-source=\"(.+?)\"",
 		
 	},
 	{
 		"chanelName": "Đồng Tháp",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/15012014/thdtlogo_27321389779800.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
@@ -2052,7 +2052,7 @@
 	},
 	{
 		"chanelName": "Đồng Nai 1",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/05112015/dongnai1_11911446714342.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
@@ -2074,7 +2074,7 @@
 	},
 	{
 		"chanelName": "Quảng Nam",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/21012014/quang-nam_58201390299076.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
@@ -2085,7 +2085,7 @@
 	},
 	{
 		"chanelName": "Sóc Trăng",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/21012014/std-logo_90471390298988.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
@@ -2096,51 +2096,51 @@
 	},
 	{
 		"chanelName": "Đắc Lắc",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/06012014/drt_16681389004338.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=27=vstv353",
-		"chanelId": "",
+		"chanelId": "68",
 		"link": "http://www.htvonline.com.vn/livetv/dac-lac--drt-36386E61.html!data-source=\"(.+?)\"",
 		
 	},
 	{
 		"chanelName": "Đắc Nông",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/06012014/ptd_89911389004281.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=27=vstv354",
-		"chanelId": "",
+		"chanelId": "69",
 		"link": "http://www.htvonline.com.vn/livetv/dac-nong--ptd-36396E61.html!data-source=\"(.+?)\"",
 		
 	},
 	{
 		"chanelName": "Huế",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/06012014/trt_16851389004073.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=27=vstv333",
-		"chanelId": "",
+		"chanelId": "64",
 		"link": "http://www.htvonline.com.vn/livetv/hue--trt-36346E61.html!data-source=\"(.+?)\"",
 		
 	},
 	{
 		"chanelName": "Bắc Giang",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/06012014/bgtv_57131389004599.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "http://www.htvonline.com.vn/livetv/bac-giang--bgtv-36366E61.html!data-source=\"(.+?)\"",
-		"chanelId": "",
+		"chanelId": "66",
 		"link": "notfreemtv=94=vstv357",
 		
 	},
 	{
 		"chanelName": "Vĩnh Phúc",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/06012014/vp_63421389003728.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
@@ -2151,7 +2151,7 @@
 	},
 	{
 		"chanelName": "Vĩnh Long 1",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/20012014/thvl1_65831390202372.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "notfreeplus=041113=53",
@@ -2162,7 +2162,7 @@
 	},
 	{
 		"chanelName": "Vĩnh Long 2",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/05112015/vinhlong2_57831446714946.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
@@ -2173,7 +2173,7 @@
 	},
 	{
 		"chanelName": "Bình Phước 1",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/06012014/bptv1_84661389004532.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
@@ -2195,7 +2195,7 @@
 	},
 	{
 		"chanelName": "Long An",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/06012014/la34_24471389003778.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
@@ -2206,67 +2206,67 @@
 	},
 	{
 		"chanelName": "Trà Vinh",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27122013/tra-vinh_12891388140964.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "",
-		"chanelId": "",
+		"chanelId": "61",
 		"link": "notfreemtv=27=vstv335",
 		
 	},
 	{
 		"chanelName": "Bạc Liêu",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/15042014/bac-lieu_29591397558042.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=27=vstv334",
-		"chanelId": "",
+		"chanelId": "121",
 		"link": "http://www.htvonline.com.vn/livetv/bac-lieu-3132316E61.html!data-source=\"(.+?)\"",
 		
 	},
 	{
 		"chanelName": "Hải Dương",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/22052014/haiduong_86191400730736.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=27=vstv369",
-		"chanelId": "",
+		"chanelId": "131",
 		"link": "http://www.htvonline.com.vn/livetv/haiduong-3133316E61.html!data-source=\"(.+?)\"",
 		
 	},
 	{
 		"chanelName": "Ninh Bình",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/13082014/ninhbinh_76041407894509.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "http://www.htvonline.com.vn/livetv/ninhbinh-3134326E61.html!data-source=\"(.+?)\"",
-		"chanelId": "",
+		"chanelId": "142",
 		"link": "notfreemtv=50=vstv257",
 		
 	},
 	{
 		"chanelName": "Hậu giang",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/15012015/logo_haugiang_35281421295310.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=27=vstv329",
-		"chanelId": "",
+		"chanelId": "147",
 		"link": "http://www.htvonline.com.vn/livetv/hau-giang-3134376E61.html!data-source=\"(.+?)\"",
 		
 	},
 	{
 		"chanelName": "Kiên giang",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/19112014/kiengiang_logo_94061416392363.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=46=vstv236",
-		"chanelId": "",
+		"chanelId": "146",
 		"link": "http://www.htvonline.com.vn/livetv/kien-giang-3134366E61.html!data-source=\"(.+?)\"",
 		
 	},
@@ -2283,34 +2283,34 @@
 	},
 	{
 		"chanelName": "Tiền Giang",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/06112015/thtg_31161446782024.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=54=vstv228",
-		"chanelId": "",
+		"chanelId": "167",
 		"link": "http://hlscache.fptplay.net.vn/livez/tiengiang_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
 		
 	},
 	{
 		"chanelName": "THTPCT TP.CẦN THƠ",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/27122013/thtpct_39031388140843.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "http://hlscache.fptplay.net.vn/live/cantho_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
-		"chanelId": "",
+		"chanelId": "103",
 		"link": "notfreemtv=39=vstv234",
 		
 	},
 	{
 		"chanelName": "Thái nguyên",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/20102014/thai-nguyen-tv-475x360_87721413796527.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "notfreemtv=92=vstv210",
-		"chanelId": "",
+		"chanelId": "145",
 		"link": "http://www.htvonline.com.vn/livetv/thainguyen-3134356E61.html!data-source=\"(.+?)\"",
 		
 	},
@@ -2685,12 +2685,12 @@
 	},
 	{
 		"chanelName": "KBS",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/17112015/kbs_54281447744829.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "",
 		"link2": "",
-		"chanelId": "",
+		"chanelId": "168",
 		"link": "http://htvonline.com.vn/livetv/kbs-world-3136386E61.html!data-source=\"(.+?)\"",
 		
 	},
@@ -3000,12 +3000,12 @@
 	},
 	{
 		"chanelName": "Đà Nẵng 2",
-		"icon": "/Assets/Images/",
+		"icon": "http://img.htvonline.com.vn/livetv/11032015/da-nang-2_80251426040354.png",
 		"typeChannel": "",
  	 	"link4":"",
 		"link3": "http://hlscache.fptplay.net.vn/live/danang2_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
 		"link2": "http://www.htvonline.com.vn/livetv/da-n%E1%BA%B5ng-2-3134386E61.html!data-source=\"(.+?)\"",
-		"chanelId": "",
+		"chanelId": "148",
 		"link": "notfreemtv=60=vstv226",
 		
 	}]

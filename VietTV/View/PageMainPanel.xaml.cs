@@ -53,6 +53,11 @@ namespace VietTV.View
                 e.Cancel = true;
                 return;
             }
+            if (MessageBox.Show("Bạn chắc chắn muốn thoát khỏi ứng dụng?","Thoát",MessageBoxButton.OKCancel)==MessageBoxResult.Cancel)
+            {
+                e.Cancel = true;
+                return;
+            }
             base.OnBackKeyPress(e);
         }
 

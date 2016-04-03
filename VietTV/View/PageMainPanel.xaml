@@ -52,18 +52,18 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="itemChanel">
-            <Button Name="btnItemChanel" Click="BtnItemChanel_OnClick"  Margin="5" HorizontalAlignment="Center" 
+            <Button Name="btnItemChanel"  Click="BtnItemChanel_OnClick"  Margin="5" HorizontalAlignment="Center" 
                 Style="{StaticResource ButtonHightLight}">
                 <Grid Background="Transparent" Margin="2"
-                      
+                       
                       >
                     <Grid Background="FloralWhite" Opacity="0.6" />
-                    <Image Height="100" Width="153" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" >
+                    <Image Height="100" Width="153"  HorizontalAlignment="Center" VerticalAlignment="Center"  >
                         <Image.Source>
                             <BitmapImage UriSource="{Binding icon}" CreateOptions="BackgroundCreation"/>
                         </Image.Source>
                     </Image>
-                    <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{Binding chanelName}" Foreground="Blue"  TextWrapping="Wrap"/>
+                    <!--<TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{Binding chanelName}" Foreground="Blue"  TextWrapping="Wrap"/>-->
                 </Grid>
             </Button>
         </DataTemplate>

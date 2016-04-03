@@ -101,7 +101,17 @@ namespace VietTV.Model
                     this._icon = value;
                     if (chanelId == null) chanelId = "333";
                     if (!chanelId.Equals(CodePublic.chanelIdAdd))
-                        this.icon = "/Assets/Images/todayTV.png";
+                    {
+                        if (this._icon.EndsWith(".jpg") || this._icon.EndsWith(".png") || this._icon.EndsWith(".jepg") || this._icon.EndsWith(".gif"))
+                        {
+                            this._icon = value;
+                        }
+                        else
+                        {
+                            this.icon = "/Assets/Images/todayTV.png";
+                        }
+                        
+                    }
                     else
                         this.icon = "/Assets/Images/addFavChanel.png";
                     this.RaisePropertyChanged("icon");
