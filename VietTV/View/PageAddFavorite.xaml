@@ -75,7 +75,7 @@
                                        Margin="6"  Source="{Binding isLiked,Converter={StaticResource BooleanToCheckedConverter}}" />
                         </Grid>
                     </Border>
-                    <!--<TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{Binding chanelName}" Foreground="Blue"  TextWrapping="Wrap"/>-->
+                    <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{Binding chanelName}" Foreground="Blue"  TextWrapping="Wrap"/>
                 </Grid>
             </Button>
         </DataTemplate>

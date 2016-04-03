@@ -63,7 +63,7 @@
                             <BitmapImage UriSource="{Binding icon}" CreateOptions="BackgroundCreation"/>
                         </Image.Source>
                     </Image>
-                    <!--<TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{Binding chanelName}" Foreground="Blue"  TextWrapping="Wrap"/>-->
+                    <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="{Binding chanelName}" Foreground="Blue"  TextWrapping="Wrap"/>
                 </Grid>
             </Button>
         </DataTemplate>

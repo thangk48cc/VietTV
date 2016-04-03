@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -42,6 +43,17 @@ namespace VietTV.View
         private void stbCloseMenu_Completed(object sender, EventArgs e)
         {
             isOpen = false;
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            if (isOpen)
+            {
+                MenuSetting();
+                e.Cancel = true;
+                return;
+            }
+            base.OnBackKeyPress(e);
         }
 
         void MenuSetting()

@@ -50,16 +50,40 @@ namespace VietTV.View
             grdBackgroundPlayer.Visibility = Visibility.Collapsed;
             btnZoomPlayer.Visibility = Visibility.Collapsed;
 
-           // this.Loaded += MainPage_Loaded;
+            this.Loaded += MainPage_Loaded;
+            webbroser.Source = null;
+            webbroser = null;
+            webbroser=new WebBrowser();
+            //webbroser.Loaded += webbroser_Loaded;
+        }
+
+        void webbroser_Loaded(object sender, RoutedEventArgs e)
+        {
+            string link = ((App.Current as App).chanelDetail.broadcastSchedule == "" || (App.Current as App).chanelDetail.broadcastSchedule == null) ? "http://htvonline.com.vn/livetv/htv7-34336E61.html" : (App.Current as App).chanelDetail.broadcastSchedule;
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                string site;
+                site = link;
+                webbroser.Navigate(new Uri(site, UriKind.Absolute));
+                webbroser.LoadCompleted += webBrowser1_LoadCompleted;
+            });
+        }
+
+        private void webBrowser1_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            string s = webbroser.SaveToString();
+            codeSampleReq_DownloadStringCompleted(s,null);
+            //MessageBox.Show(s);
         }
 
         void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             string link = "http://htvonline.com.vn/livetv/htv7-34336E61.html";
-            WebClient codeSampleReq = new WebClient();
-            codeSampleReq.DownloadStringCompleted += codeSampleReq_DownloadStringCompleted;
-            codeSampleReq.DownloadStringAsync(new Uri(link));
+            //WebClient codeSampleReq = new WebClient();
+            //codeSampleReq.DownloadStringCompleted += codeSampleReq_DownloadStringCompleted;
+            //codeSampleReq.DownloadStringAsync(new Uri(link));
             //CodeSamples.ItemsSource = codes;
+            webbroser_Loaded(null, null);
         }
 
         private void codeSampleReq_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -69,90 +93,51 @@ namespace VietTV.View
             {
                 HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
                 htmlDoc.OptionFixNestedTags = true;
-                htmlDoc.LoadHtml(e.Result);
+                htmlDoc.LoadHtml(sender.ToString());
                 HtmlNode divContainer = htmlDoc.GetElementbyId("div_schedule");
+                tbSchedal.Text = divContainer.InnerText;
                 if (divContainer != null)
                 {
-                    HtmlNodeCollection nodes = divContainer.SelectNodes("//div/div/ul/li");
-                    var data =
-                        htmlDoc.DocumentNode.SelectSingleNode("//script[contains(text(), 'Blablabla')]").InnerHtml;
-                    foreach (HtmlNode trNode in nodes)
-                    {
-                        BroadcastSchedule newSchedule = new BroadcastSchedule();
-                        HtmlNode time = trNode.SelectSingleNode("p/b");
-                        Console.WriteLine(time);
-                        CodeSample newSample = new CodeSample();
-                        HtmlNode titleNode = trNode.SelectSingleNode("p/span");
-                        if (titleNode != null)
+                    HtmlNodeCollection nodes = divContainer.SelectNodes("//div[@class='bx-wrapper']/div[@class='bx-viewport']/ul[@class='bxslider list_schedule-ul']/li");
+                    //var data =
+                    //    htmlDoc.DocumentNode.SelectSingleNode("//script[contains(text(), 'Blablabla')]").InnerHtml;
+                    listBroadcastSchedule=new ObservableCollection<BroadcastSchedule>();
+                        for (int i = 1; i < nodes.Count-1; i++)
                         {
-                            newSample.Title = titleNode.InnerHtml.Trim();
-                        }
+                            var trNode = nodes[i];
+                            HtmlNodeCollection nodes1 = trNode.SelectNodes("p");
+                            foreach (var strNote1 in nodes1)
+                            {
+                                BroadcastSchedule newSchedule = new BroadcastSchedule();
+                                HtmlNode time = strNote1.SelectSingleNode("b");
+                                newSchedule.time = time.InnerText.Trim();
+                                HtmlNode titleNode = strNote1.SelectSingleNode("span");
+                                newSchedule.title = titleNode.InnerText.Trim();
 
-                        HtmlNode summaryNode = trNode.SelectSingleNode("td[@class='itemBody']/div/div[@class='customcontribution']/a");
-                        if (summaryNode != null)
-                        {
-                            newSample.Summary = summaryNode.InnerHtml.Trim();
-                        }
-                        else
-                        {
-                            summaryNode = trNode.SelectSingleNode("td[@class='itemBody']/div/a[@class='profile-usercard-hover']");
-
-                        }
-                        if (summaryNode != null)
-                        {
-                            newSample.Summary = summaryNode.InnerHtml.Trim();
-                        }
-                        HtmlNode descNode = trNode.SelectSingleNode("td[@class='itemBody']/div[@class='summaryBox']");
-                        if (descNode != null)
-                        {
-                            newSample.Description = descNode.InnerHtml.Trim();
-                        }
-
-                        HtmlNode divTech = trNode.SelectSingleNode("td[@class='itemBody']/div/div/div[@id='Technologies']");
-                        if (divTech != null)
-                        {
-                            StringBuilder techNames = new StringBuilder();
-                            foreach (HtmlNode techAnchor in divTech.ChildNodes)
-                            {
-                                if (techAnchor.Name.StartsWith("a"))
-                                {
-                                    techNames.Append(techAnchor.InnerHtml.Trim() + " ; ");
-                                }
-                            }
-                            newSample.Technologies = techNames.ToString();
-                        }
-                        if (newSample.Technologies != null)
-                        {
-                            if (newSample.Technologies.ToString().ToLower().Contains("windows phone"))
-                            {
-                                newSample.ImageUrl = "/images/wp.jpg";
-                            }
-                            else if (newSample.Technologies.ToString().ToLower().Contains("windows store"))
-                            {
-                                newSample.ImageUrl = "/images/w8.png";
-                            }
-                            else if (newSample.Technologies.ToString().ToLower().Contains("visual studio"))
-                            {
-                                newSample.ImageUrl = "/images/vs.png";
-                            }
-                            else if (newSample.Technologies.ToString().ToLower().Contains("asp.net"))
-                            {
-                                newSample.ImageUrl = "/images/aspnet.png";
-                            }
-                            else
-                            {
-                                newSample.ImageUrl = "/images/net.jpg";
+                                listBroadcastSchedule.Add(newSchedule);
                             }
                         }
-                        codes.Add(newSample);
-                    }
                 }
-                var list = codes;
+                var list = listBroadcastSchedule;
+                lstSchedal.ItemsSource = list;
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Unable to download" + ex.Message);
             }
+            int time11 = (int)DateTime.Now.DayOfWeek +1;
+            string dayOfweek = "";
+            if (time11==1)
+            {
+                dayOfweek = "Chủ nhật";
+            }
+            else
+            {
+                dayOfweek = "Thứ " + time11;
+            }
+            string timeD = DateTime.Now.ToShortDateString();
+            tbTimeCur.Text = dayOfweek + ", " + timeD;
         }
 
         private bool isLandscape = false;
@@ -206,94 +191,8 @@ namespace VietTV.View
                 
             }
         }
-        ObservableCollection<CodeSample> codes = new ObservableCollection<CodeSample>();
-        async void loadPageHTML()
-        {
-            string link = "http://code.msdn.microsoft.com/";
-            try
-            {
-                HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
-                htmlDoc.OptionFixNestedTags = true;
-                htmlDoc.LoadHtml(link);
-                HtmlNode divContainer = htmlDoc.GetElementbyId("directoryItems");
-                if (divContainer != null)
-                {
-                    HtmlNodeCollection nodes = divContainer.SelectNodes("//table/tr");
-                    foreach (HtmlNode trNode in nodes)
-                    {
-                        CodeSample newSample = new CodeSample();
-                        HtmlNode titleNode = trNode.SelectSingleNode("td[@class='itemBody']/div[@class='itemTitle']/a");
-                        if (titleNode != null)
-                        {
-                            newSample.Title = titleNode.InnerHtml.Trim();
-                        }
-
-                        HtmlNode summaryNode = trNode.SelectSingleNode("td[@class='itemBody']/div/div[@class='customcontribution']/a");
-                        if (summaryNode != null)
-                        {
-                            newSample.Summary = summaryNode.InnerHtml.Trim();
-                        }
-                        else
-                        {
-                            summaryNode = trNode.SelectSingleNode("td[@class='itemBody']/div/a[@class='profile-usercard-hover']");
-
-                        }
-                        if (summaryNode != null)
-                        {
-                            newSample.Summary = summaryNode.InnerHtml.Trim();
-                        }
-                        HtmlNode descNode = trNode.SelectSingleNode("td[@class='itemBody']/div[@class='summaryBox']");
-                        if (descNode != null)
-                        {
-                            newSample.Description = descNode.InnerHtml.Trim();
-                        }
-
-                        HtmlNode divTech = trNode.SelectSingleNode("td[@class='itemBody']/div/div/div[@id='Technologies']");
-                        if (divTech != null)
-                        {
-                            StringBuilder techNames = new StringBuilder();
-                            foreach (HtmlNode techAnchor in divTech.ChildNodes)
-                            {
-                                if (techAnchor.Name.StartsWith("a"))
-                                {
-                                    techNames.Append(techAnchor.InnerHtml.Trim() + " ; ");
-                                }
-                            }
-                            newSample.Technologies = techNames.ToString();
-                        }
-                        if (newSample.Technologies != null)
-                        {
-                            if (newSample.Technologies.ToString().ToLower().Contains("windows phone"))
-                            {
-                                newSample.ImageUrl = "/images/wp.jpg";
-                            }
-                            else if (newSample.Technologies.ToString().ToLower().Contains("windows store"))
-                            {
-                                newSample.ImageUrl = "/images/w8.png";
-                            }
-                            else if (newSample.Technologies.ToString().ToLower().Contains("visual studio"))
-                            {
-                                newSample.ImageUrl = "/images/vs.png";
-                            }
-                            else if (newSample.Technologies.ToString().ToLower().Contains("asp.net"))
-                            {
-                                newSample.ImageUrl = "/images/aspnet.png";
-                            }
-                            else
-                            {
-                                newSample.ImageUrl = "/images/net.jpg";
-                            }
-                        }
-                        codes.Add(newSample);
-                    }
-                }
-                var list = codes;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Unable to download" + ex.Message);
-            }
-        }
+        ObservableCollection<BroadcastSchedule> listBroadcastSchedule = new ObservableCollection<BroadcastSchedule>();
+        
 
         private String linkVideo = "";
         void stbOpenMenu_Completed(object sender, EventArgs e)
@@ -747,8 +646,25 @@ namespace VietTV.View
             ProsesProgressBar.Visibility = Visibility.Collapsed;
         }
 
+        private int nCountPlay = 1;
         private void TiviMediaElement_MediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
+            nCountPlay++;
+            if (nCountPlay==2)
+            {
+                BtnServer_OnClick(btnServer2,null);
+                return;
+            }
+            if (nCountPlay == 3)
+            {
+                BtnServer_OnClick(btnServer3, null);
+                return;
+            }
+            if (nCountPlay == 4)
+            {
+                BtnServer_OnClick(btnServer4, null);
+                return;
+            }
             //if (CheckConnectNetwork.checkNetworkConnection() == false)
             //{
             //    MessageBox.Show("Lỗi kết nối mạng! Vui lòng kiểm tra lại dữ liệu kết nối.");
@@ -888,6 +804,14 @@ namespace VietTV.View
             //    e.Cancel = true;
             //    return;
             //}
+            if (isOpen)
+            {
+                MenuSetting();
+                e.Cancel = true;
+                return;
+            }
+            TiviMediaElement.Stop();
+            TiviMediaElement.Source = null;
             if (!NavigationService.CanGoBack)
                 base.OnBackKeyPress(e);
         }
@@ -1162,8 +1086,8 @@ namespace VietTV.View
                        // fc = null;
                     }
                 }
-
                 _streamLink = this._str;
+                ToastManage.Show(_streamLink);
                 //  return _str;
                 //this.Player.Source = new Uri(this._str.Trim(), 0);
                 //this.Player.Play();

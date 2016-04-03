@@ -211,6 +211,22 @@ namespace VietTV.Model
                 }
             }
         }
+        private string _broadcastschedule;
+        public string broadcastSchedule
+        {
+            get
+            {
+                return _broadcastschedule;
+            }
+            set
+            {
+                if (this._broadcastschedule != value)
+                {
+                    this._broadcastschedule = value;
+                    this.RaisePropertyChanged("broadcastSchedule");
+                }
+            }
+        }
 
     }
 

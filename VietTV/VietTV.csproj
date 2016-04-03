@@ -97,7 +97,12 @@
     <Compile Include="Common\CodePublic.cs" />
     <Compile Include="Common\KeyedList.cs" />
     <Compile Include="Common\MediaElementManager.cs" />
+    <Compile Include="Common\PopupManager.cs" />
     <Compile Include="Common\RepositoryServices.cs" />
+    <Compile Include="Common\ToastManage.cs" />
+    <Compile Include="Controls\AlertCustomize.xaml.cs">
+      <DependentUpon>AlertCustomize.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
@@ -150,6 +155,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\AlertCustomize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LoadingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

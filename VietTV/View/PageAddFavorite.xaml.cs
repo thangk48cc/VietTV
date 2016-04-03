@@ -128,6 +128,12 @@ namespace VietTV.View
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
+            if (isOpen)
+            {
+                MenuSetting();
+                e.Cancel = true;
+                return;
+            }
             var vm = DataContext as MenuMainVM;
             vm.chanelsByGroup = CodePublic.ReadDataFromIsolatedStorage();
             //while (vm.chanelsByGroup.Contains(vm.chanelFav))

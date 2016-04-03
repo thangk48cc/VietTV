@@ -297,6 +297,7 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="270" />
                 <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Background="Black">
@@ -331,8 +332,48 @@
                 </Button>
 
             </Grid>
-            <Grid Grid.Row="3" Name="panelListCalender">
-
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Live broadcast" Foreground="White" 
+                           HorizontalAlignment="Left" Margin="10 0"
+                           VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Foreground="White" Name="tbTimeCur"
+                           HorizontalAlignment="Right" Margin="10 0"
+                           VerticalAlignment="Center" Text=" --, --/--/----" />
+            </Grid>
+            <Grid Grid.Row="4" Name="panelListCalender">
+                <phone:WebBrowser Visibility="Collapsed" Name="webbroser" Source="http://htvonline.com.vn/livetv/htv7-34336E61.html"
+                                  Margin="0,5,0,0" IsScriptEnabled="True">
+                </phone:WebBrowser>   
+                <TextBlock Visibility="Collapsed" TextWrapping="Wrap" Name="tbSchedal" Text="đa" />
+                <phone:LongListSelector Name="lstSchedal">
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <Grid MaxHeight="70">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Foreground="White"
+                                           Text="{Binding time}"/>
+                                <TextBlock VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Margin="10 0"
+                                           Foreground="White" MaxHeight="70"
+                                           Grid.Column="1" TextWrapping="Wrap"
+                                           TextTrimming="WordEllipsis"
+                                           Text="{Binding title}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                    
+                    
+                </phone:LongListSelector>
             </Grid>
         </Grid>
 
@@ -502,6 +543,8 @@
             </Grid>
 
         </Grid>
+        
+        
         <Grid Name="grdMenuLeft">
             <!--Menu trai-->
             <Grid Name="grdChePanel" Tap="GrdChePanel_OnTap" Visibility="Collapsed" Background="Black" Opacity="0.2"/>

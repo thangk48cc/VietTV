@@ -267,7 +267,7 @@
 		"link2": "notfreemtv=3=vstv004",
 		"chanelId": "2",
 		"link": "http://www.htvonline.com.vn/livetv/vtv3-hd-3133356E61.html!data-source=\"(.+?)\"",
-		"broadcastSchedule":"http://htvonline.com.vn/livetv/vtc10-3131386E61.html",
+		"broadcastSchedule":"http://htvonline.com.vn/livetv/vtv3-hd-3133356E61.html",
 		
 	},
 	{
@@ -315,7 +315,7 @@
 		"link2": "http://www.htvonline.com.vn/livetv/vtv3-32306E61.html!data-source=\"(.+?)\"",
 		"chanelId": "114",
 		"link": "notfreemtv=3=vstv004",
-		"broadcastSchedule":"http://htvonline.com.vn/livetv/vtv3-hd-3133356E61.html",
+		"broadcastSchedule":"http://htvonline.com.vn/livetv/vtv3-32306E61.html",
 		
 	},
 	{
