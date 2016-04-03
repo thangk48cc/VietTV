@@ -288,10 +288,13 @@
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot1">
+    <Grid x:Name="Container">
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="/Assets/BG/bg.png"/>
         </Grid.Background>
+        <toolkit:GestureService.GestureListener>
+            <toolkit:GestureListener DragDelta="GestureListener_OnDragDelta" DragCompleted="GestureListener_OnDragCompleted" />
+        </toolkit:GestureService.GestureListener>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
@@ -300,6 +303,10 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+
+            <Grid.Projection>
+                <PlaneProjection/>
+            </Grid.Projection>
             <Grid Background="Black">
                 <TextBlock Name="tbTitle"  Text="CHI TIẾT KÊNH" 
                             FontWeight="SemiBold" Foreground="White" TextTrimming="WordEllipsis"
@@ -375,6 +382,16 @@
                     
                 </phone:LongListSelector>
             </Grid>
+            <Grid Name="grdNotSchedul" Visibility="Collapsed" Grid.Row="4" Background="Transparent">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Không tải được lịch phát sóng!"
+                           VerticalAlignment="Center" HorizontalAlignment="Center" FontStyle="Italic"/>
+                    <HyperlinkButton Name="btnTryAgain" Click="BtnTryAgain_OnClick" Margin="10" Foreground="Blue" FontStyle="Italic" Content="Thử lại" />
+                </StackPanel>
+                
+            </Grid>
+            <ProgressBar Grid.Row="4" Foreground="White" Name="processSchedul" IsIndeterminate="True" />
+
         </Grid>
 
         <!--pannel player-->
@@ -556,6 +573,10 @@
                     <RowDefinition Height="50" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+
+                <Grid.Projection>
+                    <PlaneProjection/>
+                </Grid.Projection>
                 <Grid Background="#0099d7">
                     <TextBlock Text="TIVI VIỆT" FontWeight="SemiBold" Foreground="White"
                                VerticalAlignment="Center" Margin="70 0 10 0"></TextBlock>

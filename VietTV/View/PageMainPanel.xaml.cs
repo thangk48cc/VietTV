@@ -7,10 +7,12 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using HtmlAgilityPack;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using SettingsPageAnimation.Framework;
 using VietTV.Common;
 using VietTV.Model;
 using VietTV.ViewModel;
@@ -26,6 +28,7 @@ namespace VietTV.View
             vm.getDataFromServiceCommand.Execute(null);
             stbCloseMenu.Completed += stbCloseMenu_Completed;
             stbOpenMenu.Completed += stbOpenMenu_Completed;
+            _feContainer = this.Container as FrameworkElement;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -166,5 +169,165 @@ namespace VietTV.View
                             UriKind.RelativeOrAbsolute));
             MenuSetting();
         }
+        #region==========menu===============
+        private bool canSlide = true;
+        private void GestureListener_OnDragDelta(object sender, DragDeltaGestureEventArgs e)
+        {
+
+            if (canSlide == false) return;
+
+            if (e.Direction == System.Windows.Controls.Orientation.Horizontal && e.HorizontalChange > 0 && !_isSettingsOpen)
+            {
+
+                double offset = _feContainer.GetHorizontalOffset().Value + e.HorizontalChange;
+
+                if (offset > _dragDistanceToOpen)
+                    MenuSetting();
+                   // this.OpenSettings();
+
+               // else
+
+                  //  _feContainer.SetHorizontalOffset(offset);
+
+            }
+
+            if (e.Direction == System.Windows.Controls.Orientation.Horizontal && e.HorizontalChange < 0 && _isSettingsOpen)
+            {
+
+                double offsetContainer = _feContainer.GetHorizontalOffset().Value + e.HorizontalChange;
+
+                if (offsetContainer < _dragDistanceToClose)
+
+                    //this.CloseSettings();
+                    MenuSetting();
+              //  else
+
+                   // _feContainer.SetHorizontalOffset(offsetContainer);
+
+            }
+
+        }
+
+        private void GestureListener_OnDragCompleted(object sender, DragCompletedGestureEventArgs e)
+        {
+
+            if (canSlide == false) return;
+
+            if (e.Direction == System.Windows.Controls.Orientation.Horizontal && e.HorizontalChange > 0 && !_isSettingsOpen)
+            {
+
+                if (e.HorizontalChange < _dragDistanceToOpen)
+
+                    this.ResetLayoutRoot();
+
+                else
+                    MenuSetting();
+                   // this.OpenSettings();
+
+            }
+
+            if (e.Direction == System.Windows.Controls.Orientation.Horizontal && e.HorizontalChange < 0 && _isSettingsOpen)
+            {
+
+                if (e.HorizontalChange > _dragDistanceNegative)
+
+                    this.ResetLayoutRoot();
+
+                else
+                    MenuSetting();
+                   // this.CloseSettings();
+
+            }
+
+        }
+        private double widthMenu = 480;
+        private double _dragDistanceToOpen = 75.0;
+
+        private double _dragDistanceToClose = 405.0;
+
+        private double _dragDistanceNegative = -75.0;
+
+        private FrameworkElement _feContainer;
+
+        private bool _isSettingsOpen = false;
+
+        private void TapOCMenu()
+        {
+
+            if (_isSettingsOpen)
+            {
+
+                canSlide = false;
+
+                CloseSettings();
+
+            }
+
+            else
+            {
+
+                canSlide = true;
+
+                OpenSettings();
+
+            }
+
+        }
+
+        private void CloseSettings()
+        {
+
+            //grdHide.Visibility = Visibility.Collapsed;
+            var trans = _feContainer.GetHorizontalOffset().Transform;
+
+            trans.Animate(trans.X, 0, TranslateTransform.XProperty, 480, 0, new CubicEase
+
+            {
+
+                EasingMode = EasingMode.EaseOut
+
+            });
+
+            _isSettingsOpen = false;
+
+        }
+
+        private void OpenSettings()
+        {
+            //grdHide.Visibility = Visibility.Visible;
+            var trans = _feContainer.GetHorizontalOffset().Transform;
+
+            trans.Animate(trans.X, widthMenu, TranslateTransform.XProperty, 480, 0, new CubicEase
+
+            {
+
+                EasingMode = EasingMode.EaseOut
+
+            });
+
+            _isSettingsOpen = true;
+
+        }
+        private void SettingsStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+
+            ResetLayoutRoot();
+
+        }
+
+        private void ResetLayoutRoot()
+        {
+
+            if (!_isSettingsOpen)
+
+                _feContainer.SetHorizontalOffset(0.0);
+
+            else
+
+                _feContainer.SetHorizontalOffset(widthMenu);
+
+        }
+
+        #endregion
     }
 }

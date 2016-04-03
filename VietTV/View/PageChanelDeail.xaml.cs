@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Threading;
@@ -21,6 +22,7 @@ using Microsoft.Phone.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Sen.HTMLParser;
+using SettingsPageAnimation.Framework;
 using SM.Media;
 using SM.Media.Utility;
 using SM.Media.Web;
@@ -36,6 +38,7 @@ namespace VietTV.View
         public PageChanelDeail()
         {
             InitializeComponent();
+            _feContainer = this.Container as FrameworkElement;
             //this.DataContext = (App.Current as App).chanelDetail;
             stbCloseMenu.Completed += stbCloseMenu_Completed;
             stbOpenMenu.Completed += stbOpenMenu_Completed;
@@ -59,6 +62,8 @@ namespace VietTV.View
 
         void webbroser_Loaded(object sender, RoutedEventArgs e)
         {
+            processSchedul.Visibility = Visibility.Visible;
+            grdNotSchedul.Visibility = Visibility.Collapsed;
             string link = ((App.Current as App).chanelDetail.broadcastSchedule == "" || (App.Current as App).chanelDetail.broadcastSchedule == null) ? "http://htvonline.com.vn/livetv/htv7-34336E61.html" : (App.Current as App).chanelDetail.broadcastSchedule;
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
@@ -120,11 +125,12 @@ namespace VietTV.View
                 }
                 var list = listBroadcastSchedule;
                 lstSchedal.ItemsSource = list;
-                
+                grdNotSchedul.Visibility = Visibility.Collapsed;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to download" + ex.Message);
+                grdNotSchedul.Visibility = Visibility.Visible;
+                //MessageBox.Show("Unable to download" + ex.Message);
             }
             int time11 = (int)DateTime.Now.DayOfWeek +1;
             string dayOfweek = "";
@@ -138,6 +144,7 @@ namespace VietTV.View
             }
             string timeD = DateTime.Now.ToShortDateString();
             tbTimeCur.Text = dayOfweek + ", " + timeD;
+            processSchedul.Visibility = Visibility.Collapsed;
         }
 
         private bool isLandscape = false;
@@ -1105,5 +1112,171 @@ namespace VietTV.View
         }
         private string _str = "";
         #endregion
+
+        #region==========menu===============
+        private bool canSlide = true;
+        private void GestureListener_OnDragDelta(object sender, DragDeltaGestureEventArgs e)
+        {
+
+            if (canSlide == false) return;
+
+            if (e.Direction == System.Windows.Controls.Orientation.Horizontal && e.HorizontalChange > 0 && !_isSettingsOpen)
+            {
+
+                double offset = _feContainer.GetHorizontalOffset().Value + e.HorizontalChange;
+
+                if (offset > _dragDistanceToOpen)
+                    MenuSetting();
+                // this.OpenSettings();
+
+                // else
+
+                //  _feContainer.SetHorizontalOffset(offset);
+
+            }
+
+            if (e.Direction == System.Windows.Controls.Orientation.Horizontal && e.HorizontalChange < 0 && _isSettingsOpen)
+            {
+
+                double offsetContainer = _feContainer.GetHorizontalOffset().Value + e.HorizontalChange;
+
+                if (offsetContainer < _dragDistanceToClose)
+
+                    //this.CloseSettings();
+                    MenuSetting();
+                //  else
+
+                // _feContainer.SetHorizontalOffset(offsetContainer);
+
+            }
+
+        }
+
+        private void GestureListener_OnDragCompleted(object sender, DragCompletedGestureEventArgs e)
+        {
+
+            if (canSlide == false) return;
+
+            if (e.Direction == System.Windows.Controls.Orientation.Horizontal && e.HorizontalChange > 0 && !_isSettingsOpen)
+            {
+
+                if (e.HorizontalChange < _dragDistanceToOpen)
+
+                    this.ResetLayoutRoot();
+
+                else
+                    MenuSetting();
+                // this.OpenSettings();
+
+            }
+
+            if (e.Direction == System.Windows.Controls.Orientation.Horizontal && e.HorizontalChange < 0 && _isSettingsOpen)
+            {
+
+                if (e.HorizontalChange > _dragDistanceNegative)
+
+                    this.ResetLayoutRoot();
+
+                else
+                    MenuSetting();
+                // this.CloseSettings();
+
+            }
+
+        }
+        private double widthMenu = 480;
+        private double _dragDistanceToOpen = 75.0;
+
+        private double _dragDistanceToClose = 405.0;
+
+        private double _dragDistanceNegative = -75.0;
+
+        private FrameworkElement _feContainer;
+
+        private bool _isSettingsOpen = false;
+
+        private void TapOCMenu()
+        {
+
+            if (_isSettingsOpen)
+            {
+
+                canSlide = false;
+
+                CloseSettings();
+
+            }
+
+            else
+            {
+
+                canSlide = true;
+
+                OpenSettings();
+
+            }
+
+        }
+
+        private void CloseSettings()
+        {
+
+            //grdHide.Visibility = Visibility.Collapsed;
+            var trans = _feContainer.GetHorizontalOffset().Transform;
+
+            trans.Animate(trans.X, 0, TranslateTransform.XProperty, 480, 0, new CubicEase
+
+            {
+
+                EasingMode = EasingMode.EaseOut
+
+            });
+
+            _isSettingsOpen = false;
+
+        }
+
+        private void OpenSettings()
+        {
+            //grdHide.Visibility = Visibility.Visible;
+            var trans = _feContainer.GetHorizontalOffset().Transform;
+
+            trans.Animate(trans.X, widthMenu, TranslateTransform.XProperty, 480, 0, new CubicEase
+
+            {
+
+                EasingMode = EasingMode.EaseOut
+
+            });
+
+            _isSettingsOpen = true;
+
+        }
+        private void SettingsStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+
+            ResetLayoutRoot();
+
+        }
+
+        private void ResetLayoutRoot()
+        {
+
+            if (!_isSettingsOpen)
+
+                _feContainer.SetHorizontalOffset(0.0);
+
+            else
+
+                _feContainer.SetHorizontalOffset(widthMenu);
+
+        }
+
+        #endregion
+
+        private void BtnTryAgain_OnClick(object sender, RoutedEventArgs e)
+        {
+            webbroser_Loaded(null, null);
+        }
     }
 }

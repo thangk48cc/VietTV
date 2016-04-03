@@ -108,10 +108,13 @@
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="Container">
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="/Assets/BG/bg.png"/>
         </Grid.Background>
+        <toolkit:GestureService.GestureListener>
+            <toolkit:GestureListener DragDelta="GestureListener_OnDragDelta" DragCompleted="GestureListener_OnDragCompleted" />
+        </toolkit:GestureService.GestureListener>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
@@ -119,6 +122,9 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+            <Grid.Projection>
+                <PlaneProjection/>
+            </Grid.Projection>
             <Grid Background="Black">
                 <TextBlock  Text="CHỌN KÊNH YÊU THÍCH" 
                             FontWeight="SemiBold" Foreground="White"
@@ -179,6 +185,9 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            <Grid.Projection>
+                <PlaneProjection/>
+            </Grid.Projection>
             <Grid Background="#0099d7">
                 <TextBlock Text="TIVI VIỆT" FontWeight="SemiBold" Foreground="White"
                            VerticalAlignment="Center" Margin="70 0 10 0"></TextBlock>
