@@ -67,8 +67,12 @@ namespace VietTV.View
             string link = ((App.Current as App).chanelDetail.broadcastSchedule == "" || (App.Current as App).chanelDetail.broadcastSchedule == null) ? "http://htvonline.com.vn/livetv/htv7-34336E61.html" : (App.Current as App).chanelDetail.broadcastSchedule;
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
+                webbroser.Source = null;
+                webbroser = null;
+                webbroser = new WebBrowser();
                 string site;
                 site = link;
+                webbroser.IsScriptEnabled = true;
                 webbroser.Navigate(new Uri(site, UriKind.Absolute));
                 webbroser.LoadCompleted += webBrowser1_LoadCompleted;
             });
