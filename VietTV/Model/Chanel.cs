@@ -102,15 +102,14 @@ namespace VietTV.Model
                     if (chanelId == null) chanelId = "333";
                     if (!chanelId.Equals(CodePublic.chanelIdAdd))
                     {
-                        if (this._icon.EndsWith(".jpg") || this._icon.EndsWith(".png") || this._icon.EndsWith(".jepg") || this._icon.EndsWith(".gif"))
+                        if (!this._icon.EndsWith(".jpg") && !this._icon.EndsWith(".png") && !this._icon.EndsWith(".jepg") && !this._icon.EndsWith(".gif"))
                         {
-                            this._icon = value;
+                            this._icon = value.Trim()+".JPG";
                         }
-                        else
+                        if (this._icon == "")
                         {
-                            this.icon = "/Assets/Images/todayTV.png";
+                            this._icon = "/Assets/IconChanel/Today-TV.JPG";
                         }
-                        
                     }
                     else
                         this.icon = "/Assets/Images/addFavChanel.png";
