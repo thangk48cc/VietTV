@@ -53,10 +53,11 @@ namespace VietTV.View
             grdBackgroundPlayer.Visibility = Visibility.Collapsed;
             btnZoomPlayer.Visibility = Visibility.Collapsed;
 
-            this.Loaded += MainPage_Loaded;
-            webbroser.Source = null;
-            webbroser = null;
-            webbroser=new WebBrowser();
+            //this.Loaded += MainPage_Loaded;
+            webbroser.LoadCompleted += webBrowser1_LoadCompleted;
+            //webbroser.Source = null;
+            //webbroser = null;
+            //webbroser = new WebBrowser();
             //webbroser.Loaded += webbroser_Loaded;
         }
 
@@ -67,15 +68,31 @@ namespace VietTV.View
             string link = ((App.Current as App).chanelDetail.broadcastSchedule == "" || (App.Current as App).chanelDetail.broadcastSchedule == null) ? "http://htvonline.com.vn/livetv/htv7-34336E61.html" : (App.Current as App).chanelDetail.broadcastSchedule;
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
-                webbroser.Source = null;
-                webbroser = null;
+                if (webbroser != null)
+                {
+                    webbroser.Source = null;
+                    webbroser = null;
+                }
+                
                 webbroser = new WebBrowser();
+                webbroser.IsScriptEnabled = true;
                 string site;
                 site = link;
+                webbroser.Source =new Uri(link,UriKind.RelativeOrAbsolute);
                 webbroser.IsScriptEnabled = true;
                 webbroser.Navigate(new Uri(site, UriKind.Absolute));
                 webbroser.LoadCompleted += webBrowser1_LoadCompleted;
             });
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            if (webbroser != null)
+            {
+                webbroser.Source = null;
+                webbroser = null;
+            }
+            base.OnNavigatedFrom(e);
         }
 
         private void webBrowser1_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
@@ -94,7 +111,7 @@ namespace VietTV.View
             //CodeSamples.ItemsSource = codes;
             webbroser_Loaded(null, null);
         }
-
+        
         private void codeSampleReq_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             string link = "http://code.msdn.microsoft.com/";
@@ -149,6 +166,7 @@ namespace VietTV.View
             string timeD = DateTime.Now.ToShortDateString();
             tbTimeCur.Text = dayOfweek + ", " + timeD;
             processSchedul.Visibility = Visibility.Collapsed;
+            webbroser = null;
         }
 
         private bool isLandscape = false;
@@ -337,6 +355,8 @@ namespace VietTV.View
         private string chanelName = "";
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
+            webbroser_Loaded(null, null);
             if (NavigationContext.QueryString.ContainsKey("chanelId"))
             {
                 chanelId = NavigationContext.QueryString["chanelId"];
@@ -1085,7 +1105,10 @@ namespace VietTV.View
                             HttpResponseMessage httpResponseMessage3 = await httpClient.PostAsync("http://api.mytvnet.vn/v5/channel/mobile/url", formUrlEncodedContent2);
                             string str7 = await httpResponseMessage3.Content.ReadAsStringAsync();
                             jObjects = JObject.Parse(str7);
-                            this._str = jObjects["data"]["url"].ToString();
+                            if (jObjects["result"].ToString() == "-1")
+                                this._str = "";
+                            else
+                                this._str = jObjects["data"]["url"].ToString();
                         }
                         else
                         {

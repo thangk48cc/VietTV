@@ -24,8 +24,6 @@ namespace VietTV.View
         public PageMainPanel()
         {
             InitializeComponent();
-            var vm = DataContext as MenuMainVM;
-            vm.getDataFromServiceCommand.Execute(null);
             stbCloseMenu.Completed += stbCloseMenu_Completed;
             stbOpenMenu.Completed += stbOpenMenu_Completed;
             _feContainer = this.Container as FrameworkElement;

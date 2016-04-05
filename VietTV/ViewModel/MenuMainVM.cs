@@ -156,6 +156,7 @@ namespace VietTV.ViewModel
             repositoryServices=new RepositoryServices();
             navigationHelper = _navigation;
             getDataFromServiceCommand = new RelayCommand<object>(getDataFromService);
+            getDataFromServiceCommand.Execute(null);
         }
         public Chanel chanelFav = new Chanel();
         private async void getDataFromService(object obj)
@@ -212,6 +213,7 @@ namespace VietTV.ViewModel
                     {
                         x.groupName = item.groupName;
                         x.groupId = indexId;
+                        if (!x.icon.Contains(".JPG")) x.icon = x.icon + ".JPG";
                         return x;
                     });
                     var lstChanel = new ObservableCollection<Chanel>(query1);

@@ -102,7 +102,7 @@ namespace VietTV.Model
                     if (chanelId == null) chanelId = "333";
                     if (!chanelId.Equals(CodePublic.chanelIdAdd))
                     {
-                        if (!this._icon.EndsWith(".jpg") && !this._icon.EndsWith(".png") && !this._icon.EndsWith(".jepg") && !this._icon.EndsWith(".gif"))
+                        if (!this._icon.EndsWith(".JPG") && !this._icon.EndsWith(".PNG") && !this._icon.EndsWith(".JEPG") && !this._icon.EndsWith(".GIF"))
                         {
                             this._icon = value.Trim()+".JPG";
                         }
