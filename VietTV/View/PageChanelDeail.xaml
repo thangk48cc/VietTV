@@ -359,7 +359,7 @@
                 <phone:LongListSelector Name="lstSchedal">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <Grid MaxHeight="90">
+                            <Grid Width="475" Height="60">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="70" />
                                     <ColumnDefinition Width="*" />
@@ -370,8 +370,8 @@
                                            Text="{Binding time}"/>
                                 <TextBlock VerticalAlignment="Center"
                                            HorizontalAlignment="Left"
-                                           Margin="10 0"
-                                           Foreground="White" MaxHeight="90"
+                                           Margin="10 0" MaxWidth="400"
+                                           Foreground="White" MaxHeight="60"
                                            Grid.Column="1" TextWrapping="Wrap"
                                            Text="{Binding title}"/>
                             </Grid>

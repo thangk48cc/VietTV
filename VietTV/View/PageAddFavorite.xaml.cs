@@ -182,7 +182,7 @@ namespace VietTV.View
                     }
                 }
                  var vm = DataContext as MenuMainVM;
-                if(vm!=null) vm.propData.chanelsCollection[0].numChannel = lstChanelsLiked.Count - 1;
+                if(vm!=null) vm.propData.chanelsCollection[0].numChannel = lstChanelsLiked.Count==1? 1 : lstChanelsLiked.Count - 1;
                 //var lst = CodePublic.ReadDataFromIsolatedStorage();
             }
 

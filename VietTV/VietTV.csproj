@@ -117,6 +117,7 @@
     </Compile>
     <Compile Include="Model\BroadcastSchedule.cs" />
     <Compile Include="Model\Chanel.cs" />
+    <Compile Include="Model\Fc.cs" />
     <Compile Include="Model\GetListChanels.cs" />
     <Compile Include="Model\GetListData.cs" />
     <Compile Include="Model\GetListNotFreePlus.cs" />

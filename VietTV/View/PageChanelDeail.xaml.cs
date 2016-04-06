@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -15,6 +16,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using Windows.UI.Core;
 using HtmlAgilityPack;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -38,6 +40,7 @@ namespace VietTV.View
         public PageChanelDeail()
         {
             InitializeComponent();
+            showDateTime();
             _feContainer = this.Container as FrameworkElement;
             //this.DataContext = (App.Current as App).chanelDetail;
             stbCloseMenu.Completed += stbCloseMenu_Completed;
@@ -58,6 +61,8 @@ namespace VietTV.View
             //webbroser.Source = null;
             //webbroser = null;
             //webbroser = new WebBrowser();
+            //string link = ((App.Current as App).chanelDetail.broadcastSchedule == "" || (App.Current as App).chanelDetail.broadcastSchedule == null) ? "http://htvonline.com.vn/livetv/htv7-34336E61.html" : (App.Current as App).chanelDetail.broadcastSchedule;
+            //webbroser.Source = new Uri(link, UriKind.RelativeOrAbsolute);
             //webbroser.Loaded += webbroser_Loaded;
         }
 
@@ -97,7 +102,16 @@ namespace VietTV.View
 
         private void webBrowser1_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
+            if(webbroser==null) return;
             string s = webbroser.SaveToString();
+            if (s=="")
+            {
+                grdNotSchedul.Visibility = Visibility.Visible;
+                processSchedul.Visibility = Visibility.Collapsed;
+                showDateTime();
+                return;
+                
+            }
             codeSampleReq_DownloadStringCompleted(s,null);
             //MessageBox.Show(s);
         }
@@ -153,9 +167,15 @@ namespace VietTV.View
                 grdNotSchedul.Visibility = Visibility.Visible;
                 //MessageBox.Show("Unable to download" + ex.Message);
             }
-            int time11 = (int)DateTime.Now.DayOfWeek +1;
+            processSchedul.Visibility = Visibility.Collapsed;
+            webbroser = null;
+        }
+
+        private void showDateTime()
+        {
+            int time11 = (int)DateTime.Now.DayOfWeek + 1;
             string dayOfweek = "";
-            if (time11==1)
+            if (time11 == 1)
             {
                 dayOfweek = "Chủ nhật";
             }
@@ -163,12 +183,9 @@ namespace VietTV.View
             {
                 dayOfweek = "Thứ " + time11;
             }
-            string timeD = DateTime.Now.ToShortDateString();
+            string timeD = DateTime.Now.ToString(String.Format("dd/MM/yyyy"));
             tbTimeCur.Text = dayOfweek + ", " + timeD;
-            processSchedul.Visibility = Visibility.Collapsed;
-            webbroser = null;
         }
-
         private bool isLandscape = false;
         void MainPage_OrientationChanged(object sender, OrientationChangedEventArgs e)
         {
@@ -655,7 +672,7 @@ namespace VietTV.View
         }
 
         private bool isOpenedMedia = false;
-        private void TiviMediaElement_OnMediaOpened(object sender, RoutedEventArgs e)
+        private async void TiviMediaElement_OnMediaOpened(object sender, RoutedEventArgs e)
         {
             //
             if (!TiviMediaElement.NaturalDuration.TimeSpan.Equals(TimeSpan.Zero))
@@ -669,8 +686,13 @@ namespace VietTV.View
                 //TotalDurationTextBlock.Text = string.Empty;
                 TimelineSlider.Maximum = 1; //10 phút
             }
-            isOpenedMedia = true;
-            TiviMediaElement.Play();
+            isOpenedMedia = true; 
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                //TiviMediaElement.Source = new Uri(_streamLink);
+                TiviMediaElement.Play();
+            });
+            //TiviMediaElement.Play();
             TiviMediaElement.Volume = CalcVolume(VolumeSlider.Value);
 
             _positionTimer.Start();
@@ -823,7 +845,7 @@ namespace VietTV.View
                     }
                 }
                 var vm = DataContext as MenuMainVM;
-                if (vm != null) vm.propData.chanelsCollection[0].numChannel = lstChanelsLiked.Count - 1;
+                if (vm != null) vm.propData.chanelsCollection[0].numChannel = lstChanelsLiked.Count == 1 ? 1 : lstChanelsLiked.Count - 1;
             }
         }
 
@@ -1051,11 +1073,11 @@ namespace VietTV.View
                     }
                     else
                     {
-                        //long num = Convert.ToInt64((new Fc()).DeCodeTid(jObjects["tid"].ToString()));
-                        //DateTime now = DateTime.Now;
-                        //Fc fc = new Fc();
-                        //dictionary2.Add("tid", fc.GetTid(num, now));
-                        dictionary2.Add("tid", jObjects["tid"].ToString());
+                        long num = Convert.ToInt64((new Fc()).DeCodeTid(jObjects["tid"].ToString()));
+                        DateTime now = DateTime.Now;
+                        Fc fc = new Fc();
+                        dictionary2.Add("tid", fc.GetTid(num, now));
+                       // dictionary2.Add("tid", jObjects["tid"].ToString());
                         Dictionary<string, string> dictionary3 = dictionary2;
                         int num1 = random.Next(1, 10);
                         dictionary3.Add("device_type", num1.ToString());
@@ -1084,7 +1106,7 @@ namespace VietTV.View
                         if (jObjects["result"].ToString() == "-1")
                         {
                             Dictionary<string, string> dictionary9 = new Dictionary<string, string>();
-                            //dictionary9.Add("tid", fc.GetTid(num, now));
+                            dictionary9.Add("tid", fc.GetTid(num, now));
                             num1 = random.Next(1, 10);
                             dictionary9.Add("device_type", num1.ToString());
                             num1 = random.Next(1, 99);
@@ -1117,7 +1139,7 @@ namespace VietTV.View
                         strArray1 = null;
                         random = null;
                         dictionary2 = null;
-                       // fc = null;
+                        fc = null;
                     }
                 }
                 _streamLink = this._str;
