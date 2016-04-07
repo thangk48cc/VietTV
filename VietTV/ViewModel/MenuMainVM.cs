@@ -213,7 +213,7 @@ namespace VietTV.ViewModel
                     {
                         x.groupName = item.groupName;
                         x.groupId = indexId;
-                        if (!x.icon.Contains(".JPG")) x.icon = x.icon + ".JPG";
+                        if (!x.icon.Contains(".jpg")) x.icon = x.icon + ".jpg";
                         return x;
                     });
                     var lstChanel = new ObservableCollection<Chanel>(query1);

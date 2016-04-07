@@ -32,7 +32,7 @@
 	"groupName": "Kênh VTC",
 	"chanels": [{
 		"chanelName": "VTC1",
-		"icon": "/Assets/IconChanel/VTC1.JPG",
+		"icon": "/Assets/IconChanel/VTC1",
 		"typeChannel": "",
  	 	"link4":"http://hlscache.fptplay.net.vn/livez/vtc1_1000.stream/playlist.m3u8?token=c335VydmVyX3RpbWU9MTQwMjYxNzIyNCZoYXNoX3ZhbHVl&did=NzIyNCZoYXNoX3ZhbHVl",
 		"link3": "http://vp.xemtvhd.com/chn/vtc1/v.m3u8",

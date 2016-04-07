@@ -139,8 +139,13 @@ namespace VietTV.View
                 if (divContainer != null)
                 {
                     HtmlNodeCollection nodes = divContainer.SelectNodes("//div[@class='bx-wrapper']/div[@class='bx-viewport']/ul[@class='bxslider list_schedule-ul']/li");
-                    //var data =
-                    //    htmlDoc.DocumentNode.SelectSingleNode("//script[contains(text(), 'Blablabla')]").InnerHtml;
+                    if (nodes==null)
+                    {
+                        grdNotSchedul.Visibility = Visibility.Visible;
+                        processSchedul.Visibility = Visibility.Collapsed;
+                        webbroser = null;
+                        return;
+                    }
                     listBroadcastSchedule=new ObservableCollection<BroadcastSchedule>();
                         for (int i = 1; i < nodes.Count-1; i++)
                         {
@@ -1158,6 +1163,30 @@ namespace VietTV.View
                 _streamLink = (App.Current as App).chanelDetail.link;
             }
             //this.Load.set_Visibility(1);
+            if (_streamLink == "")
+            {
+                nCountPlay++;
+                if (nCountPlay == 2)
+                {
+                    BtnServer_OnClick(btnServer2, null);
+                    return;
+                }
+                if (nCountPlay == 3)
+                {
+                    BtnServer_OnClick(btnServer3, null);
+                    return;
+                }
+                if (nCountPlay == 4)
+                {
+                    BtnServer_OnClick(btnServer4, null);
+                    return;
+                }
+                if (nCountPlay>4)
+                {
+                    MessageBox.Show("Kênh hiện không thể phát!");
+                }
+            }
+            
         }
         private string _str = "";
         #endregion
