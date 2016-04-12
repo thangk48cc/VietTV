@@ -143,6 +143,7 @@ namespace VietTV.View
             //{
             //    vm.chanelsByGroup.Remove(vm.chanelFav);
             //}
+            if(vm.chanelsByGroup!=null)
             for (int i = 0; i < vm.chanelsByGroup.Count; i++)
             {
                 if (vm.chanelsByGroup[i].chanelId == vm.chanelFav.chanelId)

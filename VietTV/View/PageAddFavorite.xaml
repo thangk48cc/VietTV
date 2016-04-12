@@ -61,7 +61,7 @@
                       
                       >
                     <Grid Background="FloralWhite" Opacity="0.6" />
-                    <Image Height="100" Width="153" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" >
+                    <Image  Height="90" Width="140" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" >
                         <Image.Source>
                             <BitmapImage UriSource="{Binding icon}" CreateOptions="BackgroundCreation"/>
                         </Image.Source>

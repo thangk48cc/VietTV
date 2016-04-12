@@ -359,7 +359,7 @@
                 <phone:LongListSelector Name="lstSchedal">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <Grid Width="475" Height="70">
+                            <Grid Width="475" Height="60">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="70" />
                                     <ColumnDefinition Width="*" />
@@ -372,7 +372,7 @@
                                     <TextBlock VerticalAlignment="Center"
                                            HorizontalAlignment="Left"
                                            Margin="10 0" Width="380"
-                                           Foreground="White" MaxHeight="70"
+                                           Foreground="White" MaxHeight="60"
                                             TextWrapping="Wrap" 
                                            Text="{Binding title}"/>
                                 </Grid>

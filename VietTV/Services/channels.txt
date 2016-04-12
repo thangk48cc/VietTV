@@ -708,7 +708,7 @@
 		"chanelId": "63",
 		"link": "notfreemtv=27=vstv304",
 		
-	"broadcastSchedule":"", },
+	"broadcastSchedule":"http://htvonline.com.vn/livetv/htv-the-thao-hd-3136396E61.html", },
 	{
 		"chanelName": "VTVCab4-Kenh 17",
 		"icon": "/Assets/IconChanel/VTVCab4",
@@ -1138,7 +1138,7 @@
 		"chanelId": "101",
 		"link": "notfreemtv=18=vstv047",
 		
-	"broadcastSchedule":"", },
+	"broadcastSchedule":"http://htvonline.com.vn/livetv/htv-the-thao-hd-3136396E61.html", },
 	{
 		"chanelName": "VTVCab16-Bóng Đá TV HD",
 		"icon": "/Assets/IconChanel/VTVCab16",
@@ -1870,7 +1870,7 @@
 		"chanelId": "166",
 		"link": "http://www.htvonline.com.vn/livetv/binh-duong-3-3130326E61.html!data-source=\"(.+?)\"",
 		
-	"broadcastSchedule":"", },
+	"broadcastSchedule":"http://htvonline.com.vn/livetv/binh-duong-1-3130326E61.html", },
 	{
 		"chanelName": "Bình Dương 2",
 		"icon": "/Assets/IconChanel/Binh-Duong-2",
@@ -1881,7 +1881,7 @@
 		"chanelId": "167",
 		"link": "notfreemtv=57=vstv233",
 		
-	"broadcastSchedule":"", },
+	"broadcastSchedule":"http://htvonline.com.vn/livetv/btv2-3135316E61.html", },
 	{
 		"chanelName": "Bình Dương 3",
 		"icon": "/Assets/IconChanel/Binh-Duong-3",
@@ -2046,7 +2046,7 @@
 		"chanelId": "182",
 		"link": "http://www.htvonline.com.vn/livetv/vinh-phuc-vp-37316E61.html!data-source=\"(.+?)\"",
 		
-	"broadcastSchedule":"", },
+	"broadcastSchedule":"http://htvonline.com.vn/livetv/vinh-phuc-vp-37316E61.html", },
 	{
 		"chanelName": "Vĩnh Long 1",
 		"icon": "/Assets/IconChanel/Vinh-Long-1",
@@ -2134,7 +2134,7 @@
 		"chanelId": "190",
 		"link": "http://www.htvonline.com.vn/livetv/haiduong-3133316E61.html!data-source=\"(.+?)\"",
 		
-	"broadcastSchedule":"", },
+	"broadcastSchedule":"http://htvonline.com.vn/livetv/haiduong-3133316E61.html", },
 	{
 		"chanelName": "Ninh Bình",
 		"icon": "/Assets/IconChanel/Ninh-Binh",

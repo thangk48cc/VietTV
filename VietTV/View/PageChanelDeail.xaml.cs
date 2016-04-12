@@ -128,6 +128,8 @@ namespace VietTV.View
         
         private void codeSampleReq_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
+            grdNotSchedul.Visibility = Visibility.Collapsed;
+            processSchedul.Visibility = Visibility.Visible;
             string link = "http://code.msdn.microsoft.com/";
             try
             {
